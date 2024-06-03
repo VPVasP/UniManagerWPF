@@ -100,6 +100,16 @@ namespace EvaluationProjectWPF
         public List<UserInfo> GetAllTeachers()
         {
             return userInfoList.UsersInfoList.Where(user => user.Category == "TEACHER").ToList();
+
+        }
+            public List<UserInfo> GetAllCleaners()
+            {
+                return userInfoList.UsersInfoList.Where(user => user.Category == "CLEANER").ToList();
+            }
+
+        public List<UserInfo> GetAllBoardingMembers()
+        {
+            return userInfoList.UsersInfoList.Where(user => user.Category == "BOARDING MEMBER").ToList();
         }
     }
 }

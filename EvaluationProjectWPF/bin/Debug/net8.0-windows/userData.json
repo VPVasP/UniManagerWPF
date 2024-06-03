@@ -109,6 +109,16 @@
       "Category": "BOARDING MEMBER",
       "Username": "boardginman",
       "Password": "12345678"
+    },
+    {
+      "Category": "ADMIN",
+      "Username": "GeneralAdmin",
+      "Password": "12345678"
+    },
+    {
+      "Category": "CLEANER",
+      "Username": "GoodCleaner",
+      "Password": "1234567"
     }
   ]
 }

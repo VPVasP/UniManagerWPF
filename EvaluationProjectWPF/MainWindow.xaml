@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EvaluationProjectWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+           Title="UniversityManager" Height="450" Width="800" WindowState="Maximized">
 
     <Grid>
         <Grid.Background>
@@ -22,25 +22,39 @@
                 <ComboBoxItem Content="STUDENT"/>
             </ComboBox>
 
-        <TextBlock Text="Username:" Foreground="White"/>
-        <TextBox x:Name="UsernameTextBox" Margin="5" Width="218" />
+            <ComboBox x:Name="AdminTypeComboBox" Margin="5" Width="218" SelectionChanged="AdminTypeComboBox_SelectionChanged">
+                <ComboBoxItem Content="TEACHER"/>
+                <ComboBoxItem Content="BOARDING MEMBER"/>
+                <ComboBoxItem Content="CLEANER"/>
+                <ComboBoxItem Content="STUDENT"/>
+            </ComboBox>
 
-        <TextBlock Text="Password:" Foreground="White"/>
+            <TextBlock  x:Name="GeneralUsername" Text="Username:" Foreground="White"/>
+        <TextBox x:Name="UsernameTextBox" Margin="5" Width="220" />
+
+            <TextBlock x:Name="AdminUsername" Text="AdminUsername:" Foreground="White"/>
+                <TextBox x:Name="AdminTextBox" Margin="5" Width="220" />
+
+
+
+            <TextBlock x:Name="Password" Text="Password:" Foreground="White"/>
         <PasswordBox x:Name="PasswordBox" Margin="5" />
 
-        <Button Content="Register" Click="RegisterUser" Margin="5"/>
-        <Button Content="Login" Click="LoginUser" Margin="5"/>
-        <Button Content="Exit" Click="ExitApplication" Margin="5"/>
+            <Button x:Name="RegisterButton" Content="Register" Click="RegisterUser" Margin="5"/>
+            <Button x:Name="LoginButton" Content="Login" Click="LoginUser" Margin="5"/>
+            <Button  x:Name="ExitButton" Content="Exit" Click="ExitApplication" Margin="5"/>
     </StackPanel>
 
-        <TextBlock x:Name="RegistrationMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, -500, 10, 0" Foreground="White"/>
-        <TextBlock x:Name="LoginMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, -500, 10, 0" Foreground="White"/>
+        <TextBlock x:Name="RegistrationMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, -500, 10, 0" Foreground="Yellow"/>
+        <TextBlock x:Name="LoginMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, -950, 10, 0" Foreground="Yellow"/>
     <TextBlock x:Name="UserExistsMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, -50, 10, 0" Foreground="Red"/>
-        <TextBlock x:Name="StudentGrades" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 50, 10, 0" Foreground="White"/>
+        <TextBlock x:Name="StudentGrades" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 50, 10, 0" Foreground="LightGreen"/>
         <TextBlock x:Name="CleanerDates" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 50, 10, 0" Foreground="White"/>
         <TextBlock x:Name="TeacherTeachingDates" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 50, 10, 0" Foreground="White"/>
 
-        <TextBlock x:Name="StudentInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-1000, 50, 10, 0" Foreground="White"/>
-        <TextBlock x:Name="TeacherInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1000, 50, 10, 0" Foreground="White"/>
+        <TextBlock x:Name="StudentInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-1350, -600, 10, 0" Foreground="LightGreen"/>
+        <TextBlock x:Name="TeacherInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1150, -500, 10, 0" Foreground="LightSalmon"/>
+        <TextBlock x:Name="CleanerInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="00, -600, 10, 0" Foreground="LightBlue"/>
+        <TextBlock x:Name="BoardingMemberInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1050, 500, 10, 0" Foreground="LightBlue"/>
     </Grid>
 </Window>
