@@ -175,6 +175,27 @@ namespace EvaluationProjectWPF
                 LoginMessage.Visibility = Visibility.Visible;
                 UserExistsMessage.Visibility = Visibility.Collapsed;
 
+                var allStudents = manager.GetAllStudents();
+                var allTeachers = manager.GetAllTeachers();
+
+                string teacherNames = "All Teachers Info:\n";
+                string studentNames = "All Students Info:\n";
+
+
+                foreach (var student in allStudents)
+                {
+                    studentNames += student.Username + "\n";
+                }
+                foreach (var teacher in allTeachers)
+                {
+                    teacherNames += teacher.Username + "\n";
+                }
+                StudentInfoText.Text = studentNames;
+                StudentInfoText.Visibility = Visibility.Visible;
+
+                TeacherInfoText.Text = teacherNames;
+                TeacherInfoText.Visibility = Visibility.Visible;
+
             }
 
             if (manager.DoesUserExistLogin(selectedCategoryCleaner, loginUsername, loginPassword) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "CLEANER")
@@ -200,7 +221,7 @@ namespace EvaluationProjectWPF
             if (manager.DoesUserExistLogin(selectedCategoryStudent,loginUsername, loginPassword) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "STUDENT")
             {
                 
-                manager.Login(selectedCategoryTeacher, loginUsername, loginPassword);
+                manager.Login(selectedCategoryStudent, loginUsername, loginPassword);
                 AddStudentCourses();
                 string allCourseGrades = "The Grades for The Student:  " + loginUsername +" Are: " + ":\n";
                 

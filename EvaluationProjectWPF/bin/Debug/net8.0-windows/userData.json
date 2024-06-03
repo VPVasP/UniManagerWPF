@@ -64,6 +64,11 @@
       "Category": "TEACHER",
       "Username": "Jordan Michael",
       "Password": "12345678"
+    },
+    {
+      "Category": "BOARDING MEMBER",
+      "Username": "BoardingGuy",
+      "Password": "12345678"
     }
   ]
 }

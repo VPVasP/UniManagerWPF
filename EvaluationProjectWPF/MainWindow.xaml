@@ -39,5 +39,8 @@
         <TextBlock x:Name="StudentGrades" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 50, 10, 0" Foreground="White"/>
         <TextBlock x:Name="CleanerDates" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 50, 10, 0" Foreground="White"/>
         <TextBlock x:Name="TeacherTeachingDates" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 50, 10, 0" Foreground="White"/>
+
+        <TextBlock x:Name="StudentInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-300, 50, 10, 0" Foreground="White"/>
+        <TextBlock x:Name="TeacherInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="300, 50, 10, 0" Foreground="White"/>
     </Grid>
 </Window>

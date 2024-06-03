@@ -93,5 +93,13 @@ namespace EvaluationProjectWPF
         {
             public List<UserInfo> UsersInfoList { get; set; } = new List<UserInfo>();
         }
+        public List<UserInfo> GetAllStudents()
+        {
+            return userInfoList.UsersInfoList.Where(user => user.Category == "STUDENT").ToList();
+        }
+        public List<UserInfo> GetAllTeachers()
+        {
+            return userInfoList.UsersInfoList.Where(user => user.Category == "TEACHER").ToList();
+        }
     }
 }
