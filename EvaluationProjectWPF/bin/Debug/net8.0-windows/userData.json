@@ -119,6 +119,11 @@
       "Category": "CLEANER",
       "Username": "GoodCleaner",
       "Password": "1234567"
+    },
+    {
+      "Category": "CLEANER",
+      "Username": "NewCleaner",
+      "Password": "12345678"
     }
   ]
 }

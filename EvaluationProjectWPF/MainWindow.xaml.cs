@@ -14,6 +14,7 @@ namespace EvaluationProjectWPF
         private UniversityManager.BoardingMember boardingMember;
         private UniversityManager.Cleaner cleaner;
         private UniversityManager.Teacher teacher;
+        private AdminManager adminManager;
         public MainWindow()
         {
             InitializeComponent();
@@ -22,6 +23,7 @@ namespace EvaluationProjectWPF
             cleaner = new UniversityManager.Cleaner();
             boardingMember = new UniversityManager.BoardingMember();
             teacher = new UniversityManager.Teacher();
+            adminManager = new AdminManager();
             HideAdminStuff();
         }
         private void AdminTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -406,5 +408,13 @@ namespace EvaluationProjectWPF
             ShowAdminRelatedStats();
         }
 
+        private void AdminManagerStuff()
+        {
+          //  adminManager.AddEntity(universityManager.AllTeachers.Add(teacher);
+
+            {
+
+            }
+        }
     }
 }
