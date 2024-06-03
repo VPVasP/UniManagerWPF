@@ -1,0 +1,20 @@
+{
+  "UsersInfoList": [
+    {
+      "Username": "ADMIN",
+      "Password": "12345678"
+    },
+    {
+      "Username": "exampleAdmin",
+      "Password": "1234567"
+    },
+    {
+      "Username": "John The Teacher",
+      "Password": "12345678"
+    },
+    {
+      "Username": "ADMIN2",
+      "Password": "12345678"
+    }
+  ]
+}
