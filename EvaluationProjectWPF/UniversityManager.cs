@@ -13,7 +13,8 @@
         }
         public class BoardingMember : Employees
         {
-            
+            public string? boardingMemberUsername;
+
         }
         public class Cleaner : Employees
         {

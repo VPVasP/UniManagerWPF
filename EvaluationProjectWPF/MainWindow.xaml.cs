@@ -92,6 +92,8 @@ namespace EvaluationProjectWPF
                 RegistrationMessage.Visibility = Visibility.Visible;
                 UserExistsMessage.Visibility = Visibility.Collapsed;
 
+                ShowBoardingMemberStudentTeacherStats();
+
             }
             if (!manager.DoesUserExistRegister(selectedCategoryCleaner, registerUsername) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "CLEANER")
             {
@@ -171,30 +173,11 @@ namespace EvaluationProjectWPF
             {
                 manager.Login(selectedCategoryBoardingMember, loginUsername, loginPassword); 
                 RegistrationLoginPanel.Visibility = Visibility.Collapsed;
-                LoginMessage.Text = "You are now logged in BOARDING MEMBER " + loginUsername + " Welcome to the application";
+                LoginMessage.Text = "You are now logged in BOARDING MEMBER " + loginUsername + " You can see all the student info, grades and the Teacher Info!";
                 LoginMessage.Visibility = Visibility.Visible;
                 UserExistsMessage.Visibility = Visibility.Collapsed;
 
-                var allStudents = manager.GetAllStudents();
-                var allTeachers = manager.GetAllTeachers();
-
-                string teacherNames = "All Teachers Info:\n";
-                string studentNames = "All Students Info:\n";
-
-
-                foreach (var student in allStudents)
-                {
-                    studentNames += student.Username + "\n";
-                }
-                foreach (var teacher in allTeachers)
-                {
-                    teacherNames += teacher.Username + "\n";
-                }
-                StudentInfoText.Text = studentNames;
-                StudentInfoText.Visibility = Visibility.Visible;
-
-                TeacherInfoText.Text = teacherNames;
-                TeacherInfoText.Visibility = Visibility.Visible;
+                ShowBoardingMemberStudentTeacherStats();
 
             }
 
@@ -272,7 +255,45 @@ namespace EvaluationProjectWPF
             universityManager.AddCleanersHours("Saturday", 4);
         }
       
+        private void ShowBoardingMemberStudentTeacherStats()
+        {
+            AddStudentCourses();
+            AddTeacherTeachingCoursesAndHours();
+            //hide the registration and login panel
+            RegistrationLoginPanel.Visibility = Visibility.Collapsed;
+            string allCourseGrades = string.Empty;
+            string allTeacherWorkingHours = string.Empty;
 
+            foreach (var teacherHours in universityManager.AllTeachers)
+            {
+                allTeacherWorkingHours += "  They teach Course: " + teacherHours.teachingCourseTitle + ", Working Day: " + teacherHours.teachingWorkingDay + ", Working Hour: " + teacherHours.teacherWorkingHour + "\n";
+            }
+            foreach (var course in universityManager.AllCourses)
+            {
+                allCourseGrades += " Course Name: " + course.CourseTitle + ", Oral Mark: " + course.OralMark + ", Written Mark: " + course.WritingMark + "\n";
+            }
+
+            var allStudents = manager.GetAllStudents();
+            var allTeachers = manager.GetAllTeachers();
+
+            string teacherNames = "All Teachers Info:\n";
+            string studentNames = "All Students Info:\n";
+
+
+            foreach (var student in allStudents)
+            {
+                studentNames += " STUDENT NAME:  " + student.Username + " " + allCourseGrades + "\n";
+            }
+            foreach (var teacher in allTeachers)
+            {
+                teacherNames += " TEACHER NAME:  " + teacher.Username + allTeacherWorkingHours + "\n";
+            }
+            StudentInfoText.Text = studentNames;
+            StudentInfoText.Visibility = Visibility.Visible;
+
+            TeacherInfoText.Text = teacherNames;
+            TeacherInfoText.Visibility = Visibility.Visible;
+        }
         private void ExitApplication(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
