@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.IO;
+using System.Security.Policy;
 using Newtonsoft.Json;
 
 namespace EvaluationProjectWPF
@@ -15,9 +16,9 @@ namespace EvaluationProjectWPF
         }
 
         // register method
-        public void Register(string registerUsername, string registerPassword)
+        public void Register(string category, string registerUsername, string registerPassword)
         {
-            if (DoesUserExistRegister(registerUsername))
+            if (DoesUserExistRegister(category,registerUsername))
             {
                 Debug.WriteLine("Username already exists");
             }
@@ -25,6 +26,7 @@ namespace EvaluationProjectWPF
             {
                 UserInfo newUser = new UserInfo()
                 {
+                    Category = category,
                     Username = registerUsername,
                     Password = registerPassword,
                 };
@@ -36,9 +38,9 @@ namespace EvaluationProjectWPF
         }
 
         // login method
-        public void Login(string loginUsername, string loginPassword)
+        public void Login(string category, string loginUsername, string loginPassword)
         {
-            if (DoesUserExistLogin(loginUsername, loginPassword))
+            if (DoesUserExistLogin(category,loginUsername, loginPassword))
             {
                 Debug.WriteLine("You are now logged in " + loginUsername);
             }
@@ -49,15 +51,15 @@ namespace EvaluationProjectWPF
         }
 
         // checking if a username already exists in registration method
-        public bool DoesUserExistRegister(string username)
+        public bool DoesUserExistRegister(string category,string username)
         {
-            return userInfoList.UsersInfoList.Exists(user => user.Username == username);
+            return userInfoList.UsersInfoList.Exists(user => user.Username == username  &&user.Category == category);
         }
 
         // checking if a username already exists in login method
-        public bool DoesUserExistLogin(string username, string password)
+        public bool DoesUserExistLogin(string category, string username, string password)
         {
-            return userInfoList.UsersInfoList.Exists(user => user.Username == username && user.Password == password);
+            return userInfoList.UsersInfoList.Exists(user =>user.Category ==category && user.Username == username && user.Password == password);
         }
 
         // save data to JSON
@@ -80,8 +82,10 @@ namespace EvaluationProjectWPF
         // the user info such as username and password
         public class UserInfo
         {
+            public required string Category { get; set; }
             public required string Username { get; set; }
             public required string Password { get; set; }
+
         }
 
         // a list of all the userinfo

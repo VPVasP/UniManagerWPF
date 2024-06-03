@@ -33,7 +33,7 @@
         <Button Content="Exit" Click="ExitApplication" Margin="5"/>
     </StackPanel>
 
-    <TextBlock x:Name="RegistrationMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Foreground="White"/>
+        <TextBlock x:Name="RegistrationMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, -500, 10, 0" Foreground="White"/>
         <TextBlock x:Name="LoginMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, -500, 10, 0" Foreground="White"/>
     <TextBlock x:Name="UserExistsMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, -50, 10, 0" Foreground="Red"/>
         <TextBlock x:Name="StudentGrades" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 50, 10, 0" Foreground="White"/>

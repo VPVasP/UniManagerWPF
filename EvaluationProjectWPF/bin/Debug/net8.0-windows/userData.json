@@ -1,19 +1,68 @@
 {
   "UsersInfoList": [
     {
+      "Category": null,
       "Username": "ADMIN",
       "Password": "12345678"
     },
     {
+      "Category": null,
       "Username": "exampleAdmin",
       "Password": "1234567"
     },
     {
+      "Category": null,
       "Username": "John The Teacher",
       "Password": "12345678"
     },
     {
+      "Category": null,
       "Username": "ADMIN2",
+      "Password": "12345678"
+    },
+    {
+      "Category": null,
+      "Username": "studentexample2",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "TeacherGeorge",
+      "Password": "12345678"
+    },
+    {
+      "Category": "STUDENT",
+      "Username": "studentMichael",
+      "Password": "12345678"
+    },
+    {
+      "Category": "STUDENT",
+      "Username": "student5555",
+      "Password": "12345678"
+    },
+    {
+      "Category": "STUDENT",
+      "Username": "StudentJonah",
+      "Password": "12345678"
+    },
+    {
+      "Category": "CLEANER",
+      "Username": "CleanestCleaner",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "Teachere5555",
+      "Password": "1234567"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "Michael Gray",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "Jordan Michael",
       "Password": "12345678"
     }
   ]
