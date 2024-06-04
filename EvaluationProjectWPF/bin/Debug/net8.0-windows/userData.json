@@ -1,154 +1,44 @@
 {
   "UsersInfoList": [
     {
-      "Category": null,
-      "Username": "ADMIN",
-      "Password": "12345678"
-    },
-    {
-      "Category": null,
-      "Username": "exampleAdmin",
-      "Password": "1234567"
-    },
-    {
-      "Category": null,
-      "Username": "John The Teacher",
-      "Password": "12345678"
-    },
-    {
-      "Category": null,
-      "Username": "ADMIN2",
-      "Password": "12345678"
-    },
-    {
-      "Category": null,
-      "Username": "studentexample2",
-      "Password": "12345678"
-    },
-    {
-      "Category": "STUDENT",
-      "Username": "studentMichael",
-      "Password": "12345678"
-    },
-    {
-      "Category": "STUDENT",
-      "Username": "student5555",
-      "Password": "12345678"
-    },
-    {
-      "Category": "STUDENT",
-      "Username": "StudentJonah",
-      "Password": "12345678"
-    },
-    {
-      "Category": "CLEANER",
-      "Username": "CleanestCleaner",
-      "Password": "12345678"
-    },
-    {
-      "Category": "TEACHER",
-      "Username": "",
-      "Password": "12345678"
-    },
-    {
-      "Category": "TEACHER",
-      "Username": "New Name",
-      "Password": "12345678"
-    },
-    {
-      "Category": "BOARDING MEMBER",
-      "Username": "BoardingGuy",
-      "Password": "12345678"
-    },
-    {
-      "Category": "BOARDING MEMBER",
-      "Username": "BoardingGuy2",
-      "Password": "12345678"
-    },
-    {
-      "Category": "BOARDING MEMBER",
-      "Username": "guy5000",
-      "Password": "12345678"
-    },
-    {
-      "Category": "BOARDING MEMBER",
-      "Username": "Guy50000",
-      "Password": "12345678"
-    },
-    {
-      "Category": "BOARDING MEMBER",
-      "Username": "boarding5000",
-      "Password": "12345678"
-    },
-    {
-      "Category": "BOARDING MEMBER",
-      "Username": "boarddd",
-      "Password": "12345678"
-    },
-    {
-      "Category": "BOARDING MEMBER",
-      "Username": "DDDDD",
-      "Password": "12345678"
-    },
-    {
-      "Category": "BOARDING MEMBER",
-      "Username": "BOARDINGMEMEBER",
-      "Password": "12345678"
-    },
-    {
-      "Category": "BOARDING MEMBER",
-      "Username": "boardginman",
-      "Password": "12345678"
-    },
-    {
       "Category": "ADMIN",
       "Username": "GeneralAdmin",
       "Password": "12345678"
     },
     {
+      "Category": "TEACHER",
+      "Username": "John",
+      "Password": "12345678"
+    },
+    {
+      "Category": "BOARDING MEMBER",
+      "Username": "William",
+      "Password": "12345678"
+    },
+    {
       "Category": "CLEANER",
-      "Username": "GoodCleaner",
-      "Password": "1234567"
+      "Username": "Nick",
+      "Password": "12345678"
+    },
+    {
+      "Category": "STUDENT",
+      "Username": "Bill",
+      "Password": "12345678"
+    },
+    {
+      "Category": "STUDENT",
+      "Username": "Jordan",
+      "Password": "12345678"
+    },
+    {
+      "Category": "STUDENT",
+      "Username": "NewStudent",
+      "Password": "12345678"
     },
     {
       "Category": "CLEANER",
-      "Username": "NewCleaner",
+      "Username": "Allison",
       "Password": "12345678"
-    },
-    {
-      "Category": "",
-      "Username": "AdminUsername:",
-      "Password": "12345678"
-    },
-    {
-      "Category": "NEW TEACHER",
-      "Username": "AdminUsername:",
-      "Password": "12345678"
-    },
-    {
-      "Category": "TEACHER",
-      "Username": "",
-      "Password": "12345678"
-    },
-    {
-      "Category": "TEACHER",
-      "Username": "New Name",
-      "Password": "12345678"
-    },
-    {
-      "Category": "TEACHER",
-      "Username": "New Name",
-      "Password": "12345678"
-    },
-    {
-      "Category": "TEACHER",
-      "Username": "NewestTeacher",
-      "Password": "12345678"
-    },
-    {
-      "Category": "TEACHER",
-      "Username": "Teacher",
-      "Password": "1234567"
     }
   ]
 }

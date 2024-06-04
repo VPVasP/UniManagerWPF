@@ -77,7 +77,8 @@
                 <ComboBoxItem Content="STUDENT"/>
             </ComboBox>
 
-           
+
+            <Button x:Name="LogoutButton" Content="Logout" Click="Logout" Margin="5"/>
 
             <TextBlock  x:Name="GeneralUsername" Text="Username:" Foreground="White"/>
         <TextBox x:Name="UsernameTextBox" Margin="5" Width="220" />
@@ -106,8 +107,10 @@
         <TextBlock x:Name="TeacherInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1150,-00, 10, 0" Foreground="White"/>
         <TextBlock x:Name="CleanerInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="00, -600, 10, 0" Foreground="White"/>
         <TextBlock x:Name="BoardingMemberInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-1350, 500, 10, 0" Foreground="White"/>
-
-        
+        <StackPanel x:Name="StudentInfoStackPanel" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <StackPanel x:Name="TeacherInfoStackPanel" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <StackPanel x:Name="CleanerInfoStackPanel" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <StackPanel x:Name="BoardingMemberInfoStackPanel" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

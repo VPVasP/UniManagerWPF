@@ -54,6 +54,8 @@ namespace EvaluationProjectWPF
             if (string.IsNullOrEmpty(registerUsername) || string.IsNullOrEmpty(registerPassword))
             {
                 Debug.WriteLine("Please provide username and password");
+                RegistrationMessage.Visibility = Visibility.Visible;
+                RegistrationMessage.Text = "Please provide a username and a password";
             }
 
 
@@ -142,9 +144,11 @@ namespace EvaluationProjectWPF
                 RegistrationMessage.Text = "Welcome, STUDENT " + registerUsername + "!";
                 RegistrationMessage.Visibility = Visibility.Visible;
                 UserExistsMessage.Visibility = Visibility.Collapsed;
-
             }
-        }
+
+           
+            }
+        
 
         private void LoginUser(object sender, RoutedEventArgs e)
         {
@@ -341,40 +345,59 @@ namespace EvaluationProjectWPF
             var allBoardingMembers = loginRegisterManager.GetAllBoardingMembers().ToList();
             allBoardingMembers.Reverse();
 
-            string teacherNames = "All Teachers Info:\n";
-            string studentNames = "All Students Info:\n";
-            string cleanerNames = "All Cleaners Info:\n";
-            string boardingMemberNames = "All Boarding Members Info:\n";
+            
+            StudentInfoStackPanel.Children.Clear();
+            TeacherInfoStackPanel.Children.Clear();
+            CleanerInfoStackPanel.Children.Clear();
+            BoardingMemberInfoStackPanel.Children.Clear();
 
             foreach (var student in allStudents)
             {
-                studentNames += " STUDENT NAME:  " + student.Username + " " + allCourseGrades + "\n";
+               
+                TextBlock studentTextBlock = new TextBlock();
+                studentTextBlock.Text = "STUDENT NAME:  " + student.Username + " " + allCourseGrades;
+                if (allStudents.IndexOf(student) == 0)
+                {
+                    studentTextBlock.Foreground = Brushes.Green;
+                }
+                StudentInfoStackPanel.Children.Add(studentTextBlock);
             }
             foreach (var teacher in allTeachers)
             {
-                teacherNames += " TEACHER NAME:  " + teacher.Username + allTeacherWorkingHours + "\n";
+                
+                TextBlock teacherTextBlock = new TextBlock();
+                teacherTextBlock.Text = "TEACHER NAME:  " + teacher.Username + allTeacherWorkingHours;
+                
+                if(allTeachers.IndexOf(teacher) == 0)
+                {
+                    teacherTextBlock.Foreground = Brushes.Green;
+                }
+                TeacherInfoStackPanel.Children.Add(teacherTextBlock);
             }
             foreach (var cleaner in allCleaners)
             {
-                cleanerNames += " CLEANER NAME: " + cleaner.Username + " " + allCleanerWorkingSchedule + "\n";
-            }
+              
+                TextBlock cleanerTextBlock = new TextBlock();
+                cleanerTextBlock.Text = "CLEANER NAME: " + cleaner.Username + " " + allCleanerWorkingSchedule;
 
+                if (allCleaners.IndexOf(cleaner) == 0)
+                {
+                    cleanerTextBlock.Foreground = Brushes.Green;
+                }
+                CleanerInfoStackPanel.Children.Add(cleanerTextBlock);
+            }
             foreach (var boardingMember in allBoardingMembers)
             {
-                boardingMemberNames += " BOARDING MEMBER NAME: " + boardingMember.Username + "\n";
+                
+                TextBlock boardingMemberTextBlock = new TextBlock();
+                boardingMemberTextBlock.Text = "BOARDING MEMBER NAME: " + boardingMember.Username;
+
+                if (allBoardingMembers.IndexOf(boardingMember) == 0)
+                {
+                    boardingMemberTextBlock.Foreground = Brushes.Green;
+                }
+                BoardingMemberInfoStackPanel.Children.Add(boardingMemberTextBlock);
             }
-
-            StudentInfoText.Text = studentNames;
-            StudentInfoText.Visibility = Visibility.Visible;
-
-            TeacherInfoText.Text = teacherNames;
-            TeacherInfoText.Visibility = Visibility.Visible;
-
-            CleanerInfoText.Text = cleanerNames;
-            CleanerInfoText.Visibility = Visibility.Visible;
-
-            BoardingMemberInfoText.Text = boardingMemberNames;
-            BoardingMemberInfoText.Visibility = Visibility.Visible;
         }
         private void ShowAdminRelatedStats()
         {
@@ -459,6 +482,7 @@ namespace EvaluationProjectWPF
             AdminNewUsernameBox.Visibility = Visibility.Collapsed;
             AdminDeleteTextBox.Visibility = Visibility.Collapsed;
             SearchDeleteEntityButton.Visibility = Visibility.Collapsed;
+            LogoutButton.Visibility = Visibility.Collapsed;
         }
         private void ShowAdminStuff()
         {
@@ -471,6 +495,7 @@ namespace EvaluationProjectWPF
             AdminPassword.Visibility = Visibility.Collapsed;
             AdminPasswordBox.Visibility = Visibility.Collapsed;
             AdminModifyTypeComboBox.Visibility = Visibility.Collapsed;
+            RegistrationMessage.Visibility = Visibility.Collapsed;
             ShowAdminRelatedStats();
         }
         private void EntityUI()
@@ -633,6 +658,7 @@ namespace EvaluationProjectWPF
             else if (AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW STUDENT")
             {
                 loginRegisterManager.Register(selectedCategoryStudent, adminRegisterUsername, adminRegisterPassword);
+                UpdateAdminStats();
             }
             else if (AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW COURSE")
             {
@@ -740,7 +766,15 @@ namespace EvaluationProjectWPF
                 }
             }
         }
-            
+
+
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            string username = "";
+            loginRegisterManager.Logout(username);
+            RegistrationLoginPanel.Visibility = Visibility.Visible;
+        }
+
 
         private void ExecuteDeletionIfConfirmed()
         {

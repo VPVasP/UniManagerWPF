@@ -50,7 +50,10 @@ namespace EvaluationProjectWPF
                 Debug.WriteLine("Wrong Username or Password");
             }
         }
-
+        public void Logout(string username)
+        {
+            Debug.WriteLine("Logged out " + username);
+        }
         // checking if a username already exists in registration method
         public bool DoesUserExistRegister(string category,string username)
         {
