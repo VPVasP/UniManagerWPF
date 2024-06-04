@@ -139,6 +139,16 @@
       "Category": "TEACHER",
       "Username": "New Name",
       "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "NewestTeacher",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "Teacher",
+      "Password": "1234567"
     }
   ]
 }

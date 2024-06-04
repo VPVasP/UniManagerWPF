@@ -329,10 +329,17 @@ namespace EvaluationProjectWPF
                 allCleanerWorkingSchedule += "Working Day: " + cleanerSchedule.workingDay + ", Working Length " + cleanerSchedule.workingLength + " Hours" + "\n";
             }
 
-            var allStudents = loginRegisterManager.GetAllStudents();
-            var allTeachers = loginRegisterManager.GetAllTeachers();
-            var allCleaners = loginRegisterManager.GetAllCleaners();
-            var allBoardingMembers = loginRegisterManager.GetAllBoardingMembers();
+            var allStudents = loginRegisterManager.GetAllStudents().ToList();
+            allStudents.Reverse();
+
+            var allTeachers = loginRegisterManager.GetAllTeachers().ToList();
+            allTeachers.Reverse();
+
+            var allCleaners = loginRegisterManager.GetAllCleaners().ToList();
+            allCleaners.Reverse();
+
+            var allBoardingMembers = loginRegisterManager.GetAllBoardingMembers().ToList();
+            allBoardingMembers.Reverse();
 
             string teacherNames = "All Teachers Info:\n";
             string studentNames = "All Students Info:\n";
@@ -355,7 +362,6 @@ namespace EvaluationProjectWPF
             foreach (var boardingMember in allBoardingMembers)
             {
                 boardingMemberNames += " BOARDING MEMBER NAME: " + boardingMember.Username + "\n";
-
             }
 
             StudentInfoText.Text = studentNames;
@@ -610,16 +616,19 @@ namespace EvaluationProjectWPF
             if (AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW TEACHER")
             {
                 loginRegisterManager.Register(selectedCategoryTeacher, adminRegisterUsername, adminRegisterPassword);
+                UpdateAdminStats();
             }
 
             else if (AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW BOARDING MEMBER")
             {
                 loginRegisterManager.Register(selectedCategoryBoardingMember, adminRegisterUsername, adminRegisterPassword);
+                UpdateAdminStats();
             }
 
             else if (AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW CLEANER")
             {
                 loginRegisterManager.Register(selectedCategoryCleaner, adminRegisterUsername, adminRegisterPassword);
+                UpdateAdminStats();
             }
             else if (AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW STUDENT")
             {
@@ -629,6 +638,7 @@ namespace EvaluationProjectWPF
             {
 
                 universityManager.AddStudentCourse(adminRegisterUsername, 0, 0);
+                UpdateAdminStats();
             }
         }
 
