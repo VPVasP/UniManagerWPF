@@ -2,7 +2,7 @@
 {
     class AdminManager
     {
-        public void AddEntity(UniversityManager universityManager)
+        public void AddEntity(LoginRegisterManager loginRegisterManager)
         {
 
         }

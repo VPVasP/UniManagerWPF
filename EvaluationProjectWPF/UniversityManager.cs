@@ -30,6 +30,13 @@
 
             AllCourses.Add(newCourse);
         }
+        public void AdminAddStudentCourse(string title)
+        {
+            Courses newCourse = new Courses();
+            newCourse.CourseTitle = title;
+
+            AllCourses.Add(newCourse);
+        }
         public void AddTeachersCourse(string title, string workingday, int workingHour)
         {
             Teacher teacher = new Teacher();

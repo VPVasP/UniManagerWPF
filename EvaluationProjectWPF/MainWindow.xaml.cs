@@ -9,7 +9,7 @@ namespace EvaluationProjectWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private LoginRegisterManager manager;
+        private LoginRegisterManager loginRegisterManager;
         private UniversityManager universityManager;
         private UniversityManager.BoardingMember boardingMember;
         private UniversityManager.Cleaner cleaner;
@@ -18,7 +18,7 @@ namespace EvaluationProjectWPF
         public MainWindow()
         {
             InitializeComponent();
-            manager = new LoginRegisterManager();
+            loginRegisterManager = new LoginRegisterManager();
             universityManager = new UniversityManager();
             cleaner = new UniversityManager.Cleaner();
             boardingMember = new UniversityManager.BoardingMember();
@@ -55,9 +55,9 @@ namespace EvaluationProjectWPF
             //    UserExistsMessage.Visibility = Visibility.Visible;
             //}
 
-            if (!manager.DoesUserExistRegister(selectedCategoryAdmin, registerUsername) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "ADMIN") 
+            if (!loginRegisterManager.DoesUserExistRegister(selectedCategoryAdmin, registerUsername) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "ADMIN") 
             {
-               manager.Register(selectedCategoryAdmin,registerUsername, registerPassword);
+               loginRegisterManager.Register(selectedCategoryAdmin,registerUsername, registerPassword);
 
                 //hide the registration and login panel
                 RegistrationLoginPanel.Visibility = Visibility.Collapsed;
@@ -68,9 +68,9 @@ namespace EvaluationProjectWPF
                 UserExistsMessage.Visibility = Visibility.Collapsed;
   
             }
-            if (!manager.DoesUserExistRegister(selectedCategoryTeacher, registerUsername) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "TEACHER")
+            if (!loginRegisterManager.DoesUserExistRegister(selectedCategoryTeacher, registerUsername) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "TEACHER")
             {
-                manager.Register(selectedCategoryTeacher, registerUsername, registerPassword);
+                loginRegisterManager.Register(selectedCategoryTeacher, registerUsername, registerPassword);
                 AddTeacherTeachingCoursesAndHours();
                 string allTeacherCourseandHours = "The working hours and courses you need to teach for  " + registerUsername + " Are: " + ":\n";
                 foreach (UniversityManager.Teacher teacher in universityManager.AllTeachers)
@@ -87,9 +87,9 @@ namespace EvaluationProjectWPF
                 UserExistsMessage.Visibility = Visibility.Collapsed;
                 TeacherTeachingDates.Visibility = Visibility.Visible;
             }
-            if (!manager.DoesUserExistRegister(selectedCategoryBoardingMember, registerUsername) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "BOARDING MEMBER")
+            if (!loginRegisterManager.DoesUserExistRegister(selectedCategoryBoardingMember, registerUsername) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "BOARDING MEMBER")
             {
-                manager.Register(selectedCategoryBoardingMember, registerUsername, registerPassword);
+                loginRegisterManager.Register(selectedCategoryBoardingMember, registerUsername, registerPassword);
 
                 //hide the registration and login panel
                 RegistrationLoginPanel.Visibility = Visibility.Collapsed;
@@ -102,9 +102,9 @@ namespace EvaluationProjectWPF
                 ShowBoardingMemberStudentTeacherStats();
 
             }
-            if (!manager.DoesUserExistRegister(selectedCategoryCleaner, registerUsername) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "CLEANER")
+            if (!loginRegisterManager.DoesUserExistRegister(selectedCategoryCleaner, registerUsername) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "CLEANER")
             {
-                manager.Register(selectedCategoryCleaner, registerUsername, registerPassword);
+                loginRegisterManager.Register(selectedCategoryCleaner, registerUsername, registerPassword);
                 AddCleanerWokringSchedule();
                 string allCleanerSchedule = "The working Schedule for the Cleaner " + registerUsername + " is: " + ":\n";
                 foreach (UniversityManager.Cleaner cleaner in universityManager.AllCleaner)
@@ -122,9 +122,9 @@ namespace EvaluationProjectWPF
                 UserExistsMessage.Visibility = Visibility.Collapsed;
 
             }
-            if (!manager.DoesUserExistRegister(selectedCategoryStudent, registerUsername) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "STUDENT")
+            if (!loginRegisterManager.DoesUserExistRegister(selectedCategoryStudent, registerUsername) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "STUDENT")
             {
-                manager.Register(selectedCategoryStudent,registerUsername, registerPassword);
+                loginRegisterManager.Register(selectedCategoryStudent,registerUsername, registerPassword);
                 AddStudentCourses();
                 //hide the registration and login panel
                 RegistrationLoginPanel.Visibility = Visibility.Collapsed;
@@ -160,18 +160,19 @@ namespace EvaluationProjectWPF
                 UserExistsMessage.Text = "Please provide username and password";
             }
 
-            if (manager.DoesUserExistLogin(selectedCategoryAdmin, loginUsername, loginPassword) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "ADMIN")
+            if (loginRegisterManager.DoesUserExistLogin(selectedCategoryAdmin, loginUsername, loginPassword) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "ADMIN")
             {
+                
+                loginRegisterManager.Login(selectedCategoryAdmin, loginUsername, loginPassword);
                 ShowAdminStuff();
-                manager.Login(selectedCategoryAdmin, loginUsername, loginPassword);
                 LoginMessage.Text = "You are now logged in ADMIN " + loginUsername + " Welcome to the application";
 
             }
 
-                if (manager.DoesUserExistLogin(selectedCategoryTeacher,loginUsername,loginPassword) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "TEACHER")
+              else  if (loginRegisterManager.DoesUserExistLogin(selectedCategoryTeacher,loginUsername,loginPassword) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "TEACHER")
             {
                 AddTeacherTeachingCoursesAndHours();
-                manager.Login(selectedCategoryTeacher,loginUsername, loginPassword);
+                loginRegisterManager.Login(selectedCategoryTeacher,loginUsername, loginPassword);
                 string allTeacherCourseandHours = "The working hours and courses you need to teach for  " + loginUsername + " Are: " + ":\n";
                 foreach (UniversityManager.Teacher teacher  in universityManager.AllTeachers)
                 {
@@ -184,9 +185,9 @@ namespace EvaluationProjectWPF
                 UserExistsMessage.Visibility = Visibility.Collapsed;
                 TeacherTeachingDates.Visibility = Visibility.Visible;
             }
-            if (manager.DoesUserExistLogin(selectedCategoryBoardingMember,loginUsername, loginPassword) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "BOARDING MEMBER")
+           else if (loginRegisterManager.DoesUserExistLogin(selectedCategoryBoardingMember,loginUsername, loginPassword) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "BOARDING MEMBER")
             {
-                manager.Login(selectedCategoryBoardingMember, loginUsername, loginPassword); 
+                loginRegisterManager.Login(selectedCategoryBoardingMember, loginUsername, loginPassword); 
                 RegistrationLoginPanel.Visibility = Visibility.Collapsed;
                 LoginMessage.Text = "You are now logged in BOARDING MEMBER " + loginUsername + " You can see all the student info, grades and the Teacher Info!";
                 LoginMessage.Visibility = Visibility.Visible;
@@ -196,9 +197,9 @@ namespace EvaluationProjectWPF
 
             }
 
-            if (manager.DoesUserExistLogin(selectedCategoryCleaner, loginUsername, loginPassword) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "CLEANER")
+         else   if (loginRegisterManager.DoesUserExistLogin(selectedCategoryCleaner, loginUsername, loginPassword) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "CLEANER")
             {
-                manager.Login(selectedCategoryCleaner, loginUsername, loginPassword);
+                loginRegisterManager.Login(selectedCategoryCleaner, loginUsername, loginPassword);
                 AddCleanerWokringSchedule();
                 string allCleanerSchedule = "The working Schedule for the Cleaner " + loginUsername + " is: " + ":\n";
                 foreach (UniversityManager.Cleaner cleaner in universityManager.AllCleaner)
@@ -216,10 +217,10 @@ namespace EvaluationProjectWPF
 
             }
 
-            if (manager.DoesUserExistLogin(selectedCategoryStudent,loginUsername, loginPassword) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "STUDENT")
+          else  if (loginRegisterManager.DoesUserExistLogin(selectedCategoryStudent,loginUsername, loginPassword) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "STUDENT")
             {
                 
-                manager.Login(selectedCategoryStudent, loginUsername, loginPassword);
+                loginRegisterManager.Login(selectedCategoryStudent, loginUsername, loginPassword);
                 AddStudentCourses();
                 string allCourseGrades = "The Grades for The Student:  " + loginUsername +" Are: " + ":\n";
                 
@@ -288,8 +289,8 @@ namespace EvaluationProjectWPF
                 allCourseGrades += " Course Name: " + course.CourseTitle + ", Oral Mark: " + course.OralMark + ", Written Mark: " + course.WritingMark + "\n";
             }
 
-            var allStudents = manager.GetAllStudents();
-            var allTeachers = manager.GetAllTeachers();
+            var allStudents = loginRegisterManager.GetAllStudents();
+            var allTeachers = loginRegisterManager.GetAllTeachers();
 
             string teacherNames = "All Teachers Info:\n";
             string studentNames = "All Students Info:\n";
@@ -335,10 +336,10 @@ namespace EvaluationProjectWPF
                 allCleanerWorkingSchedule += "Working Day: " + cleanerSchedule.workingDay + ", Working Length " + cleanerSchedule.workingLength + " Hours" + "\n";
             }
 
-            var allStudents = manager.GetAllStudents();
-            var allTeachers = manager.GetAllTeachers();
-            var allCleaners = manager.GetAllCleaners();
-            var allBoardingMembers = manager.GetAllBoardingMembers();
+            var allStudents = loginRegisterManager.GetAllStudents();
+            var allTeachers = loginRegisterManager.GetAllTeachers();
+            var allCleaners = loginRegisterManager.GetAllCleaners();
+            var allBoardingMembers = loginRegisterManager.GetAllBoardingMembers();
 
             string teacherNames = "All Teachers Info:\n";
             string studentNames = "All Students Info:\n";
@@ -382,39 +383,117 @@ namespace EvaluationProjectWPF
         }
         private void HideAdminStuff()
         {
-            AdminUsername.Visibility = Visibility.Collapsed;
-            AdminTextBox.Visibility = Visibility.Collapsed;          
-            AdminTypeComboBox.Visibility = Visibility.Collapsed;
+            AdminPanel.Visibility = Visibility.Collapsed;
+            //AdminUsername.Visibility = Visibility.Collapsed;
+            //AdminTextBox.Visibility = Visibility.Collapsed;          
+            //AdminTypeComboBox.Visibility = Visibility.Collapsed;
         }
         private void ShowAdminStuff() {
-
-            GeneralUsername.Visibility = Visibility.Collapsed;
-            UsernameTextBox.Visibility = Visibility.Collapsed;
-            AdminUsername.Visibility = Visibility.Visible;
-            AdminTextBox.Visibility = Visibility.Visible;
-            AdminTypeComboBox.Visibility = Visibility.Visible;
-            LoginMessage.Visibility = Visibility.Visible;
-            RegisterButton.Visibility = Visibility.Collapsed;
-            LoginButton.Visibility = Visibility.Collapsed;
-            ExitButton.Visibility = Visibility.Collapsed;
-            PasswordBox.Visibility = Visibility.Collapsed;
-            GeneralUsername.Visibility = Visibility.Collapsed;
-            AdminUsername.Visibility = Visibility.Collapsed;
-            Password.Visibility = Visibility.Collapsed;
+            RegistrationLoginPanel.Visibility = Visibility.Collapsed;
+            AdminPanel.Visibility = Visibility.Visible;
             AdminTypeComboBox.Visibility = Visibility.Collapsed;
-            UsernameTextBox.Visibility = Visibility.Collapsed;
-            UserTypeComboBox.Visibility = Visibility.Collapsed;
             AdminTextBox.Visibility = Visibility.Collapsed;
+            AdminUsername.Visibility = Visibility.Collapsed;
+            AddNewEntityButton.Visibility = Visibility.Collapsed;
+            AdminPassword.Visibility = Visibility.Collapsed;
+            AdminPasswordBox.Visibility = Visibility.Collapsed;
+            AdminModifyTypeComboBox.Visibility = Visibility.Collapsed;
             ShowAdminRelatedStats();
         }
-
-        private void AdminManagerStuff()
+        private void EntityUI()
         {
-          //  adminManager.AddEntity(universityManager.AllTeachers.Add(teacher);
 
+            AdminUsername.Visibility = Visibility.Visible;
+            AdminTextBox.Visibility = Visibility.Visible;
+            AddEntityUIButton.Visibility = Visibility.Collapsed;
+            AdminTypeComboBox.Visibility = Visibility.Visible;
+            AddNewEntityButton.Visibility = Visibility.Visible;
+            AdminPassword.Visibility = Visibility.Visible;
+            AdminPasswordBox.Visibility = Visibility.Visible;
+        }
+        private void ModifyEntityUI()
+        {
+            AdminUsername.Visibility = Visibility.Visible;
+            AdminTextBox.Visibility = Visibility.Visible;
+            AddEntityUIButton.Visibility = Visibility.Collapsed;
+            AdminModifyTypeComboBox.Visibility = Visibility.Visible;
+            AddNewEntityButton.Visibility = Visibility.Collapsed;
+            AdminUsername.Text = "Search Name";
+            ModifyEntityUIButton.Content = "Search Name";
+            ModifyEntityUIButton.Click -= ModifyEntityUI;
+            ModifyEntityUIButton.Click += SearchName;
+        }
+        
+
+        private void AddEntityUI(object sender, RoutedEventArgs e)
+        {
+            EntityUI();
+        }
+        private void ModifyEntityUI(object sender, RoutedEventArgs e)
+        {
+            ModifyEntityUI();
+        }
+        private void SearchName(object sender,RoutedEventArgs e)
+        {
+            string adminRegisterUsername = AdminTextBox.Text;
+            string adminRegisterPassword = AdminPasswordBox.Password;
+            string selectedCategoryTeacher = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "TEACHER" ? "TEACHER" : "";
+            string selectedCategoryBoardingMember = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "BOARDING MEMBER" ? "BOARDING MEMBER" : "";
+            string selectedCategoryCleaner = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "CLEANER" ? "CLEANER" : "";
+            string selectedCategoryStudent = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "STUDENT" ? "STUDENT" : "";
+
+
+            if (AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "TEACHER")
+            {
+                
+
+                var matchingvalues = loginRegisterManager.GetAllTeachers().Where(stringToCheck => adminRegisterUsername.Contains(adminRegisterUsername));
+                if (matchingvalues != null)
+                {
+                    Console.Write("Found Name");
+                }
+                else
+                {
+                    Console.WriteLine("Didn't find name");
+                }
+            }
+        }
+        private void AddNewEntity(object sender, RoutedEventArgs e)
+        {
+            string adminRegisterUsername = AdminTextBox.Text;
+            string adminRegisterPassword = AdminPasswordBox.Password;
+            string selectedCategoryTeacher = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW TEACHER" ? "TEACHER" : "";
+            string selectedCategoryBoardingMember = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW BOARDING MEMBER" ? "BOARDING MEMBER" : "";
+            string selectedCategoryCleaner = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW CLEANER" ? "CLEANER" : "";
+            string selectedCategoryStudent = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW STUDENT" ? "STUDENT" : "";
+
+            if (AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW TEACHER")
+            {
+                loginRegisterManager.Register(selectedCategoryTeacher, adminRegisterUsername,adminRegisterPassword);
+            }
+
+           else if(AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW BOARDING MEMBER"){
+                loginRegisterManager.Register(selectedCategoryBoardingMember, adminRegisterUsername, adminRegisterPassword);
+            }
+
+            else if (AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW CLEANER")
+            {
+                loginRegisterManager.Register(selectedCategoryCleaner, adminRegisterUsername, adminRegisterPassword);
+            }
+            else if (AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW STUDENT")
+            {
+                loginRegisterManager.Register(selectedCategoryStudent, adminRegisterUsername, adminRegisterPassword);
+            }
+            else if (AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW COURSE")
             {
 
+                universityManager.AddStudentCourse(adminRegisterUsername,0,0);
             }
+        }
+
+        private void ModifyEntity(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

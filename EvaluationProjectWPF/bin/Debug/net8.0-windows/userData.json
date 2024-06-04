@@ -124,6 +124,31 @@
       "Category": "CLEANER",
       "Username": "NewCleaner",
       "Password": "12345678"
+    },
+    {
+      "Category": "",
+      "Username": "AdminUsername:",
+      "Password": "12345678"
+    },
+    {
+      "Category": "NEW TEACHER",
+      "Username": "AdminUsername:",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "AdminUsername:",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "Teacher555",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "Teacher5555",
+      "Password": "12345678"
     }
   ]
 }

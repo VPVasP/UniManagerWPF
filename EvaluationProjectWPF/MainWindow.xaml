@@ -11,8 +11,34 @@
         <Grid.Background>
         <SolidColorBrush Color="Black"/>
     </Grid.Background>
+        <StackPanel x:Name="AdminPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <ComboBox x:Name="AdminTypeComboBox" Margin="5" Width="218" SelectionChanged="AdminTypeComboBox_SelectionChanged">
+                <ComboBoxItem Content="NEW TEACHER"/>
+                <ComboBoxItem Content="NEW BOARDING MEMBER"/>
+                <ComboBoxItem Content="NEW CLEANER"/>
+                <ComboBoxItem Content="NEW STUDENT"/>
+                <ComboBoxItem Content="NEW COURSE"/>
+            </ComboBox>
+            <ComboBox x:Name="AdminModifyTypeComboBox" Margin="5" Width="218" SelectionChanged="AdminTypeComboBox_SelectionChanged">
+                <ComboBoxItem Content="TEACHER"/>
+                <ComboBoxItem Content="BOARDING MEMBER"/>
+                <ComboBoxItem Content="CLEANER"/>
+                <ComboBoxItem Content="STUDENT"/>
+                <ComboBoxItem Content="COURSE"/>
+            </ComboBox>
+            <TextBlock x:Name="AdminUsername" Text="Set new Username:" Foreground="White"/>
+            <TextBox x:Name="AdminTextBox" Margin="5" Width="220" />
+            <TextBlock x:Name="AdminPassword" Text="Set new Password:" Foreground="White"/>
+            <PasswordBox x:Name="AdminPasswordBox" Margin="5" />
+            
+            <Button  x:Name="AddEntityUIButton" Content="AddEntity" Click="AddEntityUI" Margin="5"/>
 
-    <StackPanel x:Name="RegistrationLoginPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <Button  x:Name="ModifyEntityUIButton" Content="ModifyEntity" Click="ModifyEntityUI" Margin="5"/>
+            
+            <Button  x:Name="AddNewEntityButton" Content="AddNewEntity" Click="AddNewEntity" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel x:Name="RegistrationLoginPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
  
         <ComboBox x:Name="UserTypeComboBox" Margin="5" Width="218" SelectionChanged="UserTypeComboBox_SelectionChanged">
             <ComboBoxItem Content="ADMIN"/>
@@ -22,24 +48,19 @@
                 <ComboBoxItem Content="STUDENT"/>
             </ComboBox>
 
-            <ComboBox x:Name="AdminTypeComboBox" Margin="5" Width="218" SelectionChanged="AdminTypeComboBox_SelectionChanged">
-                <ComboBoxItem Content="TEACHER"/>
-                <ComboBoxItem Content="BOARDING MEMBER"/>
-                <ComboBoxItem Content="CLEANER"/>
-                <ComboBoxItem Content="STUDENT"/>
-            </ComboBox>
+           
 
             <TextBlock  x:Name="GeneralUsername" Text="Username:" Foreground="White"/>
         <TextBox x:Name="UsernameTextBox" Margin="5" Width="220" />
 
-            <TextBlock x:Name="AdminUsername" Text="AdminUsername:" Foreground="White"/>
-                <TextBox x:Name="AdminTextBox" Margin="5" Width="220" />
+            
 
-
-
+          
+        
             <TextBlock x:Name="Password" Text="Password:" Foreground="White"/>
         <PasswordBox x:Name="PasswordBox" Margin="5" />
-
+        
+          
             <Button x:Name="RegisterButton" Content="Register" Click="RegisterUser" Margin="5"/>
             <Button x:Name="LoginButton" Content="Login" Click="LoginUser" Margin="5"/>
             <Button  x:Name="ExitButton" Content="Exit" Click="ExitApplication" Margin="5"/>
@@ -47,14 +68,17 @@
 
         <TextBlock x:Name="RegistrationMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, -500, 10, 0" Foreground="Yellow"/>
         <TextBlock x:Name="LoginMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, -950, 10, 0" Foreground="Yellow"/>
-    <TextBlock x:Name="UserExistsMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, -50, 10, 0" Foreground="Red"/>
+       <TextBlock x:Name="UserExistsMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, -50, 10, 0" Foreground="Red"/>
         <TextBlock x:Name="StudentGrades" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 50, 10, 0" Foreground="LightGreen"/>
         <TextBlock x:Name="CleanerDates" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 50, 10, 0" Foreground="White"/>
         <TextBlock x:Name="TeacherTeachingDates" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 50, 10, 0" Foreground="White"/>
 
         <TextBlock x:Name="StudentInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-1350, -600, 10, 0" Foreground="LightGreen"/>
         <TextBlock x:Name="TeacherInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1150, -500, 10, 0" Foreground="LightSalmon"/>
-        <TextBlock x:Name="CleanerInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="00, -400, 10, 0" Foreground="LightBlue"/>
+        <TextBlock x:Name="CleanerInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="00, -500, 10, 0" Foreground="LightBlue"/>
         <TextBlock x:Name="BoardingMemberInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1050, 500, 10, 0" Foreground="LightBlue"/>
+
+        
+
     </Grid>
 </Window>
