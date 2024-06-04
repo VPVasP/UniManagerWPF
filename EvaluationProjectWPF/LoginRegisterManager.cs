@@ -2,12 +2,13 @@
 using System.IO;
 using System.Security.Policy;
 using Newtonsoft.Json;
+using static EvaluationProjectWPF.LoginRegisterManager;
 
 namespace EvaluationProjectWPF
 {
     internal class LoginRegisterManager
     {
-        private UserInfoList userInfoList;
+        public UserInfoList userInfoList;
         private string userSavedFile = "userData.json";
         public LoginRegisterManager()
         {
@@ -70,7 +71,7 @@ namespace EvaluationProjectWPF
         }
 
         // load data from JSON
-        private void LoadUserData()
+        public void LoadUserData()
         {
             if (File.Exists(userSavedFile))
             {
@@ -79,6 +80,20 @@ namespace EvaluationProjectWPF
             }
         }
 
+        public void DeleteUser(string category, string username)
+        {
+            var userToDelete = userInfoList.UsersInfoList.FirstOrDefault(user => user.Category == category && user.Username == username);
+            if (userToDelete != null)
+            {
+                userInfoList.UsersInfoList.Remove(userToDelete);
+                SaveUserData();
+                Debug.WriteLine("User deleted: " + username);
+            }
+            else
+            {
+                Debug.WriteLine("User not found: " + username);
+            }
+        }
         // the user info such as username and password
         public class UserInfo
         {

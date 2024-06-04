@@ -26,17 +26,39 @@
                 <ComboBoxItem Content="STUDENT"/>
                 <ComboBoxItem Content="COURSE"/>
             </ComboBox>
+
+            <ComboBox x:Name="AdminDeleteTypeComboBox" Margin="5" Width="218" SelectionChanged="AdminTypeComboBox_SelectionChanged">
+                <ComboBoxItem Content="TEACHER"/>
+                <ComboBoxItem Content="BOARDING MEMBER"/>
+                <ComboBoxItem Content="CLEANER"/>
+                <ComboBoxItem Content="STUDENT"/>
+                <ComboBoxItem Content="COURSE"/>
+            </ComboBox>
+            
             <TextBlock x:Name="AdminUsername" Text="Set new Username:" Foreground="White"/>
             <TextBox x:Name="AdminTextBox" Margin="5" Width="220" />
             <TextBox x:Name="AdminNewUsernameBox" Margin="5" Width="220" />
             <TextBlock x:Name="AdminPassword" Text="Set new Password:" Foreground="White"/>
             <PasswordBox x:Name="AdminPasswordBox" Margin="5" />
+
+
+            <TextBlock x:Name="DeleteEntityUsername" Text="Delete using Username:" Foreground="White"/>
             
+            <TextBox x:Name="AdminDeleteTextBox" Margin="5" Width="220" />
+
             <Button  x:Name="AddEntityUIButton" Content="AddEntity" Click="AddEntityUI" Margin="5"/>
 
             <Button  x:Name="ModifyEntityUIButton" Content="ModifyEntity" Click="ModifyEntityUI" Margin="5"/>
-            
+
+            <Button  x:Name="ConfrimModifyEntityUIButton" Content="ConfrimModifyEntity" Click="ModifyEntity" Margin="5"/>
+
             <Button  x:Name="AddNewEntityButton" Content="AddNewEntity" Click="AddNewEntity" Margin="5"/>
+
+            <Button  x:Name="DeleteEntityButton" Content="DeleteEntity" Click="DeleteEntity" Margin="5"/>
+
+            <Button  x:Name="YesDeleteEntityButton" Content="YesDeleteEntity" Click="YesDeleteEntity" Margin="5"/>
+
+            <Button  x:Name="NoDeleteEntityButton" Content="NoDeleteEntity" Click="NoDeleteEntity" Margin="5"/>
         </StackPanel>
 
         <StackPanel x:Name="RegistrationLoginPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
@@ -74,10 +96,10 @@
         <TextBlock x:Name="CleanerDates" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 50, 10, 0" Foreground="White"/>
         <TextBlock x:Name="TeacherTeachingDates" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 50, 10, 0" Foreground="White"/>
 
-        <TextBlock x:Name="StudentInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-1350, -600, 10, 0" Foreground="LightGreen"/>
-        <TextBlock x:Name="TeacherInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1150, -500, 10, 0" Foreground="LightSalmon"/>
-        <TextBlock x:Name="CleanerInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="00, -500, 10, 0" Foreground="LightBlue"/>
-        <TextBlock x:Name="BoardingMemberInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1050, 500, 10, 0" Foreground="LightBlue"/>
+        <TextBlock x:Name="StudentInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-1350, -600, 10, 0" Foreground="White"/>
+        <TextBlock x:Name="TeacherInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1150,-00, 10, 0" Foreground="White"/>
+        <TextBlock x:Name="CleanerInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="00, -600, 10, 0" Foreground="White"/>
+        <TextBlock x:Name="BoardingMemberInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-1350, 500, 10, 0" Foreground="White"/>
 
         
 

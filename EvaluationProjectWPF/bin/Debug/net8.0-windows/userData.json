@@ -27,7 +27,7 @@
     },
     {
       "Category": "TEACHER",
-      "Username": "TeacherGeorge",
+      "Username": "GeorgeCoolTeacher",
       "Password": "12345678"
     },
     {
@@ -52,12 +52,12 @@
     },
     {
       "Category": "TEACHER",
-      "Username": "Teachere5555",
+      "Username": "Teacher6",
       "Password": "1234567"
     },
     {
       "Category": "TEACHER",
-      "Username": "Michael Gray",
+      "Username": "",
       "Password": "12345678"
     },
     {
@@ -137,7 +137,7 @@
     },
     {
       "Category": "TEACHER",
-      "Username": "Bob6000",
+      "Username": "",
       "Password": "12345678"
     },
     {
@@ -148,6 +148,11 @@
     {
       "Category": "TEACHER",
       "Username": "New Name",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "NewTeacher",
       "Password": "12345678"
     }
   ]
