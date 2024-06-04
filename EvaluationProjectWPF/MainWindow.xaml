@@ -41,7 +41,9 @@
             <TextBlock x:Name="AdminPassword" Text="Set new Password:" Foreground="White"/>
             <PasswordBox x:Name="AdminPasswordBox" Margin="5" />
 
-
+ 
+            
+            
             <TextBlock x:Name="DeleteEntityUsername" Text="Delete using Username:" Foreground="White"/>
             
             <TextBox x:Name="AdminDeleteTextBox" Margin="5" Width="220" />
@@ -56,9 +58,13 @@
 
             <Button  x:Name="DeleteEntityButton" Content="DeleteEntity" Click="DeleteEntity" Margin="5"/>
 
+            <Button  x:Name="SearchDeleteEntityButton" Content="SearchUsernameDeleteEntity" Click="SearchNameDeleteEntity" Margin="5"/>
+
             <Button  x:Name="YesDeleteEntityButton" Content="YesDeleteEntity" Click="YesDeleteEntity" Margin="5"/>
 
             <Button  x:Name="NoDeleteEntityButton" Content="NoDeleteEntity" Click="NoDeleteEntity" Margin="5"/>
+
+            <TextBlock x:Name="ConfrimDeletionMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 100, 10, 0" Foreground="Yellow"/>
         </StackPanel>
 
         <StackPanel x:Name="RegistrationLoginPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">

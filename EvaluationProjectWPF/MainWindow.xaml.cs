@@ -21,6 +21,7 @@ namespace EvaluationProjectWPF
         private bool isClicked;
         private bool yesDeleteEntity;
         private bool noDeleteEntity;
+        private bool firstClick;
         public MainWindow()
         {
             InitializeComponent();
@@ -451,6 +452,7 @@ namespace EvaluationProjectWPF
             NoDeleteEntityButton.Visibility = Visibility.Collapsed;
             AdminNewUsernameBox.Visibility = Visibility.Collapsed;
             AdminDeleteTextBox.Visibility = Visibility.Collapsed;
+            SearchDeleteEntityButton.Visibility = Visibility.Collapsed;
         }
         private void ShowAdminStuff()
         {
@@ -645,8 +647,10 @@ namespace EvaluationProjectWPF
             AddEntityUIButton.Visibility = Visibility.Collapsed;
             ConfrimModifyEntityUIButton.Visibility = Visibility.Collapsed;
             AdminDeleteTextBox.Visibility = Visibility.Visible;
-            YesDeleteEntityButton.Visibility = Visibility.Visible;
-            NoDeleteEntityButton.Visibility = Visibility.Visible;
+
+            YesDeleteEntityButton.Visibility = Visibility.Collapsed;
+            NoDeleteEntityButton.Visibility = Visibility.Collapsed;
+            SearchDeleteEntityButton.Visibility = Visibility.Visible;
         }
 
         private void YesDeleteEntity(object sender, RoutedEventArgs e)
@@ -654,43 +658,115 @@ namespace EvaluationProjectWPF
             yesDeleteEntity = true;
             noDeleteEntity = false;
             Debug.WriteLine("Yes deleteEntity is " + yesDeleteEntity);
+            ExecuteDeletionIfConfirmed();
         }
+
         private void NoDeleteEntity(object sender, RoutedEventArgs e)
         {
             noDeleteEntity = true;
             yesDeleteEntity = false;
+            ConfrimDeletionMessage.Visibility = Visibility.Collapsed;
         }
 
         private void SearchNameDeleteEntity(object sender, RoutedEventArgs e)
         {
             string deleteUserInputFieldUsername = AdminDeleteTextBox.Text;
-            string deleteMessage = AdminDeleteTypeComboBox.Text;
-            string selectedCategoryTeacher = AdminDeleteTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminDeleteTypeComboBox.SelectedItem).Content.ToString() == "TEACHER" ? "TEACHER" : "";
-            string selectedCategoryBoardingMember = AdminDeleteTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminDeleteTypeComboBox.SelectedItem).Content.ToString() == "BOARDING MEMBER" ? "BOARDING MEMBER" : "";
-            string selectedCategoryCleaner = AdminDeleteTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminDeleteTypeComboBox.SelectedItem).Content.ToString() == "CLEANER" ? "CLEANER" : "";
-            string selectedCategoryStudent = AdminDeleteTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminDeleteTypeComboBox.SelectedItem).Content.ToString() == "STUDENT" ? "STUDENT" : "";
+            string selectedCategory = ((ComboBoxItem)AdminDeleteTypeComboBox.SelectedItem)?.Content.ToString() ?? "";
 
-            if (AdminDeleteTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminDeleteTypeComboBox.SelectedItem).Content.ToString() == "TEACHER")
+            if (selectedCategory == "TEACHER")
             {
-                bool foundName = false;
-
-                var matchingValues = loginRegisterManager.GetAllTeachers().Where(user => user.Username.Contains(deleteUserInputFieldUsername));
-                if (matchingValues.Any())
+                var matchingValuesTeacher = loginRegisterManager.GetAllTeachers().Where(user => user.Username.Contains(deleteUserInputFieldUsername));
+                if (matchingValuesTeacher.Any())
                 {
-                    var teacherToModify = matchingValues.First();
-                    string deleteTeacherString = teacherToModify.ToString();
-                    if (foundName)
+                    YesDeleteEntityButton.Visibility = Visibility.Visible;
+                    NoDeleteEntityButton.Visibility = Visibility.Visible;
+                    SearchDeleteEntityButton.Visibility = Visibility.Collapsed;
+                    ConfrimDeletionMessage.Text = "Are you sure you want to delete this User?";
+                    ConfrimDeletionMessage.Visibility = Visibility.Visible;
+                }
+
+                else if (selectedCategory == "CLEANER")
+                {
+                    var matchingValuesCleaner = loginRegisterManager.GetAllCleaners().Where(user => user.Username.Contains(deleteUserInputFieldUsername));
+                    if (matchingValuesCleaner.Any())
                     {
                         YesDeleteEntityButton.Visibility = Visibility.Visible;
                         NoDeleteEntityButton.Visibility = Visibility.Visible;
-                        Debug.WriteLine("Yes deleteEntity is " +yesDeleteEntity);
-                        if (yesDeleteEntity)
+                        SearchDeleteEntityButton.Visibility = Visibility.Collapsed;
+                        ConfrimDeletionMessage.Text = "Are you sure you want to delete this User?";
+                        ConfrimDeletionMessage.Visibility = Visibility.Visible;
+                    }
+
+                    else if (selectedCategory == "STUDENT")
+                    {
+                        var matchingValuesStudent = loginRegisterManager.GetAllStudents().Where(user => user.Username.Contains(deleteUserInputFieldUsername));
+                        if (matchingValuesCleaner.Any())
                         {
-                            loginRegisterManager.DeleteUser(selectedCategoryTeacher, deleteTeacherString);
+                            YesDeleteEntityButton.Visibility = Visibility.Visible;
+                            NoDeleteEntityButton.Visibility = Visibility.Visible;
+                            SearchDeleteEntityButton.Visibility = Visibility.Collapsed;
+                            ConfrimDeletionMessage.Text = "Are you sure you want to delete this User?";
+                            ConfrimDeletionMessage.Visibility = Visibility.Visible;
+                        }
+                    }
+                    else if (selectedCategory == "BOARDING MEMBER")
+                    {
+                        var matchingValuesStudent = loginRegisterManager.GetAllBoardingMembers().Where(user => user.Username.Contains(deleteUserInputFieldUsername));
+                        if (matchingValuesCleaner.Any())
+                        {
+                            YesDeleteEntityButton.Visibility = Visibility.Visible;
+                            NoDeleteEntityButton.Visibility = Visibility.Visible;
+                            SearchDeleteEntityButton.Visibility = Visibility.Collapsed;
+                            ConfrimDeletionMessage.Text = "Are you sure you want to delete this User?";
+                            ConfrimDeletionMessage.Visibility = Visibility.Visible;
+                        }
+                       
+                            else
+                        {
+                            ConfrimDeletionMessage.Text = "No user found with the given username.";
+                            ConfrimDeletionMessage.Visibility = Visibility.Visible;
                         }
                     }
                 }
             }
         }
+            
+
+        private void ExecuteDeletionIfConfirmed()
+        {
+            if (yesDeleteEntity)
+            {
+                string deleteUserInputFieldUsername = AdminDeleteTextBox.Text;
+                string selectedCategory = ((ComboBoxItem)AdminDeleteTypeComboBox.SelectedItem)?.Content.ToString() ?? "";
+
+                if (selectedCategory == "TEACHER")
+                {
+                    
+                    loginRegisterManager.DeleteUser(selectedCategory, deleteUserInputFieldUsername);
+                    ConfrimDeletionMessage.Text = "Teacher has been deleted successfully.";
+                }
+                else if(selectedCategory == "CLEANER")
+                {
+                    loginRegisterManager.DeleteUser(selectedCategory, deleteUserInputFieldUsername);
+                    ConfrimDeletionMessage.Text = "Cleaner has been deleted successfully.";
+                }
+
+                else if (selectedCategory == "STUDENT")
+                {
+                    loginRegisterManager.DeleteUser(selectedCategory, deleteUserInputFieldUsername);
+                    ConfrimDeletionMessage.Text = "Student has been deleted successfully.";
+                }
+
+                else if (selectedCategory == "BOARDING MEMBER")
+                {
+                    loginRegisterManager.DeleteUser(selectedCategory, deleteUserInputFieldUsername);
+                    ConfrimDeletionMessage.Text = "Boarding Member has been deleted successfully.";
+                }
+                ConfrimDeletionMessage.Visibility = Visibility.Visible;
+                UpdateAdminStats();
+                
+            }
+        }
+
     }
-}
+  }

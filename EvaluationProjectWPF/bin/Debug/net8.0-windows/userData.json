@@ -26,11 +26,6 @@
       "Password": "12345678"
     },
     {
-      "Category": "TEACHER",
-      "Username": "GeorgeCoolTeacher",
-      "Password": "12345678"
-    },
-    {
       "Category": "STUDENT",
       "Username": "studentMichael",
       "Password": "12345678"
@@ -49,11 +44,6 @@
       "Category": "CLEANER",
       "Username": "CleanestCleaner",
       "Password": "12345678"
-    },
-    {
-      "Category": "TEACHER",
-      "Username": "Teacher6",
-      "Password": "1234567"
     },
     {
       "Category": "TEACHER",
@@ -148,11 +138,6 @@
     {
       "Category": "TEACHER",
       "Username": "New Name",
-      "Password": "12345678"
-    },
-    {
-      "Category": "TEACHER",
-      "Username": "NewTeacher",
       "Password": "12345678"
     }
   ]
