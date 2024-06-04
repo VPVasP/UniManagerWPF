@@ -16,6 +16,7 @@ namespace EvaluationProjectWPF
         private UniversityManager.Cleaner cleaner;
         private UniversityManager.Teacher teacher;
         private AdminManager adminManager;
+        private bool isClicked;
         public MainWindow()
         {
             InitializeComponent();
@@ -385,6 +386,7 @@ namespace EvaluationProjectWPF
         private void HideAdminStuff()
         {
             AdminPanel.Visibility = Visibility.Collapsed;
+            AdminNewUsernameBox.Visibility = Visibility.Collapsed;
             //AdminUsername.Visibility = Visibility.Collapsed;
             //AdminTextBox.Visibility = Visibility.Collapsed;          
             //AdminTypeComboBox.Visibility = Visibility.Collapsed;
@@ -437,6 +439,7 @@ namespace EvaluationProjectWPF
         private void SearchName(object sender,RoutedEventArgs e)
         {
             string adminRegisterUsername = AdminTextBox.Text;
+            string adminUpdateNameBox = AdminNewUsernameBox.Text;
             string adminRegisterPassword = AdminPasswordBox.Password;
             string selectedCategoryTeacher = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "TEACHER" ? "TEACHER" : "";
             string selectedCategoryBoardingMember = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "BOARDING MEMBER" ? "BOARDING MEMBER" : "";
@@ -445,15 +448,34 @@ namespace EvaluationProjectWPF
 
             if (AdminModifyTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "TEACHER")
             {
+                bool foundName=false;
+               
                 var matchingValues = loginRegisterManager.GetAllTeachers().Where(user => user.Username.Contains(adminRegisterUsername));
-                if (matchingValues.Any()) 
+                if (matchingValues.Any())
                 {
-                    ModifyEntityUIButton.Content = "Found Name";
+                    ModifyEntityUIButton.Content = "Found Name...Please type in the Input Field the New Name...";
+                    var teacherToModify = matchingValues.First();
+                    AdminNewUsernameBox.Visibility = Visibility.Visible;
+                    AdminTextBox.Visibility = Visibility.Collapsed;
+                    AdminUsername.Text = "Choose New Name";
+                    ModifyEntityUIButton.Click += SearchName;
+                    ModifyEntityUIButton.Click += ModifyEntity;
+                    foundName = true;
+
+                    if (foundName &&isClicked)
+                    {
+
+                        teacherToModify.Username = adminUpdateNameBox;
+                        loginRegisterManager.SaveUserData();
+                    }
                 }
                 else
                 {
                     ModifyEntityUIButton.Content = "Didn't Find Name";
+                    foundName = false;
                 }
+                
+                
             }
 
             if (AdminModifyTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "BOARDING MEMBER")
@@ -531,6 +553,7 @@ namespace EvaluationProjectWPF
 
         private void ModifyEntity(object sender, RoutedEventArgs e)
         {
+            isClicked = true;
 
         }
     }

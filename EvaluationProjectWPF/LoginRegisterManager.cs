@@ -63,7 +63,7 @@ namespace EvaluationProjectWPF
         }
 
         // save data to JSON
-        private void SaveUserData()
+        public void SaveUserData()
         {
             string json = JsonConvert.SerializeObject(userInfoList, Newtonsoft.Json.Formatting.Indented);
             File.WriteAllText(userSavedFile, json);

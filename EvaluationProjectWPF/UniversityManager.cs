@@ -5,6 +5,7 @@
         public List<Courses> AllCourses = new List<Courses>();
         public List <Teacher> AllTeachers = new List<Teacher>();
         public List<Cleaner> AllCleaner = new List<Cleaner>();
+        public Teacher teacher;
         public class Teacher : Employees
         {
             public string? teachingCourseTitle;

@@ -28,6 +28,7 @@
             </ComboBox>
             <TextBlock x:Name="AdminUsername" Text="Set new Username:" Foreground="White"/>
             <TextBox x:Name="AdminTextBox" Margin="5" Width="220" />
+            <TextBox x:Name="AdminNewUsernameBox" Margin="5" Width="220" />
             <TextBlock x:Name="AdminPassword" Text="Set new Password:" Foreground="White"/>
             <PasswordBox x:Name="AdminPasswordBox" Margin="5" />
             
