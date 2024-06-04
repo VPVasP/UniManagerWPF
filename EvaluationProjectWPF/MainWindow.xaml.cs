@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -437,24 +438,61 @@ namespace EvaluationProjectWPF
         {
             string adminRegisterUsername = AdminTextBox.Text;
             string adminRegisterPassword = AdminPasswordBox.Password;
-            string selectedCategoryTeacher = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "TEACHER" ? "TEACHER" : "";
-            string selectedCategoryBoardingMember = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "BOARDING MEMBER" ? "BOARDING MEMBER" : "";
-            string selectedCategoryCleaner = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "CLEANER" ? "CLEANER" : "";
-            string selectedCategoryStudent = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "STUDENT" ? "STUDENT" : "";
+            string selectedCategoryTeacher = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "TEACHER" ? "TEACHER" : "";
+            string selectedCategoryBoardingMember = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "BOARDING MEMBER" ? "BOARDING MEMBER" : "";
+            string selectedCategoryCleaner = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "CLEANER" ? "CLEANER" : "";
+            string selectedCategoryStudent = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "STUDENT" ? "STUDENT" : "";
 
-
-            if (AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "TEACHER")
+            if (AdminModifyTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "TEACHER")
             {
-                
-
-                var matchingvalues = loginRegisterManager.GetAllTeachers().Where(stringToCheck => adminRegisterUsername.Contains(adminRegisterUsername));
-                if (matchingvalues != null)
+                var matchingValues = loginRegisterManager.GetAllTeachers().Where(user => user.Username.Contains(adminRegisterUsername));
+                if (matchingValues.Any()) 
                 {
-                    Console.Write("Found Name");
+                    ModifyEntityUIButton.Content = "Found Name";
                 }
                 else
                 {
-                    Console.WriteLine("Didn't find name");
+                    ModifyEntityUIButton.Content = "Didn't Find Name";
+                }
+            }
+
+            if (AdminModifyTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "BOARDING MEMBER")
+            {
+
+                var matchingValues = loginRegisterManager.GetAllBoardingMembers().Where(user => user.Username.Contains(adminRegisterUsername));
+                if (matchingValues.Any())
+                {
+                    ModifyEntityUIButton.Content = "Found Name";
+                }
+                else
+                {
+                    ModifyEntityUIButton.Content = "Didn't Find Name";
+                }
+            }
+
+            if (AdminModifyTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "CLEANER")
+            {
+                var matchingValues = loginRegisterManager.GetAllCleaners().Where(user => user.Username.Contains(adminRegisterUsername));
+                if (matchingValues.Any())
+                {
+                    ModifyEntityUIButton.Content = "Found Name";
+                }
+                else
+                {
+                    ModifyEntityUIButton.Content = "Didn't Find Name";
+                }
+            }
+
+                if (AdminModifyTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "STUDENT")
+                {
+                var matchingValues = loginRegisterManager.GetAllStudents().Where(user => user.Username.Contains(adminRegisterUsername));
+                if (matchingValues.Any())
+                {
+                    ModifyEntityUIButton.Content = "Found Name";
+                }
+                else
+                {
+                    ModifyEntityUIButton.Content = "Didn't Find Name";
                 }
             }
         }
