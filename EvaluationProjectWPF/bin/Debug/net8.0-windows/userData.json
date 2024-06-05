@@ -7,7 +7,7 @@
     },
     {
       "Category": "TEACHER",
-      "Username": "John",
+      "Username": "Alex",
       "Password": "12345678"
     },
     {
@@ -38,6 +38,136 @@
     {
       "Category": "CLEANER",
       "Username": "Allison",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "George",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "Lakis",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "Thanos",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "Nick",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "TeacherGeorge",
+      "Password": "12345678"
+    },
+    {
+      "Category": "CLEANER",
+      "Username": "NewCleaner",
+      "Password": "12345678"
+    },
+    {
+      "Category": "BOARDING MEMBER",
+      "Username": "George",
+      "Password": "12345678"
+    },
+    {
+      "Category": "BOARDING MEMBER",
+      "Username": "Lakis",
+      "Password": "12345678"
+    },
+    {
+      "Category": "BOARDING MEMBER",
+      "Username": "Nakis",
+      "Password": "12345678"
+    },
+    {
+      "Category": "BOARDING MEMBER",
+      "Username": "Giannis",
+      "Password": "12345678"
+    },
+    {
+      "Category": "STUDENT",
+      "Username": "Happy",
+      "Password": "12345678"
+    },
+    {
+      "Category": "STUDENT",
+      "Username": "Jakki",
+      "Password": "12345678"
+    },
+    {
+      "Category": "STUDENT",
+      "Username": "Halli",
+      "Password": "12345678"
+    },
+    {
+      "Category": "BOARDING MEMBER",
+      "Username": "NewestBoardingMember",
+      "Password": "12345678"
+    },
+    {
+      "Category": "BOARDING MEMBER",
+      "Username": "Boarder",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "Mathew",
+      "Password": "12345678"
+    },
+    {
+      "Category": "BOARDING MEMBER",
+      "Username": "Tsatsa",
+      "Password": "12345678"
+    },
+    {
+      "Category": "BOARDING MEMBER",
+      "Username": "Michael",
+      "Password": "12345678"
+    },
+    {
+      "Category": "BOARDING MEMBER",
+      "Username": "Corleone",
+      "Password": "12345678"
+    },
+    {
+      "Category": "BOARDING MEMBER",
+      "Username": "BoardingMember5000",
+      "Password": "12345678"
+    },
+    {
+      "Category": "STUDENT",
+      "Username": "MichaelGray",
+      "Password": "12345678"
+    },
+    {
+      "Category": "STUDENT",
+      "Username": "JohnMichael",
+      "Password": "12345678"
+    },
+    {
+      "Category": "STUDENT",
+      "Username": "JohnWick",
+      "Password": "12345678"
+    },
+    {
+      "Category": "STUDENT",
+      "Username": "Godfather",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "Mmmmmm",
+      "Password": "12345678"
+    },
+    {
+      "Category": "STUDENT",
+      "Username": "Mmmmmm",
       "Password": "12345678"
     }
   ]

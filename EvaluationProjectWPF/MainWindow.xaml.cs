@@ -22,6 +22,7 @@ namespace EvaluationProjectWPF
         private bool yesDeleteEntity;
         private bool noDeleteEntity;
         private bool firstClick;
+        TextBlock NewEnityTextBlock= new TextBlock();
         public MainWindow()
         {
             InitializeComponent();
@@ -370,7 +371,7 @@ namespace EvaluationProjectWPF
                 
                 if(allTeachers.IndexOf(teacher) == 0)
                 {
-                    teacherTextBlock.Foreground = Brushes.Green;
+                   teacherTextBlock.Foreground = Brushes.Green;
                 }
                 TeacherInfoStackPanel.Children.Add(teacherTextBlock);
             }
@@ -382,7 +383,7 @@ namespace EvaluationProjectWPF
 
                 if (allCleaners.IndexOf(cleaner) == 0)
                 {
-                    cleanerTextBlock.Foreground = Brushes.Green;
+                 cleanerTextBlock.Foreground = Brushes.Green;
                 }
                 CleanerInfoStackPanel.Children.Add(cleanerTextBlock);
             }
@@ -394,11 +395,99 @@ namespace EvaluationProjectWPF
 
                 if (allBoardingMembers.IndexOf(boardingMember) == 0)
                 {
-                    boardingMemberTextBlock.Foreground = Brushes.Green;
+                   boardingMemberTextBlock.Foreground = Brushes.Green;
                 }
                 BoardingMemberInfoStackPanel.Children.Add(boardingMemberTextBlock);
             }
         }
+        private void UpdateAddNewEntityUI()
+        {
+            RegistrationLoginPanel.Visibility = Visibility.Collapsed;
+            string allCourseGrades = string.Empty;
+            string allTeacherWorkingHours = string.Empty;
+            string allCleanerWorkingSchedule = string.Empty;
+
+            foreach (var teacherHours in universityManager.AllTeachers)
+            {
+                allTeacherWorkingHours += "  They teach Course: " + teacherHours.teachingCourseTitle + ", Working Day: " + teacherHours.teachingWorkingDay + ", Working Hour: " + teacherHours.teacherWorkingHour + "\n";
+            }
+            foreach (var course in universityManager.AllCourses)
+            {
+                allCourseGrades += " Course Name: " + course.CourseTitle + ", Oral Mark: " + course.OralMark + ", Written Mark: " + course.WritingMark + "\n";
+            }
+
+            foreach (var cleanerSchedule in universityManager.AllCleaner)
+            {
+                allCleanerWorkingSchedule += "Working Day: " + cleanerSchedule.workingDay + ", Working Length " + cleanerSchedule.workingLength + " Hours" + "\n";
+            }
+
+            var allStudents = loginRegisterManager.GetAllStudents().ToList();
+            allStudents.Reverse();
+
+            var allTeachers = loginRegisterManager.GetAllTeachers().ToList();
+            allTeachers.Reverse();
+
+            var allCleaners = loginRegisterManager.GetAllCleaners().ToList();
+            allCleaners.Reverse();
+
+            var allBoardingMembers = loginRegisterManager.GetAllBoardingMembers().ToList();
+            allBoardingMembers.Reverse();
+
+
+            StudentInfoStackPanel.Children.Clear();
+            TeacherInfoStackPanel.Children.Clear();
+            CleanerInfoStackPanel.Children.Clear();
+            BoardingMemberInfoStackPanel.Children.Clear();
+
+            foreach (var student in allStudents)
+            {
+
+             
+                NewEnityTextBlock.Text = "STUDENT NAME:  " + student.Username + " " + allCourseGrades;
+                if (allStudents.IndexOf(student) == 0)
+                {
+                    NewEnityTextBlock.Foreground = Brushes.Green;
+                }
+             
+            }
+            foreach (var teacher in allTeachers)
+            {
+
+
+                NewEnityTextBlock.Text = "TEACHER NAME:  " + teacher.Username + allTeacherWorkingHours;
+
+                if (allTeachers.IndexOf(teacher) == 0)
+                {
+                    NewEnityTextBlock.Foreground = Brushes.Green;
+                }
+              
+            }
+            foreach (var cleaner in allCleaners)
+            {
+
+
+                NewEnityTextBlock.Text = "CLEANER NAME: " + cleaner.Username + " " + allCleanerWorkingSchedule;
+
+                if (allCleaners.IndexOf(cleaner) == 0)
+                {
+                    NewEnityTextBlock.Foreground = Brushes.Green;
+                }
+        
+            }
+            foreach (var boardingMember in allBoardingMembers)
+            {
+
+                TextBlock boardingMemberTextBlock = new TextBlock();
+                NewEnityTextBlock.Text = "BOARDING MEMBER NAME: " + boardingMember.Username;
+
+                if (allBoardingMembers.IndexOf(boardingMember) == 0)
+                {
+                    boardingMemberTextBlock.Foreground = Brushes.Green;
+                }
+                
+            }
+        }
+    
         private void ShowAdminRelatedStats()
         {
             AddStudentCourses();
@@ -631,44 +720,121 @@ namespace EvaluationProjectWPF
         }
         private void AddNewEntity(object sender, RoutedEventArgs e)
         {
+            RegistrationLoginPanel.Visibility = Visibility.Collapsed;
+            string allCourseGrades = string.Empty;
+            string allTeacherWorkingHours = string.Empty;
+            string allCleanerWorkingSchedule = string.Empty;
+
+            foreach (var teacherHours in universityManager.AllTeachers)
+            {
+                allTeacherWorkingHours += "  They teach Course: " + teacherHours.teachingCourseTitle + ", Working Day: " + teacherHours.teachingWorkingDay + ", Working Hour: " + teacherHours.teacherWorkingHour + "\n";
+            }
+            foreach (var course in universityManager.AllCourses)
+            {
+                allCourseGrades += " Course Name: " + course.CourseTitle + ", Oral Mark: " + course.OralMark + ", Written Mark: " + course.WritingMark + "\n";
+            }
+
+            foreach (var cleanerSchedule in universityManager.AllCleaner)
+            {
+                allCleanerWorkingSchedule += "Working Day: " + cleanerSchedule.workingDay + ", Working Length " + cleanerSchedule.workingLength + " Hours" + "\n";
+            }
+
+            var allStudents = loginRegisterManager.GetAllStudents().ToList();
+            allStudents.Reverse();
+
+            var allTeachers = loginRegisterManager.GetAllTeachers().ToList();
+            allTeachers.Reverse();
+
+            var allCleaners = loginRegisterManager.GetAllCleaners().ToList();
+            allCleaners.Reverse();
+
+            var allBoardingMembers = loginRegisterManager.GetAllBoardingMembers().ToList();
+            allBoardingMembers.Reverse();
+
+
+            StudentInfoStackPanel.Children.Clear();
+            TeacherInfoStackPanel.Children.Clear();
+            CleanerInfoStackPanel.Children.Clear();
+            BoardingMemberInfoStackPanel.Children.Clear();
+
             string adminRegisterUsername = AdminTextBox.Text;
             string adminRegisterPassword = AdminPasswordBox.Password;
-            string selectedCategoryTeacher = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW TEACHER" ? "TEACHER" : "";
-            string selectedCategoryBoardingMember = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW BOARDING MEMBER" ? "BOARDING MEMBER" : "";
-            string selectedCategoryCleaner = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW CLEANER" ? "CLEANER" : "";
-            string selectedCategoryStudent = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW STUDENT" ? "STUDENT" : "";
+            string selectedCategory = ((ComboBoxItem)AdminTypeComboBox.SelectedItem)?.Content.ToString();
 
-            if (AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW TEACHER")
+            if (selectedCategory == "NEW TEACHER")
             {
-                loginRegisterManager.Register(selectedCategoryTeacher, adminRegisterUsername, adminRegisterPassword);
-                UpdateAdminStats();
+                loginRegisterManager.Register("TEACHER", adminRegisterUsername, adminRegisterPassword);
+                foreach (var teacher in allTeachers)
+                {
+                    TextBlock newTeacherTextBlock = new TextBlock();
+                    newTeacherTextBlock.Text = "TEACHER:  " + adminRegisterUsername + " ";
+                    if (allTeachers.IndexOf(teacher) == 0)
+                    {
+                        newTeacherTextBlock.Foreground = Brushes.Green;
+                    }
+                    BoardingMemberInfoStackPanel.Children.Add(newTeacherTextBlock);
+                }
+            }
+            else if (selectedCategory == "NEW BOARDING MEMBER")
+            {
+                loginRegisterManager.Register("BOARDING MEMBER", adminRegisterUsername, adminRegisterPassword);
+                BoardingMemberInfoStackPanel.UpdateLayout();
+
+
+                foreach (var boardingMember in allBoardingMembers)
+                {
+                    TextBlock newBoardingMemberTextBlock = new TextBlock();
+                    newBoardingMemberTextBlock.Text = "BOARDING MEMBER:  " + adminRegisterUsername + " ";
+                    if (allBoardingMembers.IndexOf(boardingMember) == 0)
+                    {
+                        newBoardingMemberTextBlock.Foreground = Brushes.Green;
+                    }
+                    BoardingMemberInfoStackPanel.Children.Add(newBoardingMemberTextBlock);
+                }
+            }
+            else if (selectedCategory == "NEW CLEANER")
+            {
+                loginRegisterManager.Register("CLEANER", adminRegisterUsername, adminRegisterPassword);
+                 CleanerInfoStackPanel.UpdateLayout();
+
+
+                foreach (var cleaner in allCleaners)
+                {
+                    TextBlock newCleanerTextBlock = new TextBlock();
+                    newCleanerTextBlock.Text = "CLEANER NAME:  " + adminRegisterUsername + " ";
+                    if (allCleaners.IndexOf(cleaner) == 0)
+                    {
+                       newCleanerTextBlock.Foreground = Brushes.Green;
+                    }
+                    CleanerInfoStackPanel.Children.Add(newCleanerTextBlock);
+                }
+            }
+            else if (selectedCategory == "NEW STUDENT")
+            {
+                loginRegisterManager.Register("STUDENT", adminRegisterUsername, adminRegisterPassword);
+                StudentInfoStackPanel.UpdateLayout();
+               
+                
+                foreach (var student in allStudents)
+                {
+                    TextBlock newStudentTextBlock = new TextBlock();
+                    newStudentTextBlock.Text = "STUDENT NAME:  " + adminRegisterUsername + " " + allCourseGrades;
+                    if (allStudents.IndexOf(student) == 0)
+                    {
+                        newStudentTextBlock.Foreground = Brushes.Green;
+                    }
+                    StudentInfoStackPanel.Children.Add(newStudentTextBlock);
+                }
             }
 
-            else if (AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW BOARDING MEMBER")
+            else if (selectedCategory == "NEW COURSE")
             {
-                loginRegisterManager.Register(selectedCategoryBoardingMember, adminRegisterUsername, adminRegisterPassword);
-                UpdateAdminStats();
-            }
-
-            else if (AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW CLEANER")
-            {
-                loginRegisterManager.Register(selectedCategoryCleaner, adminRegisterUsername, adminRegisterPassword);
-                UpdateAdminStats();
-            }
-            else if (AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW STUDENT")
-            {
-                loginRegisterManager.Register(selectedCategoryStudent, adminRegisterUsername, adminRegisterPassword);
-                UpdateAdminStats();
-            }
-            else if (AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminTypeComboBox.SelectedItem).Content.ToString() == "NEW COURSE")
-            {
-
                 universityManager.AddStudentCourse(adminRegisterUsername, 0, 0);
-                UpdateAdminStats();
             }
+
         }
 
-        private void ModifyEntity(object sender, RoutedEventArgs e)
+            private void ModifyEntity(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("The IsClicked is ModifyEntity:" + isClicked);
             isClicked = true;

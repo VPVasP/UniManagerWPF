@@ -103,14 +103,14 @@
         <TextBlock x:Name="CleanerDates" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 50, 10, 0" Foreground="White"/>
         <TextBlock x:Name="TeacherTeachingDates" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 50, 10, 0" Foreground="White"/>
 
-        <TextBlock x:Name="StudentInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-1350, -600, 10, 0" Foreground="White"/>
+        <TextBlock x:Name="StudentInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-1250, -600, 10, 0" Foreground="White"/>
         <TextBlock x:Name="TeacherInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1150,-00, 10, 0" Foreground="White"/>
         <TextBlock x:Name="CleanerInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="00, -600, 10, 0" Foreground="White"/>
-        <TextBlock x:Name="BoardingMemberInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-1350, 500, 10, 0" Foreground="White"/>
-        <StackPanel x:Name="StudentInfoStackPanel" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <StackPanel x:Name="TeacherInfoStackPanel" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <StackPanel x:Name="CleanerInfoStackPanel" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <StackPanel x:Name="BoardingMemberInfoStackPanel" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock x:Name="BoardingMemberInfoText" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-1350, 600, 10, 0" Foreground="White"/>
+        <StackPanel x:Name="StudentInfoStackPanel" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+        <StackPanel x:Name="TeacherInfoStackPanel" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+        <StackPanel x:Name="CleanerInfoStackPanel" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+        <StackPanel x:Name="BoardingMemberInfoStackPanel" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
