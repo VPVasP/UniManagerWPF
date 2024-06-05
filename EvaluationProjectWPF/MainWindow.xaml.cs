@@ -912,14 +912,60 @@ namespace EvaluationProjectWPF
             AdminModifyTypeComboBox.Visibility = Visibility.Collapsed;
             AdminUsername.Visibility = Visibility.Collapsed;
             ShowAdminUI();
+            loginRegisterManager.LoadUserData();
+            RegistrationLoginPanel.Visibility = Visibility.Collapsed;
+            string allCourseGrades = string.Empty;
+            string allTeacherWorkingHours = string.Empty;
+            string allCleanerWorkingSchedule = string.Empty;
+            foreach (var teacherHours in universityManager.AllTeachers)
+            {
+                allTeacherWorkingHours += "  They teach Course: " + teacherHours.teachingCourseTitle + ", Working Day: " + teacherHours.teachingWorkingDay + ", Working Hour: " + teacherHours.teacherWorkingHour + "\n";
+            }
+            foreach (var course in universityManager.AllCourses)
+            {
+                allCourseGrades += " Course Name: " + course.CourseTitle + ", Oral Mark: " + course.OralMark + ", Written Mark: " + course.WritingMark + "\n";
+            }
+
+            foreach (var cleanerSchedule in universityManager.AllCleaner)
+            {
+                allCleanerWorkingSchedule += "Working Day: " + cleanerSchedule.workingDay + ", Working Length " + cleanerSchedule.workingLength + " Hours" + "\n";
+            }
+
+            var allStudents = loginRegisterManager.GetAllStudents();
+            var allTeachers = loginRegisterManager.GetAllTeachers();
+            var allCleaners = loginRegisterManager.GetAllCleaners();
+            var allBoardingMembers = loginRegisterManager.GetAllBoardingMembers();
+
+            StudentInfoStackPanel.Children.Clear();
+            TeacherInfoStackPanel.Children.Clear();
+            CleanerInfoStackPanel.Children.Clear();
+            BoardingMemberInfoStackPanel.Children.Clear();
+
+
+            string teacherNames = "All Teachers Info:\n";
+            foreach (var teacher in allTeachers)
+            {
+                teacherNames += " TEACHER NAME:  " + teacher.Username + allTeacherWorkingHours + "\n";
+            }
             ModifyEntityUIButton.Click += ModifyEntityUI;
             if (selectedCategory == "TEACHER")
             {
+                string newTeacherName = ModifyNameTextBox.Text;
+                loginRegisterManager.Register("TEACHER", newTeacherName, matchingValuesTeacher.First().Password);
                 if (matchingValuesTeacher.Any())
                 {
-                    string newTeacherName = ModifyNameTextBox.Text;
-                    matchingValuesTeacher.First().Username = newTeacherName;
+                  
+                    loginRegisterManager.DeleteUser("TEACHER", matchingValuesTeacher.First().Username);
+                    
                     ModificationConfrimationMessage.Text = "The New username now is " + newTeacherName;
+                    var updatedAllTeachers = loginRegisterManager.GetAllTeachers();
+                    string updatedTeacherName = "All Teachers Info:\n";
+                    foreach (var teacher in updatedAllTeachers)
+                    {
+                        updatedTeacherName += " TEACHER NAME:  " + teacher.Username + allTeacherWorkingHours + "\n";
+                    }
+                    TeacherInfoText.Text = updatedTeacherName;
+               
                     loginRegisterManager.SaveUserData();
                 }
             }

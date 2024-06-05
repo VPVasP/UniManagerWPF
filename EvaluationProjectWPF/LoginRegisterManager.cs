@@ -100,9 +100,9 @@ namespace EvaluationProjectWPF
         // the user info such as username and password
         public class UserInfo
         {
-            public required string Category { get; set; }
-            public required string Username { get; set; }
-            public required string Password { get; set; }
+            public string Category { get; set; }
+            public  string Username { get; set; }
+            public  string Password { get; set; }
 
         }
 
