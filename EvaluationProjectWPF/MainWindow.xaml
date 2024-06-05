@@ -52,22 +52,32 @@
 
             <Button  x:Name="ModifyEntityUIButton" Content="ModifyEntity" Click="ModifyEntityUI" Margin="5"/>
 
-            <Button  x:Name="ConfrimModifyEntityUIButton" Content="ConfrimModifyEntity" Click="ModifyEntity" Margin="5"/>
-
+            <TextBox x:Name="ModifyNameTextBox" Margin="5" Width="220" />
+            
             <Button  x:Name="AddNewEntityButton" Content="AddNewEntity" Click="AddNewEntity" Margin="5"/>
 
             <Button  x:Name="DeleteEntityButton" Content="DeleteEntity" Click="DeleteEntity" Margin="5"/>
+            
+            <Button  x:Name="SearchModifyEntityButton" Content="SearchModifyEntity" Click="SearchModifyEntity" Margin="5"/>
 
             <Button  x:Name="SearchDeleteEntityButton" Content="SearchUsernameDeleteEntity" Click="SearchNameDeleteEntity" Margin="5"/>
 
             <Button  x:Name="YesDeleteEntityButton" Content="YesDeleteEntity" Click="YesDeleteEntity" Margin="5"/>
 
             <Button  x:Name="NoDeleteEntityButton" Content="NoDeleteEntity" Click="NoDeleteEntity" Margin="5"/>
-            
+
+
+            <Button  x:Name="YesModifyEntityButton" Content="YesModifyEntity" Click="YesModifyEntity" Margin="5"/>
+
+            <Button  x:Name="NoModifyEntityButton" Content="NoModifyEntity" Click="NoDeleteEntity" Margin="5"/>
             <Button  x:Name="ReturnAdminButton" Content="Return" Click="ReturnAdmin" Margin="5"/>
 
             <Button  x:Name="ExitAdminButton" Content="EXIT" Click="ExitApplication" Margin="5"/>
-
+            
+            <TextBlock x:Name="ModificationConfrimationMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 100, 10, 0" Foreground="Blue"/>
+            
+            <TextBlock x:Name="ConfrimModificationMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 100, 10, 0" Foreground="Yellow"/>
+            
             <TextBlock x:Name="ConfrimDeletionMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 100, 10, 0" Foreground="Yellow"/>
         </StackPanel>
 
@@ -81,8 +91,6 @@
                 <ComboBoxItem Content="STUDENT"/>
             </ComboBox>
 
-
-            <Button x:Name="LogoutButton" Content="Logout" Click="Logout" Margin="5"/>
 
             <TextBlock  x:Name="GeneralUsername" Text="Username:" Foreground="White"/>
         <TextBox x:Name="UsernameTextBox" Margin="5" Width="220" />

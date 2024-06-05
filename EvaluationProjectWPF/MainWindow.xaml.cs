@@ -17,11 +17,10 @@ namespace EvaluationProjectWPF
         private UniversityManager.BoardingMember boardingMember;
         private UniversityManager.Cleaner cleaner;
         private UniversityManager.Teacher teacher;
-        private AdminManager adminManager;
-        private bool isClicked;
+        private bool yesModify;
+        private bool noModify;
         private bool yesDeleteEntity;
         private bool noDeleteEntity;
-        private bool firstClick;
         TextBlock NewEnityTextBlock= new TextBlock();
         public MainWindow()
         {
@@ -31,17 +30,15 @@ namespace EvaluationProjectWPF
             cleaner = new UniversityManager.Cleaner();
             boardingMember = new UniversityManager.BoardingMember();
             teacher = new UniversityManager.Teacher();
-            adminManager = new AdminManager();
-            HideAdminStuff();
+            string adminRegisterUsername = AdminTextBox.Text;
+            string modifyNameBox = ModifyNameTextBox.Text;
+            HideAdminUI();
         }
-        private void AdminTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
 
-        }
-        private void UserTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
 
-        }
+
+        #region RegistrationLogin
+
         private void RegisterUser(object sender, RoutedEventArgs e)
         {
             string registerUsername = UsernameTextBox.Text;
@@ -70,7 +67,7 @@ namespace EvaluationProjectWPF
                 RegistrationMessage.Text = "Welcome, ADMIN " + registerUsername + "!";
                 RegistrationMessage.Visibility = Visibility.Visible;
                 UserExistsMessage.Visibility = Visibility.Collapsed;
-                ShowAdminStuff();
+                ShowAdminUIStats();
             }
             if (!loginRegisterManager.DoesUserExistRegister(selectedCategoryTeacher, registerUsername) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "TEACHER")
             {
@@ -148,9 +145,9 @@ namespace EvaluationProjectWPF
                 ShowUserUI();
             }
 
-           
-            }
-        
+
+        }
+
 
         private void LoginUser(object sender, RoutedEventArgs e)
         {
@@ -172,7 +169,7 @@ namespace EvaluationProjectWPF
             {
 
                 loginRegisterManager.Login(selectedCategoryAdmin, loginUsername, loginPassword);
-                ShowAdminStuff();
+                ShowAdminUIStats();
 
                 LoginMessage.Text = "You are now logged in ADMIN " + loginUsername + " Welcome to the application";
             }
@@ -248,8 +245,9 @@ namespace EvaluationProjectWPF
             }
 
         }
+        #endregion RegistrationLogin
 
-
+        #region Functions
         private void AddStudentCourses()
         {
             universityManager.AddStudentCourse("Mathematics", 5, 10);
@@ -349,7 +347,7 @@ namespace EvaluationProjectWPF
             var allBoardingMembers = loginRegisterManager.GetAllBoardingMembers().ToList();
             allBoardingMembers.Reverse();
 
-            
+
             StudentInfoStackPanel.Children.Clear();
             TeacherInfoStackPanel.Children.Clear();
             CleanerInfoStackPanel.Children.Clear();
@@ -357,7 +355,7 @@ namespace EvaluationProjectWPF
 
             foreach (var student in allStudents)
             {
-               
+
                 TextBlock studentTextBlock = new TextBlock();
                 studentTextBlock.Text = "STUDENT NAME:  " + student.Username + " " + allCourseGrades;
                 if (allStudents.IndexOf(student) == 0)
@@ -368,129 +366,43 @@ namespace EvaluationProjectWPF
             }
             foreach (var teacher in allTeachers)
             {
-                
+
                 TextBlock teacherTextBlock = new TextBlock();
                 teacherTextBlock.Text = "TEACHER NAME:  " + teacher.Username + allTeacherWorkingHours;
-                
-                if(allTeachers.IndexOf(teacher) == 0)
+
+                if (allTeachers.IndexOf(teacher) == 0)
                 {
-                   teacherTextBlock.Foreground = Brushes.Green;
+                    teacherTextBlock.Foreground = Brushes.Green;
                 }
                 TeacherInfoStackPanel.Children.Add(teacherTextBlock);
             }
             foreach (var cleaner in allCleaners)
             {
-              
+
                 TextBlock cleanerTextBlock = new TextBlock();
                 cleanerTextBlock.Text = "CLEANER NAME: " + cleaner.Username + " " + allCleanerWorkingSchedule;
 
                 if (allCleaners.IndexOf(cleaner) == 0)
                 {
-                 cleanerTextBlock.Foreground = Brushes.Green;
+                    cleanerTextBlock.Foreground = Brushes.Green;
                 }
                 CleanerInfoStackPanel.Children.Add(cleanerTextBlock);
             }
             foreach (var boardingMember in allBoardingMembers)
             {
-                
+
                 TextBlock boardingMemberTextBlock = new TextBlock();
                 boardingMemberTextBlock.Text = "BOARDING MEMBER NAME: " + boardingMember.Username;
 
                 if (allBoardingMembers.IndexOf(boardingMember) == 0)
                 {
-                   boardingMemberTextBlock.Foreground = Brushes.Green;
+                    boardingMemberTextBlock.Foreground = Brushes.Green;
                 }
                 BoardingMemberInfoStackPanel.Children.Add(boardingMemberTextBlock);
             }
         }
-        private void UpdateAddNewEntityUI()
-        {
-            RegistrationLoginPanel.Visibility = Visibility.Collapsed;
-            string allCourseGrades = string.Empty;
-            string allTeacherWorkingHours = string.Empty;
-            string allCleanerWorkingSchedule = string.Empty;
-
-            foreach (var teacherHours in universityManager.AllTeachers)
-            {
-                allTeacherWorkingHours += "  They teach Course: " + teacherHours.teachingCourseTitle + ", Working Day: " + teacherHours.teachingWorkingDay + ", Working Hour: " + teacherHours.teacherWorkingHour + "\n";
-            }
-            foreach (var course in universityManager.AllCourses)
-            {
-                allCourseGrades += " Course Name: " + course.CourseTitle + ", Oral Mark: " + course.OralMark + ", Written Mark: " + course.WritingMark + "\n";
-            }
-
-            foreach (var cleanerSchedule in universityManager.AllCleaner)
-            {
-                allCleanerWorkingSchedule += "Working Day: " + cleanerSchedule.workingDay + ", Working Length " + cleanerSchedule.workingLength + " Hours" + "\n";
-            }
-
-            var allStudents = loginRegisterManager.GetAllStudents().ToList();
-            allStudents.Reverse();
-
-            var allTeachers = loginRegisterManager.GetAllTeachers().ToList();
-            allTeachers.Reverse();
-
-            var allCleaners = loginRegisterManager.GetAllCleaners().ToList();
-            allCleaners.Reverse();
-
-            var allBoardingMembers = loginRegisterManager.GetAllBoardingMembers().ToList();
-            allBoardingMembers.Reverse();
 
 
-            StudentInfoStackPanel.Children.Clear();
-            TeacherInfoStackPanel.Children.Clear();
-            CleanerInfoStackPanel.Children.Clear();
-            BoardingMemberInfoStackPanel.Children.Clear();
-
-            foreach (var student in allStudents)
-            {
-
-             
-                NewEnityTextBlock.Text = "STUDENT NAME:  " + student.Username + " " + allCourseGrades;
-                if (allStudents.IndexOf(student) == 0)
-                {
-                    NewEnityTextBlock.Foreground = Brushes.Green;
-                }
-             
-            }
-            foreach (var teacher in allTeachers)
-            {
-
-
-                NewEnityTextBlock.Text = "TEACHER NAME:  " + teacher.Username + allTeacherWorkingHours;
-
-                if (allTeachers.IndexOf(teacher) == 0)
-                {
-                    NewEnityTextBlock.Foreground = Brushes.Green;
-                }
-              
-            }
-            foreach (var cleaner in allCleaners)
-            {
-
-
-                NewEnityTextBlock.Text = "CLEANER NAME: " + cleaner.Username + " " + allCleanerWorkingSchedule;
-
-                if (allCleaners.IndexOf(cleaner) == 0)
-                {
-                    NewEnityTextBlock.Foreground = Brushes.Green;
-                }
-        
-            }
-            foreach (var boardingMember in allBoardingMembers)
-            {
-
-                TextBlock boardingMemberTextBlock = new TextBlock();
-                NewEnityTextBlock.Text = "BOARDING MEMBER NAME: " + boardingMember.Username;
-
-                if (allBoardingMembers.IndexOf(boardingMember) == 0)
-                {
-                    boardingMemberTextBlock.Foreground = Brushes.Green;
-                }
-                
-            }
-        }
-    
         private void ShowAdminRelatedStats()
         {
             AddStudentCourses();
@@ -557,42 +469,69 @@ namespace EvaluationProjectWPF
             BoardingMemberInfoText.Text = boardingMemberNames;
             BoardingMemberInfoText.Visibility = Visibility.Visible;
         }
+        #endregion Functions
+
+        #region UI
+        private void ShowAdminUI()
+        {
+            AdminPanel.Visibility = Visibility.Visible;
+            AddEntityUIButton.Visibility = Visibility.Visible;
+            ModifyEntityUIButton.Visibility = Visibility.Visible;
+            DeleteEntityButton.Visibility = Visibility.Visible;
+            ReturnAdminButton.Visibility = Visibility.Collapsed;
+            ExitAdminButton.Visibility = Visibility.Visible;
+            SearchModifyEntityButton.Visibility = Visibility.Collapsed;
+            YesModifyEntityButton.Visibility = Visibility.Collapsed;
+            NoModifyEntityButton.Visibility = Visibility.Collapsed;
+            ModifyEntityUIButton.Content = "ModifyEntity";
+        }
+        private void ShowUserUI()
+        {
+            ExitButtonUserPanel.Visibility = Visibility.Visible;
+            UserExitButton.Visibility = Visibility.Visible;
+        }
         private void ExitApplication(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
         }
-        private void HideAdminStuff()
+        private void ReturnAdmin(object sender, RoutedEventArgs e)
         {
-            AdminPanel.Visibility = Visibility.Collapsed;
-            AdminNewUsernameBox.Visibility = Visibility.Collapsed;
-            AdminDeleteTypeComboBox.Visibility = Visibility.Collapsed;
-            DeleteEntityButton.Visibility = Visibility.Visible;
-            ConfrimModifyEntityUIButton.Visibility = Visibility.Collapsed;
-            DeleteEntityUsername.Visibility = Visibility.Collapsed;
+            ShowAdminUI();
+            HideEntityUI();
+        }
+
+        private void AdminTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        private void UserTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        private void HideDeletionUI()
+        {
             YesDeleteEntityButton.Visibility = Visibility.Collapsed;
             NoDeleteEntityButton.Visibility = Visibility.Collapsed;
-            AdminNewUsernameBox.Visibility = Visibility.Collapsed;
+            DeleteEntityUsername.Visibility = Visibility.Collapsed;
+            DeleteEntityUsername.Visibility = Visibility.Collapsed;
+            AdminDeleteTypeComboBox.Visibility = Visibility.Collapsed;
+            DeleteEntityUsername.Visibility = Visibility.Collapsed;
             AdminDeleteTextBox.Visibility = Visibility.Collapsed;
-            SearchDeleteEntityButton.Visibility = Visibility.Collapsed;
-            LogoutButton.Visibility = Visibility.Collapsed;
-            ExitAdminButton.Visibility = Visibility.Collapsed;
-            UserExitButton.Visibility = Visibility.Collapsed;
+            ShowAdminUI();
         }
-        private void ShowAdminStuff()
+        private void ShowDeletetionUI()
         {
-            RegistrationLoginPanel.Visibility = Visibility.Collapsed;
-            AdminPanel.Visibility = Visibility.Visible;
-            AdminTypeComboBox.Visibility = Visibility.Collapsed;
-            AdminTextBox.Visibility = Visibility.Collapsed;
-            AdminUsername.Visibility = Visibility.Collapsed;
-            AddNewEntityButton.Visibility = Visibility.Collapsed;
-            AdminPassword.Visibility = Visibility.Collapsed;
-            AdminPasswordBox.Visibility = Visibility.Collapsed;
-            AdminModifyTypeComboBox.Visibility = Visibility.Collapsed;
-            RegistrationMessage.Visibility = Visibility.Collapsed;
-            ReturnAdminButton.Visibility = Visibility.Collapsed;
-            ExitAdminButton.Visibility = Visibility.Visible;
-            ShowAdminRelatedStats();
+            YesDeleteEntityButton.Visibility = Visibility.Visible;
+            NoDeleteEntityButton.Visibility = Visibility.Visible;
+            DeleteEntityUsername.Visibility = Visibility.Visible;
+            DeleteEntityUsername.Visibility = Visibility.Visible;
+            AdminDeleteTypeComboBox.Visibility = Visibility.Visible;
+            DeleteEntityUsername.Visibility = Visibility.Visible;
+            AdminDeleteTextBox.Visibility = Visibility.Visible;
+        }
+        private void AddEntityUI(object sender, RoutedEventArgs e)
+        {
+            EntityUI();
         }
         private void EntityUI()
         {
@@ -610,152 +549,7 @@ namespace EvaluationProjectWPF
             ReturnAdminButton.Visibility = Visibility.Visible;
             ExitAdminButton.Visibility = Visibility.Collapsed;
         }
-        private void HideEntityUI()
-        {
-
-            AdminUsername.Visibility = Visibility.Collapsed;
-            AdminTextBox.Visibility = Visibility.Collapsed;
-            AdminTypeComboBox.Visibility = Visibility.Collapsed;
-            AddNewEntityButton.Visibility = Visibility.Collapsed;
-            AdminPassword.Visibility = Visibility.Collapsed;
-            AdminPasswordBox.Visibility = Visibility.Collapsed;
-            ConfrimDeletionMessage.Visibility = Visibility.Collapsed;
-            ReturnAdminButton.Visibility = Visibility.Collapsed;
-            SearchDeleteEntityButton.Visibility = Visibility.Collapsed;
-            AdminModifyTypeComboBox.Visibility = Visibility.Collapsed;
-            AdminUsername.Visibility = Visibility.Collapsed;
-            DeleteEntityUsername.Visibility = Visibility.Collapsed;
-            AdminDeleteTextBox.Visibility = Visibility.Collapsed;
-            AdminDeleteTypeComboBox.Visibility = Visibility.Collapsed;
-        }
-        private void ModifyEntityUI()
-        {
-            AdminUsername.Visibility = Visibility.Visible;
-            AdminTextBox.Visibility = Visibility.Visible;
-            AddEntityUIButton.Visibility = Visibility.Collapsed;
-            AdminModifyTypeComboBox.Visibility = Visibility.Visible;
-            AddNewEntityButton.Visibility = Visibility.Collapsed;
-            AdminUsername.Text = "Search Name";
-            ModifyEntityUIButton.Content = "Search Name";
-            ModifyEntityUIButton.Click -= ModifyEntityUI;
-            ModifyEntityUIButton.Click += SearchName;
-            ConfrimDeletionMessage.Visibility = Visibility.Collapsed;
-            ReturnAdminButton.Visibility = Visibility.Visible;
-            ExitAdminButton.Visibility = Visibility.Collapsed;
-        }
-
-
-        private void AddEntityUI(object sender, RoutedEventArgs e)
-        {
-            EntityUI();
-        }
-        private void ModifyEntityUI(object sender, RoutedEventArgs e)
-        {
-            ModifyEntityUI();
-        }
-
-        private void ShowUserUI()
-        {
-            ExitButtonUserPanel.Visibility = Visibility.Visible;
-            UserExitButton.Visibility = Visibility.Visible;
-        }
-        private void CompositionTarget_Rendering(object sender, EventArgs e)
-        {
-
-
-        }
-        private void SearchName(object sender, RoutedEventArgs e)
-        {
-            string adminRegisterUsername = AdminTextBox.Text;
-            string adminUpdateNameBox = AdminNewUsernameBox.Text;
-            string adminRegisterPassword = AdminPasswordBox.Password;
-            string selectedCategoryTeacher = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "TEACHER" ? "TEACHER" : "";
-            string selectedCategoryBoardingMember = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "BOARDING MEMBER" ? "BOARDING MEMBER" : "";
-            string selectedCategoryCleaner = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "CLEANER" ? "CLEANER" : "";
-            string selectedCategoryStudent = AdminTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "STUDENT" ? "STUDENT" : "";
-
-            if (AdminModifyTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "TEACHER")
-            {
-                bool foundName = false;
-
-                var matchingValues = loginRegisterManager.GetAllTeachers().Where(user => user.Username.Contains(adminRegisterUsername));
-                if (matchingValues.Any())
-                {
-                    ModifyEntityUIButton.Content = "Found Name...Please type in the Input Field the New Name...";
-                    var teacherToModify = matchingValues.First();
-
-                    AdminNewUsernameBox.Visibility = Visibility.Visible;
-                    AdminTextBox.Visibility = Visibility.Collapsed;
-                    AdminUsername.Text = "Choose New Name";
-                    foundName = true;
-                    Debug.WriteLine("The found name is :" + foundName);
-                    Debug.WriteLine("The IsClicked is:" + isClicked);
-                    if (foundName)
-                    {
-
-                        ModifyEntityUIButton.Click += ModifyEntity;
-                    }
-
-                    if (isClicked)
-                    {
-                        teacherToModify.Username = adminUpdateNameBox;
-                        loginRegisterManager.SaveUserData();
-                        loginRegisterManager.LoadUserData();
-                        UpdateAdminStats();
-                        ModifyEntityUIButton.Click -= ModifyEntity;
-                        isClicked = false;
-                    }
-                }
-                else
-                {
-                    ModifyEntityUIButton.Content = "Didn't Find Name";
-                    foundName = false;
-                }
-
-
-            }
-
-            if (AdminModifyTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "BOARDING MEMBER")
-            {
-
-                var matchingValues = loginRegisterManager.GetAllBoardingMembers().Where(user => user.Username.Contains(adminRegisterUsername));
-                if (matchingValues.Any())
-                {
-                    ModifyEntityUIButton.Content = "Found Name";
-                }
-                else
-                {
-                    ModifyEntityUIButton.Content = "Didn't Find Name";
-                }
-            }
-
-            if (AdminModifyTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "CLEANER")
-            {
-                var matchingValues = loginRegisterManager.GetAllCleaners().Where(user => user.Username.Contains(adminRegisterUsername));
-                if (matchingValues.Any())
-                {
-                    ModifyEntityUIButton.Content = "Found Name";
-                }
-                else
-                {
-                    ModifyEntityUIButton.Content = "Didn't Find Name";
-                }
-            }
-
-            if (AdminModifyTypeComboBox.SelectedItem != null && ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem).Content.ToString() == "STUDENT")
-            {
-                var matchingValues = loginRegisterManager.GetAllStudents().Where(user => user.Username.Contains(adminRegisterUsername));
-                if (matchingValues.Any())
-                {
-                    ModifyEntityUIButton.Content = "Found Name";
-                }
-                else
-                {
-                    ModifyEntityUIButton.Content = "Didn't Find Name";
-                }
-            }
-        }
-        private void AddNewEntity(object sender, RoutedEventArgs e)
+        private void UpdateAddNewEntityUI()
         {
             RegistrationLoginPanel.Visibility = Visibility.Collapsed;
             string allCourseGrades = string.Empty;
@@ -794,122 +588,272 @@ namespace EvaluationProjectWPF
             CleanerInfoStackPanel.Children.Clear();
             BoardingMemberInfoStackPanel.Children.Clear();
 
-            string adminRegisterUsername = AdminTextBox.Text;
-            string adminRegisterPassword = AdminPasswordBox.Password;
-            string selectedCategory = ((ComboBoxItem)AdminTypeComboBox.SelectedItem)?.Content.ToString();
-
-            if (selectedCategory == "NEW TEACHER")
+            foreach (var student in allStudents)
             {
-                loginRegisterManager.Register("TEACHER", adminRegisterUsername, adminRegisterPassword);
-                foreach (var teacher in allTeachers)
+
+
+                NewEnityTextBlock.Text = "STUDENT NAME:  " + student.Username + " " + allCourseGrades;
+                if (allStudents.IndexOf(student) == 0)
                 {
-                    TextBlock newTeacherTextBlock = new TextBlock();
-                    newTeacherTextBlock.Text = "TEACHER:  " + adminRegisterUsername + " ";
-                    if (allTeachers.IndexOf(teacher) == 0)
-                    {
-                        newTeacherTextBlock.Foreground = Brushes.Green;
-                    }
-                    BoardingMemberInfoStackPanel.Children.Add(newTeacherTextBlock);
+                    NewEnityTextBlock.Foreground = Brushes.Green;
                 }
+
             }
-            else if (selectedCategory == "NEW BOARDING MEMBER")
+            foreach (var teacher in allTeachers)
             {
-                loginRegisterManager.Register("BOARDING MEMBER", adminRegisterUsername, adminRegisterPassword);
-                BoardingMemberInfoStackPanel.UpdateLayout();
 
 
-                foreach (var boardingMember in allBoardingMembers)
+                NewEnityTextBlock.Text = "TEACHER NAME:  " + teacher.Username + allTeacherWorkingHours;
+
+                if (allTeachers.IndexOf(teacher) == 0)
                 {
-                    TextBlock newBoardingMemberTextBlock = new TextBlock();
-                    newBoardingMemberTextBlock.Text = "BOARDING MEMBER:  " + adminRegisterUsername + " ";
-                    if (allBoardingMembers.IndexOf(boardingMember) == 0)
-                    {
-                        newBoardingMemberTextBlock.Foreground = Brushes.Green;
-                    }
-                    BoardingMemberInfoStackPanel.Children.Add(newBoardingMemberTextBlock);
+                    NewEnityTextBlock.Foreground = Brushes.Green;
                 }
+
             }
-            else if (selectedCategory == "NEW CLEANER")
+            foreach (var cleaner in allCleaners)
             {
-                loginRegisterManager.Register("CLEANER", adminRegisterUsername, adminRegisterPassword);
-                 CleanerInfoStackPanel.UpdateLayout();
 
 
-                foreach (var cleaner in allCleaners)
+                NewEnityTextBlock.Text = "CLEANER NAME: " + cleaner.Username + " " + allCleanerWorkingSchedule;
+
+                if (allCleaners.IndexOf(cleaner) == 0)
                 {
-                    TextBlock newCleanerTextBlock = new TextBlock();
-                    newCleanerTextBlock.Text = "CLEANER NAME:  " + adminRegisterUsername + " ";
-                    if (allCleaners.IndexOf(cleaner) == 0)
-                    {
-                       newCleanerTextBlock.Foreground = Brushes.Green;
-                    }
-                    CleanerInfoStackPanel.Children.Add(newCleanerTextBlock);
+                    NewEnityTextBlock.Foreground = Brushes.Green;
                 }
+
             }
-            else if (selectedCategory == "NEW STUDENT")
+            foreach (var boardingMember in allBoardingMembers)
             {
-                loginRegisterManager.Register("STUDENT", adminRegisterUsername, adminRegisterPassword);
-                StudentInfoStackPanel.UpdateLayout();
-               
-                
-                foreach (var student in allStudents)
+
+                TextBlock boardingMemberTextBlock = new TextBlock();
+                NewEnityTextBlock.Text = "BOARDING MEMBER NAME: " + boardingMember.Username;
+
+                if (allBoardingMembers.IndexOf(boardingMember) == 0)
                 {
-                    TextBlock newStudentTextBlock = new TextBlock();
-                    newStudentTextBlock.Text = "STUDENT NAME:  " + adminRegisterUsername + " " + allCourseGrades;
-                    if (allStudents.IndexOf(student) == 0)
-                    {
-                        newStudentTextBlock.Foreground = Brushes.Green;
-                    }
-                    StudentInfoStackPanel.Children.Add(newStudentTextBlock);
+                    boardingMemberTextBlock.Foreground = Brushes.Green;
                 }
-            }
 
-            else if (selectedCategory == "NEW COURSE")
-            {
-                universityManager.AddStudentCourse(adminRegisterUsername, 0, 0);
             }
-
         }
-
-        private void ModifyEntity(object sender, RoutedEventArgs e)
+        private void HideEntityUI()
         {
-            Debug.WriteLine("The IsClicked is ModifyEntity:" + isClicked);
-            isClicked = true;
-
+            AdminUsername.Visibility = Visibility.Collapsed;
+            AdminTextBox.Visibility = Visibility.Collapsed;
+            AdminTypeComboBox.Visibility = Visibility.Collapsed;
+            AddNewEntityButton.Visibility = Visibility.Collapsed;
+            AdminPassword.Visibility = Visibility.Collapsed;
+            AdminPasswordBox.Visibility = Visibility.Collapsed;
+            ConfrimDeletionMessage.Visibility = Visibility.Collapsed;
+            ReturnAdminButton.Visibility = Visibility.Collapsed;
+            SearchDeleteEntityButton.Visibility = Visibility.Collapsed;
+            AdminModifyTypeComboBox.Visibility = Visibility.Collapsed;
+            AdminUsername.Visibility = Visibility.Collapsed;
+            DeleteEntityUsername.Visibility = Visibility.Collapsed;
+            AdminDeleteTextBox.Visibility = Visibility.Collapsed;
+            AdminDeleteTypeComboBox.Visibility = Visibility.Collapsed;
+            ModificationConfrimationMessage.Visibility = Visibility.Collapsed;
+            ModifyEntityUIButton.Visibility = Visibility.Visible;
+            AdminNewUsernameBox.Visibility = Visibility.Collapsed;
+            yesModify = false;
         }
-        private void DeleteEntity(object sender, RoutedEventArgs e)
+        private void ModifyEntityUI()
         {
-            AdminDeleteTypeComboBox.Visibility = Visibility.Visible;
-            DeleteEntityButton.Visibility = Visibility.Collapsed;
-            DeleteEntityUsername.Visibility = Visibility.Visible;
-            ModifyEntityUIButton.Visibility = Visibility.Collapsed;
+            AdminUsername.Visibility = Visibility.Visible;
+            AdminTextBox.Visibility = Visibility.Visible;
             AddEntityUIButton.Visibility = Visibility.Collapsed;
-            ConfrimModifyEntityUIButton.Visibility = Visibility.Collapsed;
-            AdminDeleteTextBox.Visibility = Visibility.Visible;
-
-            YesDeleteEntityButton.Visibility = Visibility.Collapsed;
-            NoDeleteEntityButton.Visibility = Visibility.Collapsed;
-            SearchDeleteEntityButton.Visibility = Visibility.Visible;
-            ConfrimDeletionMessage.Visibility = Visibility.Visible;
+            AdminModifyTypeComboBox.Visibility = Visibility.Visible;
+            AddNewEntityButton.Visibility = Visibility.Collapsed;
+            AdminPassword.Visibility = Visibility.Collapsed;
+            AdminUsername.Text = "Search Name";
+            ModifyEntityUIButton.Content = "Search Name";
+            ModifyEntityUIButton.Click -= ModifyEntityUI;
+            ModifyEntityUIButton.Click += SearchModifyEntity;
+            ConfrimDeletionMessage.Visibility = Visibility.Collapsed;
             ReturnAdminButton.Visibility = Visibility.Visible;
             ExitAdminButton.Visibility = Visibility.Collapsed;
-
+            DeleteEntityButton.Visibility = Visibility.Collapsed;
+            ModifyEntityUIButton.Content = "Search Name";
+            yesModify = false;
         }
-        private void ReturnAdmin(object sender, RoutedEventArgs e)
+        private void HideAdminUI()
         {
-            ShowAdminUI();
-            HideEntityUI();
-        }
-        private void ShowAdminUI()
-        {
-            AdminPanel.Visibility = Visibility.Visible;
-            AddEntityUIButton.Visibility = Visibility.Visible;
-            ModifyEntityUIButton.Visibility = Visibility.Visible;
+            AdminPanel.Visibility = Visibility.Collapsed;
+            AdminNewUsernameBox.Visibility = Visibility.Collapsed;
+            AdminDeleteTypeComboBox.Visibility = Visibility.Collapsed;
             DeleteEntityButton.Visibility = Visibility.Visible;
+            DeleteEntityUsername.Visibility = Visibility.Collapsed;
+            YesDeleteEntityButton.Visibility = Visibility.Collapsed;
+            NoDeleteEntityButton.Visibility = Visibility.Collapsed;
+            AdminNewUsernameBox.Visibility = Visibility.Collapsed;
+            AdminDeleteTextBox.Visibility = Visibility.Collapsed;
+            SearchDeleteEntityButton.Visibility = Visibility.Collapsed;
+            ExitAdminButton.Visibility = Visibility.Collapsed;
+            UserExitButton.Visibility = Visibility.Collapsed;
+        }
+        private void ShowAdminUIStats()
+        {
+            RegistrationLoginPanel.Visibility = Visibility.Collapsed;
+            AdminPanel.Visibility = Visibility.Visible;
+            AdminTypeComboBox.Visibility = Visibility.Collapsed;
+            AdminTextBox.Visibility = Visibility.Collapsed;
+            AdminUsername.Visibility = Visibility.Collapsed;
+            AddNewEntityButton.Visibility = Visibility.Collapsed;
+            AdminPassword.Visibility = Visibility.Collapsed;
+            AdminPasswordBox.Visibility = Visibility.Collapsed;
+            AdminModifyTypeComboBox.Visibility = Visibility.Collapsed;
+            RegistrationMessage.Visibility = Visibility.Collapsed;
             ReturnAdminButton.Visibility = Visibility.Collapsed;
             ExitAdminButton.Visibility = Visibility.Visible;
+            YesModifyEntityButton.Visibility = Visibility.Collapsed;
+            NoModifyEntityButton.Visibility = Visibility.Collapsed;
+            SearchModifyEntityButton.Visibility = Visibility.Collapsed;
+            ModifyNameTextBox.Visibility = Visibility.Collapsed;
+            ShowAdminRelatedStats();
+        }
+        private void ModifyEntityUI(object sender, RoutedEventArgs e)
+        {
+            ModifyEntityUI();
+        }
+        private void SearchModifyEntity(object sender, RoutedEventArgs e)
+        {
+            string adminRegisterUsername = AdminTextBox.Text;
+            string modifyNameBox = ModifyNameTextBox.Text;
+            string selectedCategory = ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem)?.Content.ToString() ?? "";
+            if (selectedCategory == "TEACHER")
+            {
+                var matchingValuesTeacher = loginRegisterManager.GetAllTeachers().Where(user => user.Username.Contains(adminRegisterUsername));
+                if (matchingValuesTeacher.Any())
+                {
+                    YesModifyEntityButton.Visibility = Visibility.Visible;
+                    NoDeleteEntityButton.Visibility = Visibility.Visible;
+                    SearchModifyEntityButton.Visibility = Visibility.Collapsed;
+
+                    AdminTextBox.Visibility = Visibility.Collapsed;
+                    ModifyEntityUIButton.Visibility = Visibility.Collapsed;
+                    AdminUsername.Text = "New Name";
+                    ModifyNameTextBox.Visibility = Visibility.Visible;
+                    ModificationConfrimationMessage.Text = "Are you sure you want to  Modify this User: ? " + adminRegisterUsername + " If yes type a new name in the New name input field";
+                    ModificationConfrimationMessage.Visibility = Visibility.Visible;
+                }
+            }
+            else if (selectedCategory == "STUDENT")
+            {
+                var matchingValuesStudent = loginRegisterManager.GetAllStudents().Where(user => user.Username.Contains(adminRegisterUsername));
+                if (matchingValuesStudent.Any())
+                {
+                    YesModifyEntityButton.Visibility = Visibility.Visible;
+                    NoDeleteEntityButton.Visibility = Visibility.Visible;
+                    SearchModifyEntityButton.Visibility = Visibility.Collapsed;
+
+                    AdminTextBox.Visibility = Visibility.Collapsed;
+                    ModifyEntityUIButton.Visibility = Visibility.Collapsed;
+                    AdminUsername.Text = "New Name";
+                    ModifyNameTextBox.Visibility = Visibility.Visible;
+                    ModificationConfrimationMessage.Text = "Are you sure you want to Modify this User: ? " + adminRegisterUsername + " If yes type a new name in the New name input field";
+                    ModificationConfrimationMessage.Visibility = Visibility.Visible;
+                }
+            }
+            else if (selectedCategory == "BOARDING MEMBER")
+            {
+                var matchingValuesBoardingMember = loginRegisterManager.GetAllBoardingMembers().Where(user => user.Username.Contains(adminRegisterUsername));
+                if (matchingValuesBoardingMember.Any())
+                {
+                    YesModifyEntityButton.Visibility = Visibility.Visible;
+                    NoDeleteEntityButton.Visibility = Visibility.Visible;
+                    SearchModifyEntityButton.Visibility = Visibility.Collapsed;
+
+                    AdminTextBox.Visibility = Visibility.Collapsed;
+                    ModifyEntityUIButton.Visibility = Visibility.Collapsed;
+                    AdminUsername.Text = "New Name";
+                    ModifyNameTextBox.Visibility = Visibility.Visible;
+                    ModificationConfrimationMessage.Text = "Are you sure you want to Modify this User: ? " + adminRegisterUsername + " If yes type a new name in the New name input field";
+                    ModificationConfrimationMessage.Visibility = Visibility.Visible;
+                }
+            }
+            else if (selectedCategory == "CLEANER")
+            {
+                var matchingValuesCleaner = loginRegisterManager.GetAllCleaners().Where(user => user.Username.Contains(adminRegisterUsername));
+                if (matchingValuesCleaner.Any())
+                {
+                    YesModifyEntityButton.Visibility = Visibility.Visible;
+                    NoDeleteEntityButton.Visibility = Visibility.Visible;
+                    SearchModifyEntityButton.Visibility = Visibility.Collapsed;
+
+                    AdminTextBox.Visibility = Visibility.Collapsed;
+                    ModifyEntityUIButton.Visibility = Visibility.Collapsed;
+                    AdminUsername.Text = "New Name";
+                    ModifyNameTextBox.Visibility = Visibility.Visible;
+                    ModificationConfrimationMessage.Text = "Are you sure you want to Modify this User: ? " + adminRegisterUsername + " If yes type a new name in the New name input field";
+                    ModificationConfrimationMessage.Visibility = Visibility.Visible;
+                }
+
+                else
+                {
+                    ConfrimDeletionMessage.Text = "No user found with the given username.";
+                    ConfrimDeletionMessage.Visibility = Visibility.Visible;
+                }
+            }
+        }
+        #endregion UI
+
+        #region Entities
+        private void YesModifyEntity(object sender, RoutedEventArgs e)
+        {
+            string adminRegisterUsername = AdminTextBox.Text;
+            string selectedCategory = ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem)?.Content.ToString() ?? "";
+            var matchingValuesTeacher = loginRegisterManager.GetAllTeachers().Where(user => user.Username.Contains(adminRegisterUsername));
+            var matchingValuesCleaner = loginRegisterManager.GetAllCleaners().Where(user => user.Username.Contains(adminRegisterUsername));
+            var matchingValuesBoardingMember = loginRegisterManager.GetAllBoardingMembers().Where(user => user.Username.Contains(adminRegisterUsername));
+            var matchingValuesStudent = loginRegisterManager.GetAllStudents().Where(user => user.Username.Contains(adminRegisterUsername));
+
+            if (selectedCategory == "TEACHER")
+            {
+                if (matchingValuesTeacher.Any())
+                {
+                    string newTeacherName = ModifyNameTextBox.Text;
+                    matchingValuesTeacher.First().Username = newTeacherName;
+                    ModificationConfrimationMessage.Text = "The New username now is " + newTeacherName;
+                    loginRegisterManager.SaveUserData();
+                }
+            }
+            else if (selectedCategory == "STUDENT")
+            {
+                if (matchingValuesStudent.Any())
+                {
+                    string newStudentName = ModifyNameTextBox.Text;
+                    matchingValuesStudent.First().Username = newStudentName;
+                    ModificationConfrimationMessage.Text = "The New username now is " + newStudentName;
+                    loginRegisterManager.SaveUserData();
+                }
+            }
+            else if (selectedCategory == "CLEANER")
+            {
+                if (matchingValuesCleaner.Any())
+                {
+                    string newCleanerName = ModifyNameTextBox.Text;
+                    matchingValuesCleaner.First().Username = newCleanerName;
+                    ModificationConfrimationMessage.Text = "The New username now is " + newCleanerName;
+                    loginRegisterManager.SaveUserData();
+                }
+            }
+            else if (selectedCategory == "BOARDING MEMBER")
+            {
+                if (matchingValuesBoardingMember.Any())
+                {
+                    string newBoardingMemberName = ModifyNameTextBox.Text;
+                    matchingValuesBoardingMember.First().Username = newBoardingMemberName;
+                    ModificationConfrimationMessage.Text = "The New username now is " + newBoardingMemberName;
+                    loginRegisterManager.SaveUserData();
+                }
+            }
         }
 
+        private void NoModifyEntity(object sender, RoutedEventArgs e)
+        {
+            yesModify = false;
+            noModify = true;
+        }
         private void YesDeleteEntity(object sender, RoutedEventArgs e)
         {
             yesDeleteEntity = true;
@@ -985,36 +929,104 @@ namespace EvaluationProjectWPF
             }
         }
 
-
-
-
-        private void Logout(object sender, RoutedEventArgs e)
+        private void AddNewEntity(object sender, RoutedEventArgs e)
         {
-            string username = "";
-            loginRegisterManager.Logout(username);
-            RegistrationLoginPanel.Visibility = Visibility.Visible;
+            RegistrationLoginPanel.Visibility = Visibility.Collapsed;
+            string allCourseGrades = string.Empty;
+            string allTeacherWorkingHours = string.Empty;
+            string allCleanerWorkingSchedule = string.Empty;
+
+            foreach (var teacherHours in universityManager.AllTeachers)
+            {
+                allTeacherWorkingHours += "  They teach Course: " + teacherHours.teachingCourseTitle + ", Working Day: " + teacherHours.teachingWorkingDay + ", Working Hour: " + teacherHours.teacherWorkingHour + "\n";
+            }
+            foreach (var course in universityManager.AllCourses)
+            {
+                allCourseGrades += " Course Name: " + course.CourseTitle + ", Oral Mark: " + course.OralMark + ", Written Mark: " + course.WritingMark + "\n";
+            }
+
+            foreach (var cleanerSchedule in universityManager.AllCleaner)
+            {
+                allCleanerWorkingSchedule += "Working Day: " + cleanerSchedule.workingDay + ", Working Length " + cleanerSchedule.workingLength + " Hours" + "\n";
+            }
+
+            var allStudents = loginRegisterManager.GetAllStudents().ToList();
+            var allTeachers = loginRegisterManager.GetAllTeachers().ToList();
+            var allCleaners = loginRegisterManager.GetAllCleaners().ToList();
+            var allBoardingMembers = loginRegisterManager.GetAllBoardingMembers().ToList();
+
+            StudentInfoStackPanel.Children.Clear();
+            TeacherInfoStackPanel.Children.Clear();
+            CleanerInfoStackPanel.Children.Clear();
+            BoardingMemberInfoStackPanel.Children.Clear();
+
+            string adminRegisterUsername = AdminTextBox.Text;
+            string adminRegisterPassword = AdminPasswordBox.Password;
+            string selectedCategory = ((ComboBoxItem)AdminTypeComboBox.SelectedItem)?.Content.ToString();
+
+            if (selectedCategory == "NEW TEACHER")
+            {
+                loginRegisterManager.Register("TEACHER", adminRegisterUsername, adminRegisterPassword);
+                TextBlock newTeacherTextBlock = new TextBlock
+                {
+                    Text = "New Added TEACHER:  " + adminRegisterUsername,
+                    Foreground = Brushes.Green
+                };
+                TeacherInfoStackPanel.Children.Add(newTeacherTextBlock);
+            }
+            else if (selectedCategory == "NEW BOARDING MEMBER")
+            {
+                loginRegisterManager.Register("BOARDING MEMBER", adminRegisterUsername, adminRegisterPassword);
+                TextBlock newBoardingMemberTextBlock = new TextBlock
+                {
+                    Text = "New BOARDING MEMBER:  " + adminRegisterUsername,
+                    Foreground = Brushes.Green
+                };
+                BoardingMemberInfoStackPanel.Children.Add(newBoardingMemberTextBlock);
+            }
+            else if (selectedCategory == "NEW CLEANER")
+            {
+                loginRegisterManager.Register("CLEANER", adminRegisterUsername, adminRegisterPassword);
+                TextBlock newCleanerTextBlock = new TextBlock
+                {
+                    Text = "New Added CLEANER:  " + adminRegisterUsername,
+                    Foreground = Brushes.Green
+                };
+                CleanerInfoStackPanel.Children.Add(newCleanerTextBlock);
+            }
+            else if (selectedCategory == "NEW STUDENT")
+            {
+                loginRegisterManager.Register("STUDENT", adminRegisterUsername, adminRegisterPassword);
+                TextBlock newStudentTextBlock = new TextBlock
+                {
+                    Text = "New Added STUDENT:  " + adminRegisterUsername + " " + allCourseGrades,
+                    Foreground = Brushes.Green
+                };
+                StudentInfoStackPanel.Children.Add(newStudentTextBlock);
+            }
+            else if (selectedCategory == "NEW COURSE")
+            {
+                universityManager.AddStudentCourse(adminRegisterUsername, 0, 0);
+            }
         }
 
-        private void HideDeletionUI()
+
+        private void DeleteEntity(object sender, RoutedEventArgs e)
         {
+            AdminDeleteTypeComboBox.Visibility = Visibility.Visible;
+            DeleteEntityButton.Visibility = Visibility.Collapsed;
+            DeleteEntityUsername.Visibility = Visibility.Visible;
+            ModifyEntityUIButton.Visibility = Visibility.Collapsed;
+            AddEntityUIButton.Visibility = Visibility.Collapsed;
+            AdminDeleteTextBox.Visibility = Visibility.Visible;
+
             YesDeleteEntityButton.Visibility = Visibility.Collapsed;
             NoDeleteEntityButton.Visibility = Visibility.Collapsed;
-            DeleteEntityUsername.Visibility = Visibility.Collapsed;
-            DeleteEntityUsername.Visibility = Visibility.Collapsed;
-            AdminDeleteTypeComboBox.Visibility = Visibility.Collapsed;
-            DeleteEntityUsername.Visibility = Visibility.Collapsed;
-            AdminDeleteTextBox.Visibility = Visibility.Collapsed;
-            ShowAdminUI();
-        }
-        private void ShowDeletetionUI()
-        {
-            YesDeleteEntityButton.Visibility = Visibility.Visible;
-            NoDeleteEntityButton.Visibility = Visibility.Visible;
-            DeleteEntityUsername.Visibility = Visibility.Visible;
-            DeleteEntityUsername.Visibility = Visibility.Visible;
-            AdminDeleteTypeComboBox.Visibility = Visibility.Visible;
-            DeleteEntityUsername.Visibility = Visibility.Visible;
-            AdminDeleteTextBox.Visibility = Visibility.Visible;
+            SearchDeleteEntityButton.Visibility = Visibility.Visible;
+            ConfrimDeletionMessage.Visibility = Visibility.Visible;
+            ReturnAdminButton.Visibility = Visibility.Visible;
+            ExitAdminButton.Visibility = Visibility.Collapsed;
+
         }
         private void ExecuteDeletionIfConfirmed()
         {
@@ -1066,9 +1078,9 @@ namespace EvaluationProjectWPF
                     ConfrimDeletionMessage.Text = "Teacher has been deleted successfully.";
                     TeacherInfoStackPanel.UpdateLayout();
                     HideDeletionUI();
-           
+
                 }
-                else if(selectedCategory == "CLEANER")
+                else if (selectedCategory == "CLEANER")
                 {
                     loginRegisterManager.DeleteUser(selectedCategory, deleteUserInputFieldUsername);
                     ConfrimDeletionMessage.Text = "Cleaner has been deleted successfully.";
@@ -1089,13 +1101,39 @@ namespace EvaluationProjectWPF
                     HideDeletionUI();
                 }
                 ConfrimDeletionMessage.Visibility = Visibility.Visible;
-                
+
             }
             if (noDeleteEntity)
             {
                 HideDeletionUI();
             }
         }
+        private void ExecuteEntityModification()
+        {
+            var allStudents = loginRegisterManager.GetAllStudents().ToList();
+            allStudents.Reverse();
 
+            var allTeachers = loginRegisterManager.GetAllTeachers().ToList();
+            allTeachers.Reverse();
+
+            var allCleaners = loginRegisterManager.GetAllCleaners().ToList();
+            allCleaners.Reverse();
+
+            var allBoardingMembers = loginRegisterManager.GetAllBoardingMembers().ToList();
+            allBoardingMembers.Reverse();
+
+            if (yesModify)
+            {
+                string adminRegisterUsername = AdminTextBox.Text;
+                string adminUpdateNameBox = AdminNewUsernameBox.Text;
+                string adminRegisterPassword = AdminPasswordBox.Password;
+                string selectedCategory = ((ComboBoxItem)AdminDeleteTypeComboBox.SelectedItem)?.Content.ToString() ?? "";
+                if (selectedCategory == "TEACHER")
+                {
+
+                }
+            }
+        }
+        #endregion Entities
     }
-  }
+}
