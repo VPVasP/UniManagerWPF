@@ -90,6 +90,7 @@ namespace EvaluationProjectWPF
                 RegistrationMessage.Visibility = Visibility.Visible;
                 UserExistsMessage.Visibility = Visibility.Collapsed;
                 TeacherTeachingDates.Visibility = Visibility.Visible;
+                ShowUserUI();
             }
             if (!loginRegisterManager.DoesUserExistRegister(selectedCategoryBoardingMember, registerUsername) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "BOARDING MEMBER")
             {
@@ -104,7 +105,7 @@ namespace EvaluationProjectWPF
                 UserExistsMessage.Visibility = Visibility.Collapsed;
 
                 ShowBoardingMemberStudentTeacherStats();
-
+                ShowUserUI();
             }
             if (!loginRegisterManager.DoesUserExistRegister(selectedCategoryCleaner, registerUsername) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "CLEANER")
             {
@@ -124,7 +125,7 @@ namespace EvaluationProjectWPF
                 RegistrationMessage.Text = "Welcome, CLEANER " + registerUsername + "!";
                 RegistrationMessage.Visibility = Visibility.Visible;
                 UserExistsMessage.Visibility = Visibility.Collapsed;
-
+                ShowUserUI();
             }
             if (!loginRegisterManager.DoesUserExistRegister(selectedCategoryStudent, registerUsername) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "STUDENT")
             {
@@ -144,6 +145,7 @@ namespace EvaluationProjectWPF
                 RegistrationMessage.Text = "Welcome, STUDENT " + registerUsername + "!";
                 RegistrationMessage.Visibility = Visibility.Visible;
                 UserExistsMessage.Visibility = Visibility.Collapsed;
+                ShowUserUI();
             }
 
            
@@ -190,6 +192,7 @@ namespace EvaluationProjectWPF
                 LoginMessage.Visibility = Visibility.Visible;
                 UserExistsMessage.Visibility = Visibility.Collapsed;
                 TeacherTeachingDates.Visibility = Visibility.Visible;
+                ShowUserUI();
             }
             else if (loginRegisterManager.DoesUserExistLogin(selectedCategoryBoardingMember, loginUsername, loginPassword) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "BOARDING MEMBER")
             {
@@ -200,7 +203,7 @@ namespace EvaluationProjectWPF
                 UserExistsMessage.Visibility = Visibility.Collapsed;
 
                 ShowBoardingMemberStudentTeacherStats();
-
+                ShowUserUI();
             }
 
             else if (loginRegisterManager.DoesUserExistLogin(selectedCategoryCleaner, loginUsername, loginPassword) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "CLEANER")
@@ -220,7 +223,7 @@ namespace EvaluationProjectWPF
                 LoginMessage.Visibility = Visibility.Visible;
                 StudentGrades.Visibility = Visibility.Collapsed;
                 UserExistsMessage.Visibility = Visibility.Collapsed;
-
+                ShowUserUI();
             }
 
             else if (loginRegisterManager.DoesUserExistLogin(selectedCategoryStudent, loginUsername, loginPassword) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "STUDENT")
@@ -241,6 +244,7 @@ namespace EvaluationProjectWPF
                 CleanerDates.Visibility = Visibility.Collapsed;
                 LoginMessage.Visibility = Visibility.Visible;
                 UserExistsMessage.Visibility = Visibility.Collapsed;
+                ShowUserUI();
             }
 
         }
@@ -571,6 +575,8 @@ namespace EvaluationProjectWPF
             AdminDeleteTextBox.Visibility = Visibility.Collapsed;
             SearchDeleteEntityButton.Visibility = Visibility.Collapsed;
             LogoutButton.Visibility = Visibility.Collapsed;
+            ExitAdminButton.Visibility = Visibility.Collapsed;
+            UserExitButton.Visibility = Visibility.Collapsed;
         }
         private void ShowAdminStuff()
         {
@@ -585,6 +591,7 @@ namespace EvaluationProjectWPF
             AdminModifyTypeComboBox.Visibility = Visibility.Collapsed;
             RegistrationMessage.Visibility = Visibility.Collapsed;
             ReturnAdminButton.Visibility = Visibility.Collapsed;
+            ExitAdminButton.Visibility = Visibility.Visible;
             ShowAdminRelatedStats();
         }
         private void EntityUI()
@@ -601,6 +608,7 @@ namespace EvaluationProjectWPF
             DeleteEntityButton.Visibility = Visibility.Collapsed;
             ConfrimDeletionMessage.Visibility = Visibility.Collapsed;
             ReturnAdminButton.Visibility = Visibility.Visible;
+            ExitAdminButton.Visibility = Visibility.Collapsed;
         }
         private void HideEntityUI()
         {
@@ -633,6 +641,7 @@ namespace EvaluationProjectWPF
             ModifyEntityUIButton.Click += SearchName;
             ConfrimDeletionMessage.Visibility = Visibility.Collapsed;
             ReturnAdminButton.Visibility = Visibility.Visible;
+            ExitAdminButton.Visibility = Visibility.Collapsed;
         }
 
 
@@ -643,6 +652,12 @@ namespace EvaluationProjectWPF
         private void ModifyEntityUI(object sender, RoutedEventArgs e)
         {
             ModifyEntityUI();
+        }
+
+        private void ShowUserUI()
+        {
+            ExitButtonUserPanel.Visibility = Visibility.Visible;
+            UserExitButton.Visibility = Visibility.Visible;
         }
         private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
@@ -877,7 +892,8 @@ namespace EvaluationProjectWPF
             SearchDeleteEntityButton.Visibility = Visibility.Visible;
             ConfrimDeletionMessage.Visibility = Visibility.Visible;
             ReturnAdminButton.Visibility = Visibility.Visible;
-            
+            ExitAdminButton.Visibility = Visibility.Collapsed;
+
         }
         private void ReturnAdmin(object sender, RoutedEventArgs e)
         {
@@ -891,7 +907,7 @@ namespace EvaluationProjectWPF
             ModifyEntityUIButton.Visibility = Visibility.Visible;
             DeleteEntityButton.Visibility = Visibility.Visible;
             ReturnAdminButton.Visibility = Visibility.Collapsed;
-
+            ExitAdminButton.Visibility = Visibility.Visible;
         }
 
         private void YesDeleteEntity(object sender, RoutedEventArgs e)

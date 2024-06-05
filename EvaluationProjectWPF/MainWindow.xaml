@@ -66,6 +66,8 @@
             
             <Button  x:Name="ReturnAdminButton" Content="Return" Click="ReturnAdmin" Margin="5"/>
 
+            <Button  x:Name="ExitAdminButton" Content="EXIT" Click="ExitApplication" Margin="5"/>
+
             <TextBlock x:Name="ConfrimDeletionMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 100, 10, 0" Foreground="Yellow"/>
         </StackPanel>
 
@@ -96,7 +98,8 @@
             <Button x:Name="RegisterButton" Content="Register" Click="RegisterUser" Margin="5"/>
             <Button x:Name="LoginButton" Content="Login" Click="LoginUser" Margin="5"/>
             <Button  x:Name="ExitButton" Content="Exit" Click="ExitApplication" Margin="5"/>
-    </StackPanel>
+           
+        </StackPanel>
 
         <TextBlock x:Name="RegistrationMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, -500, 10, 0" Foreground="Yellow"/>
         <TextBlock x:Name="LoginMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, -950, 10, 0" Foreground="Yellow"/>
@@ -112,7 +115,15 @@
         <StackPanel x:Name="StudentInfoStackPanel" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
         <StackPanel x:Name="TeacherInfoStackPanel" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
         <StackPanel x:Name="CleanerInfoStackPanel" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+        
         <StackPanel x:Name="BoardingMemberInfoStackPanel" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+
+
+        <StackPanel x:Name="ExitButtonUserPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
+            <Button x:Name="UserExitButton" Content="Exit" Click="ExitApplication" Margin="50" Width="150" Height="50"/>
+
+
+        </StackPanel>
 
     </Grid>
 </Window>
