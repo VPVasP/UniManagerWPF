@@ -27,22 +27,87 @@
     },
     {
       "Category": "TEACHER",
-      "Username": "NoTeacher",
+      "Username": "BadTeacher",
       "Password": "12345678"
     },
     {
       "Category": "TEACHER",
-      "Username": "ddddd",
+      "Username": "GoodTeacher",
       "Password": "12345678"
     },
     {
       "Category": "TEACHER",
-      "Username": "Teacher8",
-      "Password": "123456678"
+      "Username": "God",
+      "Password": "12345678"
+    },
+    {
+      "Category": "BOARDING MEMBER",
+      "Username": "Goodest",
+      "Password": "12345678"
     },
     {
       "Category": "TEACHER",
-      "Username": "Teacher90000",
+      "Username": "Goder",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "Mother",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "Godesttt",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "Newest",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "Bob",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "Mama",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "Bob333",
+      "Password": "12345678"
+    },
+    {
+      "Category": "BOARDING MEMBER",
+      "Username": "Bobest",
+      "Password": "12345678"
+    },
+    {
+      "Category": "BOARDING MEMBER",
+      "Username": "Master",
+      "Password": "12345678"
+    },
+    {
+      "Category": "CLEANER",
+      "Username": "NewestCleaner",
+      "Password": "12345678"
+    },
+    {
+      "Category": "CLEANER",
+      "Username": "NewCleanest",
+      "Password": "12345678"
+    },
+    {
+      "Category": "STUDENT",
+      "Username": "BobStudent",
+      "Password": "12345678"
+    },
+    {
+      "Category": "STUDENT",
+      "Username": "Students222",
       "Password": "12345678"
     }
   ]

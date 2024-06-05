@@ -69,7 +69,7 @@
 
             <Button  x:Name="YesModifyEntityButton" Content="YesModifyEntity" Click="YesModifyEntity" Margin="5"/>
 
-            <Button  x:Name="NoModifyEntityButton" Content="NoModifyEntity" Click="NoDeleteEntity" Margin="5"/>
+            <Button  x:Name="NoModifyEntityButton" Content="NoModifyEntity" Click="NoModifyEntity" Margin="5"/>
             <Button  x:Name="ReturnAdminButton" Content="Return" Click="ReturnAdmin" Margin="5"/>
 
             <Button  x:Name="ExitAdminButton" Content="EXIT" Click="ExitApplication" Margin="5"/>

@@ -22,6 +22,8 @@ namespace EvaluationProjectWPF
         private bool yesDeleteEntity;
         private bool noDeleteEntity;
         TextBlock NewEnityTextBlock = new TextBlock();
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -423,7 +425,67 @@ namespace EvaluationProjectWPF
             }
         }
 
+        private void UIAdminStats()
+        {
+            string allCourseGrades = string.Empty;
+            string allTeacherWorkingHours = string.Empty;
+            string allCleanerWorkingSchedule = string.Empty;
 
+            foreach (var teacherHours in universityManager.AllTeachers)
+            {
+                allTeacherWorkingHours += "  They teach Course: " + teacherHours.teachingCourseTitle + ", Working Day: " + teacherHours.teachingWorkingDay + ", Working Hour: " + teacherHours.teacherWorkingHour + "\n";
+            }
+            foreach (var course in universityManager.AllCourses)
+            {
+                allCourseGrades += " Course Name: " + course.CourseTitle + ", Oral Mark: " + course.OralMark + ", Written Mark: " + course.WritingMark + "\n";
+            }
+
+            foreach (var cleanerSchedule in universityManager.AllCleaner)
+            {
+                allCleanerWorkingSchedule += "Working Day: " + cleanerSchedule.workingDay + ", Working Length " + cleanerSchedule.workingLength + " Hours" + "\n";
+            }
+
+            var allStudents = loginRegisterManager.GetAllStudents();
+            var allTeachers = loginRegisterManager.GetAllTeachers();
+            var allCleaners = loginRegisterManager.GetAllCleaners();
+            var allBoardingMembers = loginRegisterManager.GetAllBoardingMembers();
+
+            string teacherNames = "All Teachers Info:\n";
+            string studentNames = "All Students Info:\n";
+            string cleanerNames = "All Cleaners Info:\n";
+            string boardingMemberNames = "All Boarding Members Info:\n";
+
+            foreach (var student in allStudents)
+            {
+                studentNames += " STUDENT NAME:  " + student.Username + " " + allCourseGrades + "\n";
+            }
+            foreach (var teacher in allTeachers)
+            {
+                teacherNames += " TEACHER NAME:  " + teacher.Username + allTeacherWorkingHours + "\n";
+            }
+            foreach (var cleaner in allCleaners)
+            {
+                cleanerNames += " CLEANER NAME: " + cleaner.Username + " " + allCleanerWorkingSchedule + "\n";
+            }
+
+            foreach (var boardingMember in allBoardingMembers)
+            {
+                boardingMemberNames += " BOARDING MEMBER NAME: " + boardingMember.Username + "\n";
+
+            }
+
+            StudentInfoText.Text = studentNames;
+            StudentInfoText.Visibility = Visibility.Visible;
+
+            TeacherInfoText.Text = teacherNames;
+            TeacherInfoText.Visibility = Visibility.Visible;
+
+            CleanerInfoText.Text = cleanerNames;
+            CleanerInfoText.Visibility = Visibility.Visible;
+
+            BoardingMemberInfoText.Text = boardingMemberNames;
+            BoardingMemberInfoText.Visibility = Visibility.Visible;
+        }
         private void ShowAdminRelatedStats()
         {
             AddStudentCourses();
@@ -504,6 +566,7 @@ namespace EvaluationProjectWPF
             SearchModifyEntityButton.Visibility = Visibility.Collapsed;
             YesModifyEntityButton.Visibility = Visibility.Collapsed;
             NoModifyEntityButton.Visibility = Visibility.Collapsed;
+            ModifyNameTextBox.Visibility = Visibility.Collapsed;
             ModifyEntityUIButton.Content = "ModifyEntity";
         }
         private void ShowUserUI()
@@ -698,7 +761,6 @@ namespace EvaluationProjectWPF
             ExitAdminButton.Visibility = Visibility.Collapsed;
             DeleteEntityButton.Visibility = Visibility.Collapsed;
             ModificationConfrimationMessage.Visibility = Visibility.Collapsed;
-            ModifyEntityUIButton.Content = "Search Name";
             AddEntityUIButton.Visibility = Visibility.Collapsed;
             DeleteEntityButton.Visibility = Visibility.Collapsed;
             NoDeleteEntityButton.Visibility = Visibility.Collapsed;
@@ -764,6 +826,8 @@ namespace EvaluationProjectWPF
                     ModifyNameTextBox.Visibility = Visibility.Visible;
                     ModificationConfrimationMessage.Text = "Are you sure you want to  Modify this User: ? " + adminRegisterUsername + " If yes type a new name in the New name input field";
                     ModificationConfrimationMessage.Visibility = Visibility.Visible;
+                    NoDeleteEntityButton.Visibility = Visibility.Collapsed;
+                    NoModifyEntityButton.Visibility = Visibility.Visible;
                 }
             }
             else if (selectedCategory == "STUDENT")
@@ -781,6 +845,8 @@ namespace EvaluationProjectWPF
                     ModifyNameTextBox.Visibility = Visibility.Visible;
                     ModificationConfrimationMessage.Text = "Are you sure you want to Modify this User: ? " + adminRegisterUsername + " If yes type a new name in the New name input field";
                     ModificationConfrimationMessage.Visibility = Visibility.Visible;
+                    NoDeleteEntityButton.Visibility = Visibility.Collapsed;
+                    NoModifyEntityButton.Visibility = Visibility.Visible;
                 }
             }
             else if (selectedCategory == "BOARDING MEMBER")
@@ -798,6 +864,8 @@ namespace EvaluationProjectWPF
                     ModifyNameTextBox.Visibility = Visibility.Visible;
                     ModificationConfrimationMessage.Text = "Are you sure you want to Modify this User: ? " + adminRegisterUsername + " If yes type a new name in the New name input field";
                     ModificationConfrimationMessage.Visibility = Visibility.Visible;
+                    NoDeleteEntityButton.Visibility = Visibility.Collapsed;
+                    NoModifyEntityButton.Visibility = Visibility.Visible;
                 }
             }
             else if (selectedCategory == "CLEANER")
@@ -815,6 +883,8 @@ namespace EvaluationProjectWPF
                     ModifyNameTextBox.Visibility = Visibility.Visible;
                     ModificationConfrimationMessage.Text = "Are you sure you want to Modify this User: ? " + adminRegisterUsername + " If yes type a new name in the New name input field";
                     ModificationConfrimationMessage.Visibility = Visibility.Visible;
+                    NoDeleteEntityButton.Visibility = Visibility.Collapsed;
+                    NoModifyEntityButton.Visibility = Visibility.Visible;
                 }
 
                 else
@@ -889,6 +959,14 @@ namespace EvaluationProjectWPF
         {
             yesModify = false;
             noModify = true;
+            YesModifyEntityButton.Visibility = Visibility.Collapsed;
+            NoDeleteEntityButton.Visibility = Visibility.Collapsed;
+            SearchModifyEntityButton.Visibility = Visibility.Collapsed;
+            ModifyNameTextBox.Visibility = Visibility.Collapsed;
+            AdminModifyTypeComboBox.Visibility = Visibility.Collapsed;
+            AdminUsername.Visibility = Visibility.Collapsed;
+            ShowAdminUI();
+            ModifyEntityUIButton.Click += ModifyEntityUI;
         }
         private void YesDeleteEntity(object sender, RoutedEventArgs e)
         {
@@ -967,6 +1045,7 @@ namespace EvaluationProjectWPF
 
         private void AddNewEntity(object sender, RoutedEventArgs e)
         {
+            loginRegisterManager.LoadUserData();
             RegistrationLoginPanel.Visibility = Visibility.Collapsed;
             string allCourseGrades = string.Empty;
             string allTeacherWorkingHours = string.Empty;
@@ -986,10 +1065,10 @@ namespace EvaluationProjectWPF
                 allCleanerWorkingSchedule += "Working Day: " + cleanerSchedule.workingDay + ", Working Length " + cleanerSchedule.workingLength + " Hours" + "\n";
             }
 
-            var allStudents = loginRegisterManager.GetAllStudents().ToList();
-            var allTeachers = loginRegisterManager.GetAllTeachers().ToList();
-            var allCleaners = loginRegisterManager.GetAllCleaners().ToList();
-            var allBoardingMembers = loginRegisterManager.GetAllBoardingMembers().ToList();
+            var allStudents = loginRegisterManager.GetAllStudents();
+            var allTeachers = loginRegisterManager.GetAllTeachers();
+            var allCleaners = loginRegisterManager.GetAllCleaners();
+            var allBoardingMembers = loginRegisterManager.GetAllBoardingMembers();
 
             StudentInfoStackPanel.Children.Clear();
             TeacherInfoStackPanel.Children.Clear();
@@ -999,17 +1078,37 @@ namespace EvaluationProjectWPF
             string adminRegisterUsername = AdminTextBox.Text;
             string adminRegisterPassword = AdminPasswordBox.Password;
             string selectedCategory = ((ComboBoxItem)AdminTypeComboBox.SelectedItem)?.Content.ToString();
+            string teacherNames = "All Teachers Info:\n";
+            foreach (var teacher in allTeachers)
+            {
+                teacherNames += " TEACHER NAME:  " + teacher.Username + allTeacherWorkingHours + "\n";
+            }
 
             if (selectedCategory == "NEW TEACHER")
             {
                 loginRegisterManager.Register("TEACHER", adminRegisterUsername, adminRegisterPassword);
+
+            
                 TextBlock newTeacherTextBlock = new TextBlock
                 {
                     Text = "New Added TEACHER:  " + adminRegisterUsername,
-                    Foreground = Brushes.Green
+                    Foreground = Brushes.Green, 
                 };
-                TeacherInfoStackPanel.Children.Add(newTeacherTextBlock);
+                TeacherInfoStackPanel.Children.Insert(0, newTeacherTextBlock);
+                TeacherInfoStackPanel.UpdateLayout();
+
+              
+                var updatedAllTeachers = loginRegisterManager.GetAllTeachers();
+                string updatedTeacherName = "All Teachers Info:\n"; 
+                foreach (var teacher in updatedAllTeachers)
+                {
+                    updatedTeacherName += "TEACHER NAME:  " + teacher.Username + allTeacherWorkingHours + "\n";
+                }
+                TeacherInfoText.Text = updatedTeacherName; 
+                loginRegisterManager.SaveUserData(); 
             }
+
+
             else if (selectedCategory == "NEW BOARDING MEMBER")
             {
                 loginRegisterManager.Register("BOARDING MEMBER", adminRegisterUsername, adminRegisterPassword);
@@ -1018,7 +1117,19 @@ namespace EvaluationProjectWPF
                     Text = "New BOARDING MEMBER:  " + adminRegisterUsername,
                     Foreground = Brushes.Green
                 };
-                BoardingMemberInfoStackPanel.Children.Add(newBoardingMemberTextBlock);
+                BoardingMemberInfoStackPanel.Children.Insert (0, newBoardingMemberTextBlock);
+                BoardingMemberInfoStackPanel.UpdateLayout();
+
+                var updatedAllBoardingMembers = loginRegisterManager.GetAllBoardingMembers();
+                string updatedBoardingMemberName = "All Boarding Name Info:\n";
+
+                foreach(var boardingMember in updatedAllBoardingMembers)
+                {
+                    updatedBoardingMemberName += "BOARDING MEMBER NAME: " + boardingMember.Username+  "\n";
+                }
+
+                BoardingMemberInfoText.Text = updatedBoardingMemberName;
+                loginRegisterManager.SaveUserData();
             }
             else if (selectedCategory == "NEW CLEANER")
             {
@@ -1028,17 +1139,42 @@ namespace EvaluationProjectWPF
                     Text = "New Added CLEANER:  " + adminRegisterUsername,
                     Foreground = Brushes.Green
                 };
-                CleanerInfoStackPanel.Children.Add(newCleanerTextBlock);
+                CleanerInfoStackPanel.Children.Insert(0, newCleanerTextBlock);
+                CleanerInfoStackPanel.UpdateLayout();
+
+                var updatedAllCleaners = loginRegisterManager.GetAllCleaners();
+                string updatedCleanerName = "All Cleaner Name Info:\n";
+
+                foreach (var cleaner in updatedAllCleaners)
+                {
+                   updatedCleanerName += "CLEANER NAME: " +cleaner.Username+ allCleanerWorkingSchedule+ "\n";
+                }
+
+                CleanerInfoText.Text = updatedCleanerName;
+                loginRegisterManager.SaveUserData();
             }
             else if (selectedCategory == "NEW STUDENT")
             {
                 loginRegisterManager.Register("STUDENT", adminRegisterUsername, adminRegisterPassword);
                 TextBlock newStudentTextBlock = new TextBlock
                 {
-                    Text = "New Added STUDENT:  " + adminRegisterUsername + " " + allCourseGrades,
+                    Text = "New Added STUDENT:  " + adminRegisterUsername,
                     Foreground = Brushes.Green
                 };
-                StudentInfoStackPanel.Children.Add(newStudentTextBlock);
+                StudentInfoStackPanel.Children.Insert(0, newStudentTextBlock);
+                StudentInfoStackPanel.UpdateLayout();
+
+                var updateallstudents = loginRegisterManager.GetAllStudents();
+                string updatedstudentName = "All Student Name Info:\n";
+
+                foreach (var student in updateallstudents)
+                {
+                   updatedstudentName += "STUDENT NAME: " + student.Username + allCourseGrades + "\n";
+                }
+
+                StudentInfoText.Text = updatedstudentName;
+                loginRegisterManager.SaveUserData();
+
             }
             else if (selectedCategory == "NEW COURSE")
             {
