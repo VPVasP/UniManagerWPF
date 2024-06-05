@@ -255,20 +255,36 @@ namespace EvaluationProjectWPF
         #region Functions
         private void AddStudentCourses()
         {
-            universityManager.AddStudentCourse("Mathematics", 5, 10);
-            universityManager.AddStudentCourse("Physics", 7, 6);
-            universityManager.AddStudentCourse("Economy", 4, 7);
-            universityManager.AddStudentCourse("History", 2, 4);
-            universityManager.AddStudentCourse("English", 5, 7);
+            Random random = new Random();
+            int[] randomGrades = new int[5];
+            randomGrades[0] = random.Next(5, 10);
+            randomGrades[1] = random.Next(5, 10);
+            randomGrades[2] = random.Next(5, 10);
+            randomGrades[3] = random.Next(5, 10);
+            randomGrades[4] = random.Next(5, 10);
+            universityManager.AddStudentCourse("Mathematics", randomGrades[0], randomGrades[4]);
+            universityManager.AddStudentCourse("Physics", randomGrades[1], randomGrades[1]);
+            universityManager.AddStudentCourse("Economy", randomGrades[2], randomGrades[3]);
+            universityManager.AddStudentCourse("History", randomGrades[3], randomGrades[2]);
+            universityManager.AddStudentCourse("English", randomGrades[4], randomGrades[1]);
         }
 
         private void AddTeacherTeachingCoursesAndHours()
         {
-            universityManager.AddTeachersCourse("Mathematics", "Monday", 1);
-            universityManager.AddTeachersCourse("Physics", "Tuesday", 2);
-            universityManager.AddTeachersCourse("Economy", "Wednesday", 3);
-            universityManager.AddTeachersCourse("History", "Thursday", 4);
-            universityManager.AddTeachersCourse("English", "Friday", 5);
+
+            Random random = new Random();
+            int[] randomCourseHours = new int[5];
+            randomCourseHours[0] = random.Next(1,7);
+            randomCourseHours[1] = random.Next(1, 7);
+            randomCourseHours[2] = random.Next(1, 7);
+            randomCourseHours[3] = random.Next(1, 7);
+            randomCourseHours[4] = random.Next(1, 7);
+
+            universityManager.AddTeachersCourse("Mathematics", "Monday", randomCourseHours[0]);
+            universityManager.AddTeachersCourse("Physics", "Tuesday", randomCourseHours[1]);
+            universityManager.AddTeachersCourse("Economy", "Wednesday", randomCourseHours[2]);
+            universityManager.AddTeachersCourse("History", "Thursday", randomCourseHours[3]);
+            universityManager.AddTeachersCourse("English", "Friday", randomCourseHours[4]);
         }
         private void AddCleanerWokringSchedule()
         {
