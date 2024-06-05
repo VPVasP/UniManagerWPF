@@ -70,7 +70,7 @@ namespace EvaluationProjectWPF
                 RegistrationMessage.Text = "Welcome, ADMIN " + registerUsername + "!";
                 RegistrationMessage.Visibility = Visibility.Visible;
                 UserExistsMessage.Visibility = Visibility.Collapsed;
-
+                ShowAdminStuff();
             }
             if (!loginRegisterManager.DoesUserExistRegister(selectedCategoryTeacher, registerUsername) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "TEACHER")
             {
@@ -171,8 +171,8 @@ namespace EvaluationProjectWPF
 
                 loginRegisterManager.Login(selectedCategoryAdmin, loginUsername, loginPassword);
                 ShowAdminStuff();
-                LoginMessage.Text = "You are now logged in ADMIN " + loginUsername + " Welcome to the application";
 
+                LoginMessage.Text = "You are now logged in ADMIN " + loginUsername + " Welcome to the application";
             }
 
             else if (loginRegisterManager.DoesUserExistLogin(selectedCategoryTeacher, loginUsername, loginPassword) && UserTypeComboBox.SelectedItem != null && ((ComboBoxItem)UserTypeComboBox.SelectedItem).Content.ToString() == "TEACHER")
@@ -584,6 +584,7 @@ namespace EvaluationProjectWPF
             AdminPasswordBox.Visibility = Visibility.Collapsed;
             AdminModifyTypeComboBox.Visibility = Visibility.Collapsed;
             RegistrationMessage.Visibility = Visibility.Collapsed;
+            ReturnAdminButton.Visibility = Visibility.Collapsed;
             ShowAdminRelatedStats();
         }
         private void EntityUI()
@@ -599,6 +600,25 @@ namespace EvaluationProjectWPF
             ModifyEntityUIButton.Visibility = Visibility.Collapsed;
             DeleteEntityButton.Visibility = Visibility.Collapsed;
             ConfrimDeletionMessage.Visibility = Visibility.Collapsed;
+            ReturnAdminButton.Visibility = Visibility.Visible;
+        }
+        private void HideEntityUI()
+        {
+
+            AdminUsername.Visibility = Visibility.Collapsed;
+            AdminTextBox.Visibility = Visibility.Collapsed;
+            AdminTypeComboBox.Visibility = Visibility.Collapsed;
+            AddNewEntityButton.Visibility = Visibility.Collapsed;
+            AdminPassword.Visibility = Visibility.Collapsed;
+            AdminPasswordBox.Visibility = Visibility.Collapsed;
+            ConfrimDeletionMessage.Visibility = Visibility.Collapsed;
+            ReturnAdminButton.Visibility = Visibility.Collapsed;
+            SearchDeleteEntityButton.Visibility = Visibility.Collapsed;
+            AdminModifyTypeComboBox.Visibility = Visibility.Collapsed;
+            AdminUsername.Visibility = Visibility.Collapsed;
+            DeleteEntityUsername.Visibility = Visibility.Collapsed;
+            AdminDeleteTextBox.Visibility = Visibility.Collapsed;
+            AdminDeleteTypeComboBox.Visibility = Visibility.Collapsed;
         }
         private void ModifyEntityUI()
         {
@@ -612,6 +632,7 @@ namespace EvaluationProjectWPF
             ModifyEntityUIButton.Click -= ModifyEntityUI;
             ModifyEntityUIButton.Click += SearchName;
             ConfrimDeletionMessage.Visibility = Visibility.Collapsed;
+            ReturnAdminButton.Visibility = Visibility.Visible;
         }
 
 
@@ -855,7 +876,13 @@ namespace EvaluationProjectWPF
             NoDeleteEntityButton.Visibility = Visibility.Collapsed;
             SearchDeleteEntityButton.Visibility = Visibility.Visible;
             ConfrimDeletionMessage.Visibility = Visibility.Visible;
+            ReturnAdminButton.Visibility = Visibility.Visible;
             
+        }
+        private void ReturnAdmin(object sender, RoutedEventArgs e)
+        {
+            ShowAdminUI();
+            HideEntityUI();
         }
         private void ShowAdminUI()
         {
@@ -863,6 +890,8 @@ namespace EvaluationProjectWPF
             AddEntityUIButton.Visibility = Visibility.Visible;
             ModifyEntityUIButton.Visibility = Visibility.Visible;
             DeleteEntityButton.Visibility = Visibility.Visible;
+            ReturnAdminButton.Visibility = Visibility.Collapsed;
+
         }
 
         private void YesDeleteEntity(object sender, RoutedEventArgs e)
