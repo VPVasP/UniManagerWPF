@@ -962,7 +962,7 @@ namespace EvaluationProjectWPF
                     string updatedTeacherName = "All Teachers Info:\n";
                     foreach (var teacher in updatedAllTeachers)
                     {
-                        updatedTeacherName += " TEACHER NAME:  " + teacher.Username + allTeacherWorkingHours + "\n";
+                        updatedTeacherName += "TEACHER NAME:  " + teacher.Username + allTeacherWorkingHours + "\n";
                     }
                     TeacherInfoText.Text = updatedTeacherName;
                
@@ -971,31 +971,70 @@ namespace EvaluationProjectWPF
             }
             else if (selectedCategory == "STUDENT")
             {
+                string newStudentName = ModifyNameTextBox.Text;
+                loginRegisterManager.Register("STUDENT", newStudentName, matchingValuesStudent.First().Password);
                 if (matchingValuesStudent.Any())
                 {
-                    string newStudentName = ModifyNameTextBox.Text;
-                    matchingValuesStudent.First().Username = newStudentName;
+
+                    loginRegisterManager.DeleteUser("STUDENT", matchingValuesStudent.First().Username);
+
                     ModificationConfrimationMessage.Text = "The New username now is " + newStudentName;
+                    var updatedAllStudents = loginRegisterManager.GetAllStudents();
+                    string updatedStudentName = "All Students Info:\n";
+                    foreach (var student in updatedAllStudents)
+                    {
+                        updatedStudentName+= "STUDENT NAME:  " + student.Username + allCourseGrades + "\n";
+                    }
+                    StudentInfoText.Text = updatedStudentName;
+
                     loginRegisterManager.SaveUserData();
                 }
             }
             else if (selectedCategory == "CLEANER")
             {
+                string newCleanerName = ModifyNameTextBox.Text;
+                loginRegisterManager.Register("CLEANER", newCleanerName, matchingValuesCleaner.First().Password);
                 if (matchingValuesCleaner.Any())
                 {
-                    string newCleanerName = ModifyNameTextBox.Text;
-                    matchingValuesCleaner.First().Username = newCleanerName;
+                    loginRegisterManager.DeleteUser("CLEANER", matchingValuesCleaner.First().Username);
+
                     ModificationConfrimationMessage.Text = "The New username now is " + newCleanerName;
+
+               
+                    var updatedAllCleaners = loginRegisterManager.GetAllCleaners();
+
+
+                    string updatedCleanerInfo = "All Cleaners Info:\n";
+                    foreach (var cleaner in updatedAllCleaners)
+                    {
+                        updatedCleanerInfo += "CLEANER NAME:  " + cleaner.Username+"  " +allCleanerWorkingSchedule+ "\n";
+                    }
+                    CleanerInfoText.Text = updatedCleanerInfo;
+
+             
                     loginRegisterManager.SaveUserData();
                 }
             }
             else if (selectedCategory == "BOARDING MEMBER")
             {
+                string newBoardingMemberName = ModifyNameTextBox.Text;
+                loginRegisterManager.Register("BOARDING MEMBER", newBoardingMemberName, matchingValuesBoardingMember.First().Password);
                 if (matchingValuesBoardingMember.Any())
                 {
-                    string newBoardingMemberName = ModifyNameTextBox.Text;
-                    matchingValuesBoardingMember.First().Username = newBoardingMemberName;
+           
+                    loginRegisterManager.DeleteUser("BOARDING MEMBER", matchingValuesBoardingMember.First().Username);
+
                     ModificationConfrimationMessage.Text = "The New username now is " + newBoardingMemberName;
+
+                    var updatedAllBoardingMembers = loginRegisterManager.GetAllBoardingMembers();
+
+                    string updatedBoardingMemberInfo = "All Boarding Members Info:\n";
+                    foreach (var boardingMember in updatedAllBoardingMembers)
+                    {
+                        updatedBoardingMemberInfo += "BOARDING MEMBER NAME:  " + boardingMember.Username + "\n";
+                    }
+                    BoardingMemberInfoText.Text = updatedBoardingMemberInfo;
+
                     loginRegisterManager.SaveUserData();
                 }
             }

@@ -6,28 +6,33 @@
       "Password": "12345678"
     },
     {
-      "Category": "CLEANER",
-      "Username": "zzzzzzz",
-      "Password": "12345678"
-    },
-    {
       "Category": "BOARDING MEMBER",
       "Username": "hather",
       "Password": "12345678"
     },
     {
-      "Category": "BOARDING MEMBER",
-      "Username": "Giannis",
-      "Password": "12345678"
-    },
-    {
-      "Category": "STUDENT",
-      "Username": "Mom",
+      "Category": "TEACHER",
+      "Username": "Bad",
       "Password": "12345678"
     },
     {
       "Category": "TEACHER",
-      "Username": "Bad",
+      "Username": "Dad",
+      "Password": "12345678"
+    },
+    {
+      "Category": "STUDENT",
+      "Username": "StudentWorst",
+      "Password": "12345678"
+    },
+    {
+      "Category": "CLEANER",
+      "Username": "Bob",
+      "Password": "12345678"
+    },
+    {
+      "Category": "BOARDING MEMBER",
+      "Username": "Takis",
       "Password": "12345678"
     }
   ]
