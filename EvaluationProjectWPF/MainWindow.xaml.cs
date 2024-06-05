@@ -276,7 +276,7 @@ namespace EvaluationProjectWPF
 
             Random random = new Random();
             int[] randomCourseHours = new int[5];
-            randomCourseHours[0] = random.Next(1,7);
+            randomCourseHours[0] = random.Next(1, 7);
             randomCourseHours[1] = random.Next(1, 7);
             randomCourseHours[2] = random.Next(1, 7);
             randomCourseHours[3] = random.Next(1, 7);
@@ -889,7 +889,7 @@ namespace EvaluationProjectWPF
 
                 else
                 {
-                    ModificationConfrimationMessage.Text  = "No user found with the given username.";
+                    ModificationConfrimationMessage.Text = "No user found with the given username.";
                     ModificationConfrimationMessage.Visibility = Visibility.Visible;
                 }
             }
@@ -954,9 +954,9 @@ namespace EvaluationProjectWPF
                 loginRegisterManager.Register("TEACHER", newTeacherName, matchingValuesTeacher.First().Password);
                 if (matchingValuesTeacher.Any())
                 {
-                  
+
                     loginRegisterManager.DeleteUser("TEACHER", matchingValuesTeacher.First().Username);
-                    
+
                     ModificationConfrimationMessage.Text = "The New username now is " + newTeacherName;
                     var updatedAllTeachers = loginRegisterManager.GetAllTeachers();
                     string updatedTeacherName = "All Teachers Info:\n";
@@ -965,7 +965,7 @@ namespace EvaluationProjectWPF
                         updatedTeacherName += "TEACHER NAME:  " + teacher.Username + allTeacherWorkingHours + "\n";
                     }
                     TeacherInfoText.Text = updatedTeacherName;
-               
+
                     loginRegisterManager.SaveUserData();
                 }
             }
@@ -983,7 +983,7 @@ namespace EvaluationProjectWPF
                     string updatedStudentName = "All Students Info:\n";
                     foreach (var student in updatedAllStudents)
                     {
-                        updatedStudentName+= "STUDENT NAME:  " + student.Username + allCourseGrades + "\n";
+                        updatedStudentName += "STUDENT NAME:  " + student.Username + allCourseGrades + "\n";
                     }
                     StudentInfoText.Text = updatedStudentName;
 
@@ -1000,18 +1000,18 @@ namespace EvaluationProjectWPF
 
                     ModificationConfrimationMessage.Text = "The New username now is " + newCleanerName;
 
-               
+
                     var updatedAllCleaners = loginRegisterManager.GetAllCleaners();
 
 
                     string updatedCleanerInfo = "All Cleaners Info:\n";
                     foreach (var cleaner in updatedAllCleaners)
                     {
-                        updatedCleanerInfo += "CLEANER NAME:  " + cleaner.Username+"  " +allCleanerWorkingSchedule+ "\n";
+                        updatedCleanerInfo += "CLEANER NAME:  " + cleaner.Username + "  " + allCleanerWorkingSchedule + "\n";
                     }
                     CleanerInfoText.Text = updatedCleanerInfo;
 
-             
+
                     loginRegisterManager.SaveUserData();
                 }
             }
@@ -1021,7 +1021,7 @@ namespace EvaluationProjectWPF
                 loginRegisterManager.Register("BOARDING MEMBER", newBoardingMemberName, matchingValuesBoardingMember.First().Password);
                 if (matchingValuesBoardingMember.Any())
                 {
-           
+
                     loginRegisterManager.DeleteUser("BOARDING MEMBER", matchingValuesBoardingMember.First().Username);
 
                     ModificationConfrimationMessage.Text = "The New username now is " + newBoardingMemberName;
@@ -1173,24 +1173,24 @@ namespace EvaluationProjectWPF
             {
                 loginRegisterManager.Register("TEACHER", adminRegisterUsername, adminRegisterPassword);
 
-            
+
                 TextBlock newTeacherTextBlock = new TextBlock
                 {
                     Text = "New Added TEACHER:  " + adminRegisterUsername,
-                    Foreground = Brushes.Green, 
+                    Foreground = Brushes.Green,
                 };
                 TeacherInfoStackPanel.Children.Insert(0, newTeacherTextBlock);
                 TeacherInfoStackPanel.UpdateLayout();
 
-              
+
                 var updatedAllTeachers = loginRegisterManager.GetAllTeachers();
-                string updatedTeacherName = "All Teachers Info:\n"; 
+                string updatedTeacherName = "All Teachers Info:\n";
                 foreach (var teacher in updatedAllTeachers)
                 {
                     updatedTeacherName += "TEACHER NAME:  " + teacher.Username + allTeacherWorkingHours + "\n";
                 }
-                TeacherInfoText.Text = updatedTeacherName; 
-                loginRegisterManager.SaveUserData(); 
+                TeacherInfoText.Text = updatedTeacherName;
+                loginRegisterManager.SaveUserData();
             }
 
 
@@ -1202,15 +1202,15 @@ namespace EvaluationProjectWPF
                     Text = "New BOARDING MEMBER:  " + adminRegisterUsername,
                     Foreground = Brushes.Green
                 };
-                BoardingMemberInfoStackPanel.Children.Insert (0, newBoardingMemberTextBlock);
+                BoardingMemberInfoStackPanel.Children.Insert(0, newBoardingMemberTextBlock);
                 BoardingMemberInfoStackPanel.UpdateLayout();
 
                 var updatedAllBoardingMembers = loginRegisterManager.GetAllBoardingMembers();
                 string updatedBoardingMemberName = "All Boarding Name Info:\n";
 
-                foreach(var boardingMember in updatedAllBoardingMembers)
+                foreach (var boardingMember in updatedAllBoardingMembers)
                 {
-                    updatedBoardingMemberName += "BOARDING MEMBER NAME: " + boardingMember.Username+  "\n";
+                    updatedBoardingMemberName += "BOARDING MEMBER NAME: " + boardingMember.Username + "\n";
                 }
 
                 BoardingMemberInfoText.Text = updatedBoardingMemberName;
@@ -1232,7 +1232,7 @@ namespace EvaluationProjectWPF
 
                 foreach (var cleaner in updatedAllCleaners)
                 {
-                   updatedCleanerName += "CLEANER NAME: " +cleaner.Username+ allCleanerWorkingSchedule+ "\n";
+                    updatedCleanerName += "CLEANER NAME: " + cleaner.Username + allCleanerWorkingSchedule + "\n";
                 }
 
                 CleanerInfoText.Text = updatedCleanerName;
@@ -1254,7 +1254,7 @@ namespace EvaluationProjectWPF
 
                 foreach (var student in updateallstudents)
                 {
-                   updatedstudentName += "STUDENT NAME: " + student.Username + allCourseGrades + "\n";
+                    updatedstudentName += "STUDENT NAME: " + student.Username + allCourseGrades + "\n";
                 }
 
                 StudentInfoText.Text = updatedstudentName;
@@ -1291,7 +1291,11 @@ namespace EvaluationProjectWPF
             string allCourseGrades = string.Empty;
             string allTeacherWorkingHours = string.Empty;
             string allCleanerWorkingSchedule = string.Empty;
-
+            string deletedInputField = AdminDeleteTextBox.Text;
+            var matchingValuesTeacher = loginRegisterManager.GetAllTeachers().Where(user => user.Username.Contains(deletedInputField));
+            var matchingValuesCleaner = loginRegisterManager.GetAllCleaners().Where(user => user.Username.Contains(deletedInputField));
+            var matchingValuesBoardingMember = loginRegisterManager.GetAllBoardingMembers().Where(user => user.Username.Contains(deletedInputField));
+            var matchingValuesStudent = loginRegisterManager.GetAllStudents().Where(user => user.Username.Contains(deletedInputField));
             foreach (var teacherHours in universityManager.AllTeachers)
             {
                 allTeacherWorkingHours += "  They teach Course: " + teacherHours.teachingCourseTitle + ", Working Day: " + teacherHours.teachingWorkingDay + ", Working Hour: " + teacherHours.teacherWorkingHour + "\n";
@@ -1325,48 +1329,115 @@ namespace EvaluationProjectWPF
             BoardingMemberInfoStackPanel.Children.Clear();
             if (yesDeleteEntity)
             {
-                string deleteUserInputFieldUsername = AdminDeleteTextBox.Text;
+                string deleteUserInputFieldUsername = deletedInputField; ;
                 string selectedCategory = ((ComboBoxItem)AdminDeleteTypeComboBox.SelectedItem)?.Content.ToString() ?? "";
 
                 if (selectedCategory == "TEACHER")
                 {
 
-                    loginRegisterManager.DeleteUser(selectedCategory, deleteUserInputFieldUsername);
-                    ConfrimDeletionMessage.Text = "Teacher has been deleted successfully.";
-                    TeacherInfoStackPanel.UpdateLayout();
-                    HideDeletionUI();
+                    if (matchingValuesTeacher.Any())
+                    {
 
+                        loginRegisterManager.DeleteUser("TEACHER", matchingValuesTeacher.First().Username);
+
+                        var updatedAllTeachers = loginRegisterManager.GetAllTeachers();
+                        string updatedDeletedTeacherName = "All Teachers Info:\n";
+                        foreach (var teacher in updatedAllTeachers)
+                        {
+                            updatedDeletedTeacherName += "TEACHER NAME:  " + teacher.Username + allTeacherWorkingHours + "\n";
+                        }
+
+                        TeacherInfoText.Text = updatedDeletedTeacherName;
+                        ConfrimDeletionMessage.Text = "Deleted User";
+                        loginRegisterManager.SaveUserData();
+                    }
                 }
                 else if (selectedCategory == "CLEANER")
                 {
-                    loginRegisterManager.DeleteUser(selectedCategory, deleteUserInputFieldUsername);
-                    ConfrimDeletionMessage.Text = "Cleaner has been deleted successfully.";
-                    HideDeletionUI();
+                    if (matchingValuesCleaner.Any())
+                    {
+
+                        loginRegisterManager.DeleteUser("CLEANER", matchingValuesCleaner.First().Username);
+
+
+                        var updatedAllCleaners = loginRegisterManager.GetAllCleaners();
+
+                        string updatedCleanerInfo = "All Cleaners Info:\n";
+
+                        foreach (var cleaner in updatedAllCleaners)
+                        {
+                            updatedCleanerInfo += "CLEANER NAME:  " + cleaner.Username + allCleanerWorkingSchedule + "\n";
+                        }
+                        CleanerInfoText.Text = updatedCleanerInfo;
+
+
+                        ConfrimDeletionMessage.Text = "Deleted User";
+
+
+                        loginRegisterManager.SaveUserData();
+                    }
                 }
+
 
                 else if (selectedCategory == "STUDENT")
                 {
-                    loginRegisterManager.DeleteUser(selectedCategory, deleteUserInputFieldUsername);
-                    ConfrimDeletionMessage.Text = "Student has been deleted successfully.";
-                    HideDeletionUI();
+                    if (matchingValuesStudent.Any())
+                    {
+
+                        loginRegisterManager.DeleteUser("STUDENT", matchingValuesStudent.First().Username);
+
+
+                        var updatedAllStudents = loginRegisterManager.GetAllStudents();
+
+
+                        string updatedStudentInfo = "All Students Info:\n";
+                        foreach (var student in updatedAllStudents)
+                        {
+                            updatedStudentInfo += "STUDENT NAME:  " + student.Username + allCourseGrades + "\n";
+                        }
+                        StudentInfoText.Text = updatedStudentInfo;
+
+                        ConfrimDeletionMessage.Text = "Deleted User";
+
+
+                        loginRegisterManager.SaveUserData();
+                    }
                 }
 
                 else if (selectedCategory == "BOARDING MEMBER")
                 {
-                    loginRegisterManager.DeleteUser(selectedCategory, deleteUserInputFieldUsername);
-                    ConfrimDeletionMessage.Text = "Boarding Member has been deleted successfully.";
+                    if (matchingValuesBoardingMember.Any())
+                    {
+
+                        loginRegisterManager.DeleteUser("BOARDING MEMBER", matchingValuesBoardingMember.First().Username);
+
+
+                        var updatedAllBoardingMembers = loginRegisterManager.GetAllBoardingMembers();
+
+
+                        string updatedBoardingMemberInfo = "All Boarding Members Info:\n";
+
+                        foreach (var boardingMember in updatedAllBoardingMembers)
+                        {
+                            updatedBoardingMemberInfo += "BOARDING MEMBER NAME:  " + boardingMember.Username + "\n";
+                        }
+                        BoardingMemberInfoText.Text = updatedBoardingMemberInfo;
+
+
+                        ConfrimDeletionMessage.Text = "Deleted User";
+
+
+                        loginRegisterManager.SaveUserData();
+                    }
+                }
+                if (noDeleteEntity)
+                {
                     HideDeletionUI();
                 }
-                ConfrimDeletionMessage.Visibility = Visibility.Visible;
+            }
 
-            }
-            if (noDeleteEntity)
-            {
-                HideDeletionUI();
-            }
         }
-    
-            }
-        }
+    }
+}
         #endregion Entities
     
