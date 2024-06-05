@@ -22,17 +22,27 @@
     },
     {
       "Category": "STUDENT",
-      "Username": "mok",
+      "Username": "Mom",
       "Password": "12345678"
     },
     {
       "Category": "TEACHER",
-      "Username": "john",
+      "Username": "NoTeacher",
       "Password": "12345678"
     },
     {
       "Category": "TEACHER",
       "Username": "ddddd",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "Teacher8",
+      "Password": "123456678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "Teacher90000",
       "Password": "12345678"
     }
   ]
