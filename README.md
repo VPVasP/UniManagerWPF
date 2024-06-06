@@ -1,5 +1,8 @@
 # UniManage
-Created a University Login/Registration system with the data being stored locally using JSON. The user can register/login as an Admin or as a User(Student, Cleaner, Boarding Member).
+Created a University Login/Registration system with the data being stored locally using JSON. The user can register/login as an Admin or as a User(Student, Cleaner, Boarding Member).The Admin can Add/Modify/Delete all entities which the each User can see their corresponding values when authenticated.
+
+## Technologies Used:
+- WPF,C#,.Net 8.0, JSON
 
 ## Project Features
 - The user can register/sign in with their own credentials depending on whether they are an admin or a user, and the information is stored locally using JSON.
