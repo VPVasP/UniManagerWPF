@@ -11,11 +11,6 @@
       "Password": "1345678"
     },
     {
-      "Category": "TEACHER",
-      "Username": "MrGeorge",
-      "Password": "12345678"
-    },
-    {
       "Category": "BOARDING MEMBER",
       "Username": "John",
       "Password": "12345678"
@@ -23,6 +18,16 @@
     {
       "Category": "STUDENT",
       "Username": "Michael",
+      "Password": "12345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "MrMathew",
+      "Password": "12345678"
+    },
+    {
+      "Category": "CLEANER",
+      "Username": "Mr Williams",
       "Password": "12345678"
     }
   ]
