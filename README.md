@@ -21,6 +21,13 @@ Created a University Login/Registration system with the data being stored locall
 2. Open the Project .sln file in Visual Studio and run it.
 
 
+## Screenshots
+![Screenshot 1](1.PNG)
+![Screenshot 2](2.PNG)
+![Screenshot 3](3.PNG)
+![Screenshot 4](4.PNG)
+
+
 
 
 
