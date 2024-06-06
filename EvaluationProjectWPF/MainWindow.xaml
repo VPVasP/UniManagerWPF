@@ -9,7 +9,7 @@
 
     <Grid>
         <Grid.Background>
-        <SolidColorBrush Color="Black"/>
+        <SolidColorBrush Color="CadetBlue"/>
     </Grid.Background>
         <StackPanel x:Name="AdminPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
             <ComboBox x:Name="AdminTypeComboBox" Margin="5" Width="218" SelectionChanged="AdminTypeComboBox_SelectionChanged">
@@ -19,7 +19,7 @@
                 <ComboBoxItem Content="NEW STUDENT"/>
                 <ComboBoxItem Content="NEW COURSE"/>
             </ComboBox>
-            <ComboBox x:Name="AdminModifyTypeComboBox" Margin="5" Width="218" SelectionChanged="AdminTypeComboBox_SelectionChanged">
+            <ComboBox x:Name="AdminModifyTypeComboBox" Margin="5" Width="220" SelectionChanged="AdminTypeComboBox_SelectionChanged">
                 <ComboBoxItem Content="TEACHER"/>
                 <ComboBoxItem Content="BOARDING MEMBER"/>
                 <ComboBoxItem Content="CLEANER"/>
@@ -27,7 +27,7 @@
                 <ComboBoxItem Content="COURSE"/>
             </ComboBox>
 
-            <ComboBox x:Name="AdminDeleteTypeComboBox" Margin="5" Width="218" SelectionChanged="AdminTypeComboBox_SelectionChanged">
+            <ComboBox x:Name="AdminDeleteTypeComboBox" Margin="5" Width="220" SelectionChanged="AdminTypeComboBox_SelectionChanged">
                 <ComboBoxItem Content="TEACHER"/>
                 <ComboBoxItem Content="BOARDING MEMBER"/>
                 <ComboBoxItem Content="CLEANER"/>

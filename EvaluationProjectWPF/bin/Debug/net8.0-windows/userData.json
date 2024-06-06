@@ -6,18 +6,23 @@
       "Password": "12345678"
     },
     {
-      "Category": "BOARDING MEMBER",
-      "Username": "hather",
+      "Category": "ADMIN",
+      "Username": "GeneralAdmin2",
+      "Password": "1345678"
+    },
+    {
+      "Category": "TEACHER",
+      "Username": "MrGeorge",
       "Password": "12345678"
     },
     {
-      "Category": "CLEANER",
-      "Username": "Bob",
+      "Category": "BOARDING MEMBER",
+      "Username": "John",
       "Password": "12345678"
     },
     {
-      "Category": "BOARDING MEMBER",
-      "Username": "Takis",
+      "Category": "STUDENT",
+      "Username": "Michael",
       "Password": "12345678"
     }
   ]

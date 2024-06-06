@@ -1,5 +1,7 @@
 ﻿namespace EvaluationProjectWPF
 {
+
+    //students class containing the student values
     internal class Students
     {
         public int Id { get; set; }

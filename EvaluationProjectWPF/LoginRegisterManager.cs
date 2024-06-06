@@ -57,7 +57,7 @@ namespace EvaluationProjectWPF
         // checking if a username already exists in registration method
         public bool DoesUserExistRegister(string category,string username)
         {
-            return userInfoList.UsersInfoList.Exists(user => user.Username == username  &&user.Category == category);
+            return userInfoList.UsersInfoList.Exists(user => user.Username == username  && user.Category == category);
         }
 
         // checking if a username already exists in login method
@@ -83,11 +83,14 @@ namespace EvaluationProjectWPF
             }
         }
 
+
+        //delete data from json
         public void DeleteUser(string category, string username)
         {
             var userToDelete = userInfoList.UsersInfoList.FirstOrDefault(user => user.Category == category && user.Username == username);
             if (userToDelete != null)
             {
+                //remove the user to be deleted from the userInfoList
                 userInfoList.UsersInfoList.Remove(userToDelete);
                 SaveUserData();
                 Debug.WriteLine("User deleted: " + username);
@@ -97,12 +100,13 @@ namespace EvaluationProjectWPF
                 Debug.WriteLine("User not found: " + username);
             }
         }
-        // the user info such as username and password
+
+        //a class that contains the user info such as category, username and password
         public class UserInfo
         {
-            public string Category { get; set; }
-            public  string Username { get; set; }
-            public  string Password { get; set; }
+            public required string Category { get; set; }
+            public required string Username { get; set; }
+            public required string Password { get; set; }
 
         }
 
@@ -111,20 +115,23 @@ namespace EvaluationProjectWPF
         {
             public List<UserInfo> UsersInfoList { get; set; } = new List<UserInfo>();
         }
+        //returns all the STUDENT Elements from the user info list
         public List<UserInfo> GetAllStudents()
         {
             return userInfoList.UsersInfoList.Where(user => user.Category == "STUDENT").ToList();
         }
+        //returns all the TEACHER Elements from the user info list
         public List<UserInfo> GetAllTeachers()
         {
             return userInfoList.UsersInfoList.Where(user => user.Category == "TEACHER").ToList();
 
         }
-            public List<UserInfo> GetAllCleaners()
+        //returns all the CLEANER Elements from the user info list
+        public List<UserInfo> GetAllCleaners()
             {
                 return userInfoList.UsersInfoList.Where(user => user.Category == "CLEANER").ToList();
-            }
-
+          }
+        //returns all the BOARDING MEMBER Elements from the user info list
         public List<UserInfo> GetAllBoardingMembers()
         {
             return userInfoList.UsersInfoList.Where(user => user.Category == "BOARDING MEMBER").ToList();
