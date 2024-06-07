@@ -871,6 +871,10 @@ namespace EvaluationProjectWPF
                         NoDeleteEntityButton.Visibility = Visibility.Collapsed;
                         NoModifyEntityButton.Visibility = Visibility.Visible;
                     }
+                    else
+                    {
+                        ShowNoUserFoundModifyMessage();
+                    }
                     break;
                 case "STUDENT":
                     //if any of the result results contains the text from the AdminTextBox field
@@ -890,6 +894,10 @@ namespace EvaluationProjectWPF
                         ModificationConfrimationMessage.Visibility = Visibility.Visible;
                         NoDeleteEntityButton.Visibility = Visibility.Collapsed;
                         NoModifyEntityButton.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        ShowNoUserFoundModifyMessage();
                     }
                     break;
 
@@ -912,6 +920,10 @@ namespace EvaluationProjectWPF
                         NoDeleteEntityButton.Visibility = Visibility.Collapsed;
                         NoModifyEntityButton.Visibility = Visibility.Visible;
                     }
+                    else
+                    {
+                        ShowNoUserFoundModifyMessage();
+                    }
                     break;
                 //if any of the result results contains the text from the AdminTextBox field
                 case "CLEANER":
@@ -932,10 +944,31 @@ namespace EvaluationProjectWPF
                         NoDeleteEntityButton.Visibility = Visibility.Collapsed;
                         NoModifyEntityButton.Visibility = Visibility.Visible;
                     }
+                    else
+                    {
+                        ShowNoUserFoundModifyMessage();
+                    }
+                    break;
+                default:
+                    ShowNoUserFoundModifyMessage();
                     break;
             }
             
                
+        }
+
+        //handles the ui in case a user hasn't been found in the modification method
+
+        private void ShowNoUserFoundModifyMessage()
+        {
+            ModificationConfrimationMessage.Text = "No user can be found with the given username";
+            ModificationConfrimationMessage.Visibility = Visibility.Visible;
+            NoDeleteEntityButton.Visibility = Visibility.Collapsed;
+            YesModifyEntityButton.Visibility = Visibility.Collapsed;
+            SearchModifyEntityButton.Visibility = Visibility.Visible;
+            AdminTextBox.Visibility = Visibility.Visible;
+            ReturnAdminButton.Visibility = Visibility.Visible;
+            SearchModifyEntityButton.Visibility = Visibility.Collapsed;
         }
         #endregion UI
 
