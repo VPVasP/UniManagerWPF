@@ -27,6 +27,8 @@ namespace EvaluationProjectWPF
         string allCleanerWorkingSchedule = string.Empty;
         string adminRegisterUsername = string.Empty;
         string teacherNames = string.Empty;
+        private int minimumUsernameCharacters =3;
+        private int minimumPasswordCharacters= 6;
 
         public MainWindow()
         {
@@ -66,8 +68,23 @@ namespace EvaluationProjectWPF
                 UserExistsMessage.Text = "Please provide username and password";
                 return;
             }
-
-            loginRegisterManager.Register(selectedCategory, loginUsername, loginPassword);
+            if (loginUsername.Length < minimumUsernameCharacters)
+            {
+                UserExistsMessage.Visibility = Visibility.Visible;
+                UserExistsMessage.Text = "Invalid username length,it must be more than " + minimumUsernameCharacters + " digits"; ;
+                return;
+            }
+          else if (loginPassword.Length < minimumUsernameCharacters)
+            {
+                UserExistsMessage.Visibility = Visibility.Visible;
+                UserExistsMessage.Text = "Invalid password length,it must be more than " + minimumUsernameCharacters + " digits";
+                return;
+            }
+           else if(loginUsername.Length >minimumUsernameCharacters && loginPassword.Length > minimumPasswordCharacters)
+            {
+                loginRegisterManager.Register(selectedCategory, loginUsername, loginPassword);
+            }
+ 
 
             switch (selectedCategory)
             {

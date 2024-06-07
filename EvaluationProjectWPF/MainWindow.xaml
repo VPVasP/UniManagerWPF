@@ -108,7 +108,7 @@
 
         <TextBlock x:Name="RegistrationMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, -950, 10, 0" Foreground="Yellow"/>
         <TextBlock x:Name="LoginMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, -950,0, 0" Foreground="Yellow"/>
-       <TextBlock x:Name="UserExistsMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 500, 10, 0" Foreground="Red"/>
+       <TextBlock x:Name="UserExistsMessage" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 500, 10, 0" Foreground="Red" FontSize="45"/>
         <TextBlock x:Name="StudentGrades" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 500, 10, 0" Foreground="LightGreen"/>
         <TextBlock x:Name="CleanerDates" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 500, 10, 0" Foreground="White"/>
         <TextBlock x:Name="TeacherTeachingDates" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 500, 10, 0" Foreground="White"/>
