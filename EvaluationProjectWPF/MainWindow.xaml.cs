@@ -963,12 +963,24 @@ namespace EvaluationProjectWPF
         {
             ModificationConfrimationMessage.Text = "No user can be found with the given username";
             ModificationConfrimationMessage.Visibility = Visibility.Visible;
-            NoDeleteEntityButton.Visibility = Visibility.Collapsed;
+            NoModifyEntityButton.Visibility = Visibility.Collapsed;
             YesModifyEntityButton.Visibility = Visibility.Collapsed;
             SearchModifyEntityButton.Visibility = Visibility.Visible;
             AdminTextBox.Visibility = Visibility.Visible;
             ReturnAdminButton.Visibility = Visibility.Visible;
             SearchModifyEntityButton.Visibility = Visibility.Collapsed;
+        }
+        //handles the ui in case a user hasn't been found in the deletion method
+        private void ShowNoUserFoundDeleteMessage()
+        {
+            ConfrimDeletionMessage.Text = "No user can be found with the given username";
+            ConfrimDeletionMessage.Visibility = Visibility.Visible;
+            NoDeleteEntityButton.Visibility = Visibility.Collapsed;
+            YesDeleteEntityButton.Visibility = Visibility.Collapsed;
+        //    AdminTextBox.Visibility = Visibility.Visible;
+         //   delete
+            SearchDeleteEntityButton.Visibility = Visibility.Visible;
+            ReturnAdminButton.Visibility = Visibility.Visible;
         }
         #endregion UI
 
@@ -1167,6 +1179,7 @@ namespace EvaluationProjectWPF
             ShowAdminUI();
             NoModifyEntityUI();
             ModifyEntityUIButton.Click += ModifyEntityUI;
+            ModificationConfrimationMessage.Visibility = Visibility.Collapsed;
         }
         //handles the ui in case we chose no in the no modify button
         private void NoModifyEntityUI()
@@ -1194,6 +1207,20 @@ namespace EvaluationProjectWPF
             noDeleteEntity = true;
             yesDeleteEntity = false;
             ConfrimDeletionMessage.Visibility = Visibility.Collapsed;
+            AdminDeleteTypeComboBox.Visibility = Visibility.Visible;
+            DeleteEntityButton.Visibility = Visibility.Collapsed;
+            DeleteEntityUsername.Visibility = Visibility.Visible;
+            ModifyEntityUIButton.Visibility = Visibility.Collapsed;
+            AddEntityUIButton.Visibility = Visibility.Collapsed;
+            AdminDeleteTextBox.Visibility = Visibility.Visible;
+
+            YesDeleteEntityButton.Visibility = Visibility.Collapsed;
+            NoDeleteEntityButton.Visibility = Visibility.Collapsed;
+            SearchDeleteEntityButton.Visibility = Visibility.Visible;
+            ConfrimDeletionMessage.Visibility = Visibility.Visible;
+            ReturnAdminButton.Visibility = Visibility.Visible;
+            ExitAdminButton.Visibility = Visibility.Collapsed;
+            
         }
 
         private void SearchNameDeleteEntity(object sender, RoutedEventArgs e)
@@ -1213,6 +1240,11 @@ namespace EvaluationProjectWPF
                         ConfrimDeletionMessage.Text = "Are you sure you want to delete this User?";
                         ConfrimDeletionMessage.Visibility = Visibility.Visible;
                     }
+                    else
+                    {
+                        //in case a mistake happens show a message
+                        ShowNoUserFoundDeleteMessage();
+                    }
                     break;
 
                 case "STUDENT":
@@ -1225,6 +1257,11 @@ namespace EvaluationProjectWPF
                         SearchDeleteEntityButton.Visibility = Visibility.Collapsed;
                         ConfrimDeletionMessage.Text = "Are you sure you want to delete this User?";
                         ConfrimDeletionMessage.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        //in case a mistake happens show a message
+                        ShowNoUserFoundDeleteMessage();
                     }
                     break;
 
@@ -1240,6 +1277,11 @@ namespace EvaluationProjectWPF
                         ConfrimDeletionMessage.Text = "Are you sure you want to delete this User?";
                         ConfrimDeletionMessage.Visibility = Visibility.Visible;
                     }
+                    else
+                    {
+                        //in case a mistake happens show a message
+                        ShowNoUserFoundDeleteMessage();
+                    }
                     break;
 
                 case "BOARDING MEMBER":
@@ -1253,11 +1295,15 @@ namespace EvaluationProjectWPF
                         ConfrimDeletionMessage.Text = "Are you sure you want to delete this User?";
                         ConfrimDeletionMessage.Visibility = Visibility.Visible;
                     }
+                    else
+                    {
+                        //in case a mistake happens show a message
+                        ShowNoUserFoundDeleteMessage();
+                    }
                     break;
                 default:
                     //in case a mistake happens show a message
-                    ConfrimDeletionMessage.Text = "No user can be found with the given username";
-                    ConfrimDeletionMessage.Visibility = Visibility.Visible;
+                    ShowNoUserFoundDeleteMessage();
                     break;
 
             }
@@ -1433,7 +1479,7 @@ namespace EvaluationProjectWPF
             ConfrimDeletionMessage.Visibility = Visibility.Visible;
             ReturnAdminButton.Visibility = Visibility.Visible;
             ExitAdminButton.Visibility = Visibility.Collapsed;
-
+            ConfrimDeletionMessage.Visibility = Visibility.Collapsed;
         }
         private void ExecuteDeletionIfConfirmed()
         {
