@@ -779,6 +779,10 @@ namespace EvaluationProjectWPF
             DeleteEntityButton.Visibility = Visibility.Collapsed;
             NoDeleteEntityButton.Visibility = Visibility.Collapsed;
             YesDeleteEntityButton.Visibility = Visibility.Collapsed;
+            YesModifyEntityButton.Visibility = Visibility.Collapsed;
+            NoModifyEntityButton.Visibility = Visibility.Collapsed;
+            ModifyEntityUIButton.Visibility = Visibility.Visible;
+            ModifyNameTextBox.Visibility = Visibility.Collapsed;
             yesModify = false;
         }
         /// method that hides the admin UI

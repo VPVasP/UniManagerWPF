@@ -95,10 +95,7 @@
             <TextBlock  x:Name="GeneralUsername" Text="Username:" Foreground="White"/>
         <TextBox x:Name="UsernameTextBox" Margin="5" Width="220" />
 
-            
-
-          
-        
+           
             <TextBlock x:Name="Password" Text="Password:" Foreground="White"/>
         <PasswordBox x:Name="PasswordBox" Margin="5" />
         
