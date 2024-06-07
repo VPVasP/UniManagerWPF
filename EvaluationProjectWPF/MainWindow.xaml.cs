@@ -967,6 +967,9 @@ namespace EvaluationProjectWPF
         //function that handles when we click the yes modify entity button
         private void YesModifyEntity(object sender, RoutedEventArgs e)
         {
+            allTeacherWorkingHours = string.Empty;
+            allCourseGrades = string.Empty;
+            allCleanerWorkingSchedule = string.Empty;
             string selectedCategory = ((ComboBoxItem)AdminModifyTypeComboBox.SelectedItem)?.Content.ToString() ?? "";
             //find matching users based on the adminRegisterUsername in each category
             var matchingValuesTeacher = loginRegisterManager.GetAllTeachers().Where(user => user.Username.Contains(adminRegisterUsername));

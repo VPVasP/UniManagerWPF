@@ -27,12 +27,12 @@
     },
     {
       "Category": "TEACHER",
-      "Username": "MrJohnson",
+      "Username": "MrDon",
       "Password": "12345678"
     },
     {
       "Category": "TEACHER",
-      "Username": "MrDon",
+      "Username": "MrJohnshon",
       "Password": "12345678"
     }
   ]
